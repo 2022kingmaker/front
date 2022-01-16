@@ -18,6 +18,9 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
       }
     }
+    h2, h3{
+      scroll-margin-top: 72px;
+    }
 `;
 
 export default GlobalStyles;

@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "categoryId": 0,
+      "name": "경제"
+    },
+    {
+      "categoryId": 1,
+      "name": "부동산"
+    },
+    {
+      "categoryId": 2,
+      "name": "교육"
+    },
+    {
+      "categoryId": 3,
+      "name": "환경"
+    },
+    {
+      "categoryId": 4,
+      "name": "에너지/과학/기술"
+    },
+    {
+      "categoryId": 5,
+      "name": "전염병"
+    },
+    {
+      "categoryId": 6,
+      "name": "사회/복지"
+    },
+    {
+      "categoryId": 7,
+      "name": "외교/안보"
+    },
+    {
+      "categoryId": 8,
+      "name": "정치/행정"
+    },
+    {
+      "categoryId": 9,
+      "name": "지역별"
+    }
+  ]
+}

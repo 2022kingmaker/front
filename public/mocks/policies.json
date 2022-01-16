@@ -1,0 +1,64 @@
+{
+  "policies": [
+    {
+      "policyId":0,
+      "candidate": {
+        "candidateId": 1,
+        "name": "누구누구",
+        "party": {
+          "partyId": "ㅁㄴㅇ",
+          "name": "string",
+          "colorCode": "black"
+        }
+      },
+      "phrase": "string",
+      "text": "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ",
+      "keywordId": 0
+    },
+    {
+      "policyId":1,
+      "candidate": {
+        "candidateId": 1,
+        "name": "누구누구",
+        "party": {
+          "partyId": "ㅁㄴㅇ",
+          "name": "string",
+          "colorCode": "red"
+        }
+      },
+      "phrase": "string",
+      "text": "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ",
+      "keywordId": 0
+    },
+    {
+      "policyId":2,
+      "candidate": {
+        "candidateId": 1,
+        "name": "누구누구",
+        "party": {
+          "partyId": "ㅁㄴㅇ",
+          "name": "string",
+          "colorCode": "yellow"
+        }
+      },
+      "phrase": "string",
+      "text": "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ",
+      "keywordId": 0
+    },
+    {
+      "policyId":2,
+      "candidate": {
+        "candidateId": 1,
+        "name": "누구누구",
+        "party": {
+          "partyId": "ㅁㄴㅇ",
+          "name": "string",
+          "colorCode": "yellow"
+        }
+      },
+      "phrase": "string",
+      "text": "ㅁㄴㅇㅁㄴㅇㅁㄴㅇ",
+      "keywordId": 1
+    }
+  ]
+}

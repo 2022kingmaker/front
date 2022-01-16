@@ -1,5 +1,5 @@
 import Home from '../pages/index';
-import Header from '../components/Header/Header';
+import Header from '@atoms/Header/Header';
 
 export default {
   title: 'Pages/Home',

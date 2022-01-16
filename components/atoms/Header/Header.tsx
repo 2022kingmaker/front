@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import { flexBox } from '../../styles/mixin';
+import { flexBox } from '@styles/mixin';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -9,7 +9,7 @@ const HeaderBlock = styled.div`
   box-shadow: 0 1px 0 0 rgb(0 0 0 / 10%);
   background: #fff;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   .container {
     ${flexBox('space-between', null, 'row')};
     padding: 0 20px;

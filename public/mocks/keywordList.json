@@ -1,0 +1,29 @@
+{
+  "keywordList": [
+    {
+      "keywordId": 0,
+      "name": "조세",
+      "categoryId": 0
+    },
+    {
+      "keywordId": 1,
+      "name": "금융",
+      "categoryId": 0
+    },
+    {
+      "keywordId": 2,
+      "name": "일자리",
+      "categoryId": 0
+    },
+    {
+      "keywordId": 3,
+      "name": "창업 지원",
+      "categoryId": 0
+    },
+    {
+      "keywordId": 4,
+      "name": "최저임금/노동",
+      "categoryId": 0
+    }
+  ]
+}

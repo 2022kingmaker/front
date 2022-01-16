@@ -4,7 +4,7 @@ import SpeechBubble, { SpeechBubbleProps } from './SpeechBubble';
 import { Meta, Story } from '@storybook/react';
 
 export default {
-  title: 'Components/SpeechBubble',
+  title: 'Atoms/SpeechBubble',
   component: SpeechBubble,
 } as Meta;
 

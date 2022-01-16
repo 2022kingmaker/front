@@ -3,6 +3,7 @@ import GlobalStyles from '../styles/global-styles';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import { ReactNode } from 'react';
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }: AppProps) {
   // @ts-ignore
@@ -11,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {getLayout(<Component {...pageProps} />)}
+      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
     </ThemeProvider>
   );
 }
