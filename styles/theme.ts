@@ -13,6 +13,7 @@ const theme: DefaultTheme = {
     middle: '16px',
     large: '24px',
   },
+  desktop: `(max-width: 880px)`,
 };
 
 export default theme;

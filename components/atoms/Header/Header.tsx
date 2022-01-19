@@ -9,7 +9,7 @@ const HeaderBlock = styled.div`
   box-shadow: 0 1px 0 0 rgb(0 0 0 / 10%);
   background: #fff;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   .container {
     ${flexBox('space-between', null, 'row')};
     padding: 0 20px;
@@ -31,22 +31,22 @@ const Header = () => {
     <HeaderBlock>
       <ul className="container">
         <NavigationTab>
-          <Link href={'#'}>
+          <Link href={'/'}>
             <a>LOGO</a>
           </Link>
-          <Link href={'#'}>
-            <a>공약</a>
-          </Link>
-          <Link href={'#'}>
-            <a>통계</a>
-          </Link>
-          <Link href={'#'}>
+          {/*<Link href={'#'}>*/}
+          {/*  <a>공약</a>*/}
+          {/*</Link>*/}
+          {/*<Link href={'#'}>*/}
+          {/*  <a>통계</a>*/}
+          {/*</Link>*/}
+          <Link href={'mailto:20dsmd@gmail.com'}>
             <a>제보</a>
           </Link>
         </NavigationTab>
-        <UserInfo>
-          <a href="#">로그인</a>
-        </UserInfo>
+        {/*<UserInfo>*/}
+        {/*  <a href="#">로그인</a>*/}
+        {/*</UserInfo>*/}
       </ul>
     </HeaderBlock>
   );

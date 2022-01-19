@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import styled from 'styled-components';
+
 import SideBar from '@atoms/SideBar/SideBar';
 import Layout from '@atoms/Layout/Layout';
-import { keywords } from '../types/Keyword';
-import { categories } from '../types/Category';
 import PhraseContents from '@templates/PhraseContents/PhraseContents';
+
 import useTableOfContents from '../hooks/useTableOfContents';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
+
+import { keywordDetails, keywords } from '../types/Keyword';
+import { categories } from '../types/Category';
+import { getCategories } from '../apis/category';
+import { getKeywordDetails } from '../apis/keyword';
 
 const HomeBlock = styled.div`
   height: inherit;
@@ -16,19 +21,19 @@ const HomeBlock = styled.div`
 
 interface HomeProps {
   data: {
-    keywords: keywords;
+    keywordDetails: keywordDetails;
     categories: categories;
   };
 }
 
 const Home: NextPage = ({ data }: HomeProps) => {
-  const [activeTopic, setActiveTopic] = useState('');
-  const { categories, keywords } = data;
+  const { categories, keywordDetails } = data;
+  const [activeTopic, setActiveTopic] = useState(categories[0].name);
 
   useTableOfContents();
   useIntersectionObserver(setActiveTopic);
 
-  const groupByCategory = groupingByCategory(categories, keywords);
+  const groupByCategory = groupingByCategory(categories, keywordDetails);
 
   return (
     <HomeBlock>
@@ -39,12 +44,10 @@ const Home: NextPage = ({ data }: HomeProps) => {
 };
 
 export const getServerSideProps = async () => {
-  const categoriesResponse = await fetch(`http://localhost:3000/mocks/categories.json`);
-  const keywordsResponse = await fetch(`http://localhost:3000/mocks/keywords.json`);
+  const categories = await getCategories();
+  const keywordDetails = await getKeywordDetails();
 
-  const [{ keywords }, { categories }] = await Promise.all([keywordsResponse.json(), categoriesResponse.json()]);
-
-  return { props: { data: { categories, keywords } } };
+  return { props: { data: { categories, keywordDetails } } };
 };
 
 export default Home;

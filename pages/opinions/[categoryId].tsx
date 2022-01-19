@@ -1,30 +1,44 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import Layout from '@atoms/Layout/Layout';
-import { keywords } from '../../types/Keyword';
-import SideBar from '@atoms/SideBar/SideBar';
 import { GetServerSidePropsContext } from 'next/types';
+import styled from 'styled-components';
+
+import Layout from '@atoms/Layout/Layout';
+import SideBar from '@atoms/SideBar/SideBar';
 import OpinionContents from '@templates/OpinionContents/OpinionContents';
+
+import { keywords } from '../../types/Keyword';
+import { categories } from '../../types/Category';
 import { policies } from '../../types/Policy';
+
+import useTableOfContents from '../../hooks/useTableOfContents';
+import useIntersectionObserver from '../../hooks/useIntersectionObserver';
+
+import { getCategories } from '../../apis/category';
+import { getKeywords } from '../../apis/keyword';
+import { getPolicies } from '../../apis/policy';
 
 const IdBlock = styled.div``;
 
 export interface IdProps {
   data: {
-    keywordList: keywords;
+    keywords: keywords;
     policies: policies;
+    categories: categories;
   };
 }
 
 const OpinionPage = ({ data }: IdProps) => {
-  const [activeTopic, setActiveTopic] = useState('');
-  const { keywordList, policies } = data;
+  const { keywords, policies, categories } = data;
+  const [activeTopic, setActiveTopic] = useState(categories[0].name);
 
-  const groupByKeyword = groupingByKeyword(policies, keywordList);
+  useTableOfContents();
+  useIntersectionObserver(setActiveTopic);
+
+  const groupByKeyword = groupingByKeyword(policies, keywords);
 
   return (
     <IdBlock>
-      <SideBar toc={keywordList} activeTopic={activeTopic} />
+      <SideBar toc={keywords} activeTopic={activeTopic} categories={categories} />
       <OpinionContents groupByKeyword={groupByKeyword} />
     </IdBlock>
   );
@@ -37,17 +51,16 @@ OpinionPage.getLayout = function getLayout(page: React.ReactNode) {
 };
 
 export const getServerSideProps = async ({ params }: GetServerSidePropsContext) => {
-  const keywordsResponse = await fetch(`http://localhost:3000/mocks/keywordList.json`);
-  const policiesResponse = await fetch(`http://localhost:3000/mocks/policies.json`);
+  const { categoryId } = params;
+  const categories = await getCategories();
+  const keywords = await getKeywords(categoryId);
+  const policies = await getPolicies(categoryId);
 
-  const { keywordList } = await keywordsResponse.json();
-  const { policies } = await policiesResponse.json();
-
-  return { props: { data: { keywordList, policies } } };
+  return { props: { data: { policies, categories, keywords } } };
 };
 
-const groupingByKeyword = (policies: policies, keywordList: keywords) =>
-  keywordList
+const groupingByKeyword = (policies: policies, keywords: keywords): any =>
+  keywords
     .map(({ keywordId, name }) => {
       return policies
         .map(policy => {

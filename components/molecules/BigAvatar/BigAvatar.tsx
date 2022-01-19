@@ -23,12 +23,13 @@ const BigAvatarBlock = styled.div`
 export interface BigAvatarProps extends AvatarProps {
   name: string;
   partyName: string;
+  imgId: number;
 }
 
-const BigAvatar = ({ size = 130, imgUrl, name = '대통령 후보', partyName = '아무도 안 찍어 당' }: BigAvatarProps) => {
+const BigAvatar = ({ size = 130, imgId, name = '대통령 후보', partyName = '아무도 안 찍어 당' }: BigAvatarProps) => {
   return (
     <BigAvatarBlock>
-      <Avatar size={size} imgUrl={imgUrl} />
+      <Avatar size={size} imgId={imgId} />
       <div className="info">
         <h3>{name}</h3>
         <div>{partyName}</div>

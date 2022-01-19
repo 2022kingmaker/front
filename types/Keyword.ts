@@ -23,3 +23,4 @@ export interface keywordDetail extends keyword {
 
 export type keywords = keyword[];
 export type phrases = phrase[];
+export type keywordDetails = keywordDetail[];

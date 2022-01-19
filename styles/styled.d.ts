@@ -14,5 +14,6 @@ declare module 'styled-components' {
       middle: string;
       large: string;
     };
+    desktop: string;
   }
 }

@@ -5,6 +5,7 @@ import { categories } from '../../../types/Category';
 import { keywords } from '../../../types/Keyword';
 import { useRecoilState } from 'recoil';
 import { tocState } from '../../../states/toc';
+import { useRouter } from 'next/router';
 
 const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   ${flexBox('center', 'center', 'column')};
@@ -22,16 +23,33 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
       font-size: ${({ activeFontSize }) => activeFontSize}px;
     }
   }
+  .category-item {
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
   z-index: 1;
+  .back-button {
+    position: absolute;
+    top: 55px;
+    left: 10px;
+    color: white;
+  }
+  @media ${({ theme }) => theme.desktop} {
+    display: none;
+  }
 `;
 
 export interface SideBarProps {
   toc: categories | keywords;
   activeFontSize?: number;
   activeTopic: string;
+  categories?: categories;
 }
 
-const SideBar = ({ toc, activeFontSize = 25, activeTopic }: SideBarProps) => {
+const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarProps) => {
+  const router = useRouter();
   const [table, setToc] = useRecoilState(tocState);
   const { currentTopic } = table;
 
@@ -40,15 +58,26 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic }: SideBarProps) => {
     if (value === currentTopic) {
       return;
     }
-
     setToc({ currentTopic: value, targetTopic: value });
   };
 
+  const handleBackBtnClick = () => {
+    if (categories) {
+      router.push(`/#${categories[toc[0].categoryId].name}`);
+    }
+  };
+
   return (
-    <SideBarBlock activeFontSize={activeFontSize}>
+    <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
+      {categories && (
+        <>
+          <div className={'back-button'} onClick={handleBackBtnClick}>{`<`}</div>
+          <li className={'category-item'}>{categories.find.name}</li>
+        </>
+      )}
       {toc.map(({ categoryId, name }) => (
         <li key={`${categoryId}+${name}`}>
-          <a onClick={handleTopicClick} className={activeTopic === name ? 'active' : ''} href={`#${name}`}>
+          <a onClick={handleTopicClick} className={activeTopic === name ? 'active' : ''}>
             {name}
           </a>
         </li>

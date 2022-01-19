@@ -16,10 +16,19 @@ const ContentsBlock = styled.div`
   }
   .title {
     padding: 12px;
-    width: 300px;
+    z-index: 2;
+    width: 100%;
     font-weight: 650;
     font-size: 32px;
     border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
+    background: #f2f2f2;
+  }
+  @media ${({ theme }) => theme.desktop} {
+    padding: 60px 0 200px 0;
+    h2 {
+      position: sticky;
+      top: 44px;
+    }
   }
 `;
 
@@ -31,7 +40,13 @@ const PhraseContents = ({ groupByCategory }: ContentsProps) => {
   return (
     <ContentsBlock>
       {groupByCategory.map((keywords, index) => (
-        <div className="topic-container" key={index} data-title={keywords[0].categoryName} data-index={index}>
+        <div
+          className="topic-container"
+          key={index}
+          data-title={keywords[0].categoryName}
+          data-index={index}
+          data-category-id={keywords[0].categoryId}
+        >
           <h2 className="title">{keywords[0].categoryName}</h2>
           {keywords.map(({ name, phrases }) => (
             <Pledges key={name} keyword={name} phrases={phrases} />

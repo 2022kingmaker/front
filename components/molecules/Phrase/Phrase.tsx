@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Avatar from '@atoms/Avatar/Avatar';
 import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
 import { flexBox } from '@styles/mixin';
+import { phrase } from '../../../types/Keyword';
 
 const PhraseBlock = styled.div<Partial<PhraseProps>>`
   ${flexBox(null, 'center', 'row')};
@@ -17,24 +18,35 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
   }
 `;
 
+const COLORS_MAP = {
+  1: 'first',
+  2: 'second',
+  3: 'third',
+  4: 'fourth',
+};
+
 export interface PhraseProps {
-  color: 'first' | 'second' | 'third' | 'fourth';
-  imgURL: string;
   position: string;
+  phrase: phrase;
 }
 
-const Phrase = ({ color, imgURL, position }: PhraseProps) => {
+const Phrase = ({ position, phrase }: PhraseProps) => {
+  const phraseText = phrase.phrase;
+  const { partyId, colorCode } = phrase.candidate.party;
+
+  const color = COLORS_MAP[partyId] || colorCode;
+
   return (
     <PhraseBlock position={position}>
       {position === 'left' ? (
         <>
-          <Avatar imgUrl={imgURL} />
-          <SpeechBubble color={color} position={position} />
+          <Avatar imgId={partyId} />
+          <SpeechBubble color={color} position={position} phraseText={phraseText} />
         </>
       ) : (
         <>
-          <SpeechBubble color={color} position={position} />
-          <Avatar imgUrl={imgURL} />
+          <SpeechBubble color={color} position={position} phraseText={phraseText} />
+          <Avatar imgId={partyId} />
         </>
       )}
     </PhraseBlock>

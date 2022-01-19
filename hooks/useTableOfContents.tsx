@@ -17,6 +17,16 @@ const useTableOfContents = () => {
   useEffect(() => {
     const topic = decodeURI(router.asPath).replace('/#', '');
     setToc({ currentTopic: topic, targetTopic: topic });
+
+    const handlePopState = () => {
+      console.log(router);
+      console.log('e');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   return;
