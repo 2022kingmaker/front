@@ -51,6 +51,7 @@ OpinionPage.getLayout = function getLayout(page: React.ReactNode) {
 };
 
 export const getServerSideProps = async ({ params }: GetServerSidePropsContext) => {
+  // @ts-ignore
   const { categoryId } = params;
   const categories = await getCategories();
   const keywords = await getKeywords(categoryId);

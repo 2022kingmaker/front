@@ -18,12 +18,7 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
   }
 `;
 
-const COLORS_MAP = {
-  1: 'first',
-  2: 'second',
-  3: 'third',
-  4: 'fourth',
-};
+const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 
 export interface PhraseProps {
   position: string;

@@ -41,7 +41,7 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
 `;
 
 export interface SpeechBubbleProps {
-  color: 'first' | 'second' | 'third' | 'fourth';
+  color: string;
   position: string;
   phraseText: string;
 }

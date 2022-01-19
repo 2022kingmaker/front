@@ -19,12 +19,7 @@ export interface OpinionProps {
   candidate: any;
 }
 
-const COLORS_MAP = {
-  1: 'first',
-  2: 'second',
-  3: 'third',
-  4: 'fourth',
-};
+const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 
 const Opinion = ({ phrase, text, rectType, candidate }: OpinionProps) => {
   const { name: candidateName, party } = candidate;
