@@ -13,6 +13,11 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   height: calc(100%);
   background: ${({ theme }) => theme.colors.primary};
   position: fixed;
+  z-index: 1;
+
+  a:hover {
+    cursor: pointer;
+  }
   a {
     color: #fff;
     line-height: 44px;
@@ -29,15 +34,24 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     font-weight: 700;
     margin-bottom: 20px;
   }
-  z-index: 1;
   .back-button {
     position: absolute;
     top: 55px;
     left: 10px;
     color: white;
   }
+
   @media ${({ theme }) => theme.desktop} {
-    display: none;
+    ${flexBox()};
+    position: fixed;
+    z-index: 3;
+    top: 44px;
+    width: 100%;
+    height: 50px;
+    background: ${({ theme }) => theme.colors.primary};
+    > li {
+      padding: 12px;
+    }
   }
 `;
 

@@ -21,6 +21,11 @@ const GlobalStyles = createGlobalStyle`
     h2, h3{
       scroll-margin-top: 72px;
     }
+    li, ul{
+      list-style: none;
+      margin: 0; 
+      padding: 0;
+    }
 `;
 
 export default GlobalStyles;

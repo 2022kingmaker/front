@@ -25,10 +25,6 @@ const ContentsBlock = styled.div`
   }
   @media ${({ theme }) => theme.desktop} {
     padding: 60px 0 200px 0;
-    h2 {
-      position: sticky;
-      top: 44px;
-    }
   }
 `;
 
