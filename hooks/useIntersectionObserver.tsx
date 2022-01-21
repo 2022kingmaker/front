@@ -7,7 +7,6 @@ interface IElementMap {
 
 const useIntersectionObserver = (setActiveTopic: React.Dispatch<React.SetStateAction<string>>) => {
   const headingElementsRef = useRef<IElementMap>({});
-  const router = useRouter();
 
   useEffect(() => {
     const callback: IntersectionObserverCallback = entries => {
@@ -25,7 +24,8 @@ const useIntersectionObserver = (setActiveTopic: React.Dispatch<React.SetStateAc
 
       const topic = visibleTopics.sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index))[0].dataset
         .title as string;
-      router.push(`#${topic}`);
+
+      window.history.replaceState(null, '', `#${topic}`);
       setActiveTopic(topic);
     };
 

@@ -15,18 +15,12 @@ const useTableOfContents = () => {
   }, [targetTopic]);
 
   useEffect(() => {
-    const topic = decodeURI(router.asPath).replace('/#', '');
-    setToc({ currentTopic: topic, targetTopic: topic });
-
-    const handlePopState = () => {
-      console.log(router);
-      console.log('e');
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
+    // router.beforePopState(historyState => {
+    //   router.push(historyState.as).then(() => {
+    //     const y = localStorage.getItem(historyState.as);
+    //   });
+    //   return false;
+    // });
   }, []);
 
   return;
