@@ -8,23 +8,30 @@ const ContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
   position: relative;
   padding: 60px 0 200px 200px;
-  .topic-container > * {
-    padding: 24px;
-  }
   .topic-container {
     margin: 20px 0;
+    & > * {
+      padding: 24px;
+    }
   }
   .title {
     padding: 12px;
     z-index: 2;
-    width: 100%;
+    width: inherit;
     font-weight: 650;
     font-size: 32px;
     border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
     background: #f2f2f2;
   }
   @media ${({ theme }) => theme.desktop} {
-    padding: 60px 0 200px 0;
+    width: 100%;
+    padding: 90px 24px 200px 24px;
+    .topic-container {
+      width: 380px;
+      & > * {
+        padding: 24px 0;
+      }
+    }
   }
 `;
 

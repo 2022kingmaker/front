@@ -6,15 +6,23 @@ import { flexBox } from '@styles/mixin';
 import { phrase } from '../../../types/Keyword';
 
 const PhraseBlock = styled.div<Partial<PhraseProps>>`
-  ${flexBox(null, 'center', 'row')};
+  ${flexBox('flex-start', 'center', 'row')};
   position: relative;
   width: 550px;
+  height: 80px;
   img {
     left: 5px;
     ${({ position }) => (position === 'right' ? `left` : ``)} : 500px;
   }
   > * {
     margin: 10px 0;
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 100%;
+    img {
+      ${({ position }) => (position === 'right' ? `left` : ``)} : 330px;
+    }
   }
 `;
 

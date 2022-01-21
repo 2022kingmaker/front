@@ -14,6 +14,7 @@ const theme: DefaultTheme = {
     large: '24px',
   },
   desktop: `(max-width: 880px)`,
+  mobile: `(max-width: 580px)`,
 };
 
 export default theme;

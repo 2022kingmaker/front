@@ -11,5 +11,6 @@ declare module 'styled-components' {
       large: string;
     };
     desktop: string;
+    mobile: string;
   }
 }

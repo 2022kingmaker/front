@@ -5,12 +5,14 @@ import { phrases } from '../../../types/Keyword';
 import { flexBox } from '@styles/mixin';
 
 const PledgesBlock = styled.div`
-  ${flexBox(null, 'center', 'column')};\
+  ${flexBox('center', 'center', 'column')};
+
   position: relative;
 `;
 
 const KeywordContainer = styled.div`
   ${flexBox()};
+  margin: auto;
   width: 200px;
   height: 25px;
 
@@ -27,7 +29,9 @@ export interface PledgesProps {
 const Pledges = ({ keyword, phrases }: PledgesProps) => {
   return (
     <PledgesBlock>
-      <KeywordContainer>{keyword}</KeywordContainer>
+      <KeywordContainer>
+        <div>{keyword}</div>
+      </KeywordContainer>
       {phrases.map((phrase, index) => (
         <Phrase key={phrase.phrase} position={index % 2 === 0 ? 'left' : 'right'} phrase={phrase} />
       ))}

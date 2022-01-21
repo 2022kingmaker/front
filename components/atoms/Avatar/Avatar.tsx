@@ -10,6 +10,10 @@ const AvatarBlock = styled.img<Partial<AvatarProps>>`
     height: ${size}px;
   `};
   border-radius: 50%;
+  @media ${({ theme }) => theme.mobile} {
+    width: 35px;
+    height: 35px;
+  }
 `;
 
 export interface AvatarProps {
