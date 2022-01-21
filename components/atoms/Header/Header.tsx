@@ -40,7 +40,11 @@ const Header = () => {
           {/*<Link href={'#'}>*/}
           {/*  <a>통계</a>*/}
           {/*</Link>*/}
-          <Link href={'mailto:20dsmd@gmail.com'}>
+          <Link
+            href={
+              'mailto:20dsmd@gmail.com?subject=제보/수정/추가 건의 메일입니다.&body=후보의 이름과 제보/수정/추가 되었으면 하는 부분을 설명해주세요.'
+            }
+          >
             <a>제보</a>
           </Link>
         </NavigationTab>
