@@ -27,9 +27,9 @@ const ContentsBlock = styled.div`
     width: 100%;
     padding: 90px 24px 200px 24px;
     .topic-container {
-      width: 380px;
+      width: 320px;
       & > * {
-        padding: 24px 0;
+        padding: 24px 12px;
       }
     }
   }

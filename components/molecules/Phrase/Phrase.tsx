@@ -21,7 +21,7 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
   @media ${({ theme }) => theme.mobile} {
     width: 100%;
     img {
-      ${({ position }) => (position === 'right' ? `left` : ``)} : 330px;
+      ${({ position }) => (position === 'right' ? `left` : ``)} : 260px;
     }
   }
 `;

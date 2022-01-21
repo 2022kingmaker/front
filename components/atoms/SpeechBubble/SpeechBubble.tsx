@@ -42,9 +42,9 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
 
   @media ${({ theme }) => theme.mobile} {
     ${flexBox()};
-    left: 60px;
-    min-width: 250px;
-    font-size: 12px;
+    left: 50px;
+    min-width: 200px;
+    font-size: 14px;
   }
 `;
 
