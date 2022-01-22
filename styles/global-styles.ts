@@ -3,6 +3,11 @@ import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
     ${reset};
+    @font-face {
+      font-family: "NotoSansKorean";
+      font-display: fallback;
+      src: url("/fonts/NotoSansKR-Medium-Hestia.woff") format("woff");
+    }
     *{
       color: #333;
       box-sizing: border-box;
@@ -10,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
     html, body, #__next{
       height: 100%;
       background: #F2F2F2;
+      font-family: "NotoSansKorean", sans-serif;
     }
     a {
       text-decoration: none; 

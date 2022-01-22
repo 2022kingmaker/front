@@ -22,7 +22,7 @@ export interface AvatarProps {
 }
 
 const Avatar = ({ imgId, size = 55 }: Partial<AvatarProps>) => {
-  return <AvatarBlock src={IMAGE_URL + `/candidate-images/candidate${imgId}.png`} size={size} />;
+  return <AvatarBlock src={IMAGE_URL + `/candidate-images/candidate0${imgId}.png`} size={size} />;
 };
 
 export default Avatar;
