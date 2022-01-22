@@ -1,0 +1,1 @@
+. /home/dsmd-user/script/deploy-front.sh
