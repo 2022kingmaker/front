@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 
@@ -47,6 +47,9 @@ const IntroModal = () => {
     const currentTime = Date.now();
     localStorage.setItem('offPopup', `${currentTime + 86400000}`);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <IntroModalBlock>

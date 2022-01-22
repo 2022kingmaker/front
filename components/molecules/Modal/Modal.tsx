@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
@@ -26,6 +26,10 @@ interface ModalProps {
 
 const Modal = ({ children, isShowing, close }: ModalProps) => {
   const $portal = document.querySelector('#modal-root') as Element;
+
+  useEffect(() => {
+    document.body.classList.add('modal-on');
+  }, []);
 
   return isShowing && $portal
     ? ReactDOM.createPortal(
