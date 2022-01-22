@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { flexBox } from '@styles/mixin';
 
 const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
+  ${flexBox()};
+
   position: absolute;
   left: 75px;
   width: 50%;
@@ -42,9 +44,13 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
 
   @media ${({ theme }) => theme.mobile} {
     ${flexBox()};
-    left: 50px;
-    min-width: 200px;
+    ${({ position }) => (position === 'left' ? 'left:50px' : 'left:0')};
+    min-width: 250px;
     font-size: 14px;
+    &:hover {
+      cursor: pointer;
+      transform: none;
+    }
   }
 `;
 

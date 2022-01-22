@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
-import { is } from '@babel/types/lib/index-legacy';
 
 const ModalBlock = styled.div`
   ${flexBox('center', 'center')};

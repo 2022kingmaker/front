@@ -32,8 +32,12 @@ const Pledges = ({ keyword, phrases }: PledgesProps) => {
       <KeywordContainer>
         <div>{keyword}</div>
       </KeywordContainer>
-      {phrases.map((phrase, index) => (
-        <Phrase key={phrase.phrase} position={index % 2 === 0 ? 'left' : 'right'} phrase={phrase} />
+      {phrases.map(phrase => (
+        <Phrase
+          key={phrase.phrase}
+          position={(phrase.candidate.candidateId - 1) % 2 === 0 ? 'left' : 'right'}
+          phrase={phrase}
+        />
       ))}
     </PledgesBlock>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { categories } from '../../../types/Category';
@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   ${flexBox('center', 'center', 'column')};
   width: 200px;
-  height: calc(100%);
+  height: 100%;
   background: ${({ theme }) => theme.colors.primary};
   position: fixed;
   z-index: 1;
@@ -43,13 +43,24 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
 
   @media ${({ theme }) => theme.desktop} {
     ${flexBox()};
-    position: fixed;
     z-index: 3;
     top: 44px;
     width: 100%;
+    overflow-x: scroll;
     height: 50px;
     background: ${({ theme }) => theme.colors.primary};
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &::before {
+      content: '';
+      min-width: 300px;
+    }
     > li {
+      font-size: 12px;
       padding: 12px;
     }
   }
@@ -65,6 +76,7 @@ export interface SideBarProps {
 const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarProps) => {
   const router = useRouter();
   const [table, setToc] = useRecoilState(tocState);
+  const ref = useRef<HTMLUListElement>(null);
   const { currentTopic } = table;
 
   const handleTopicClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -80,9 +92,14 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
       router.push(`/#${categories[toc[0].categoryId].name}`);
     }
   };
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollLeft = document.querySelector('.active')!.scrollLeft;
+    }
+  }, [activeTopic]);
 
   return (
-    <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
+    <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize} ref={ref}>
       {categories && (
         <>
           <div className={'back-button'} onClick={handleBackBtnClick}>{`<`}</div>

@@ -36,12 +36,16 @@ const IntroModalBlock = styled.div`
       text-align: right;
     }
   }
+  @media ${({ theme }) => theme.desktop} {
+    width: 90%;
+    margin: auto;
+  }
 `;
 
 const IntroModal = () => {
   const handleAllDayCloseClick = () => {
     const currentTime = Date.now();
-    localStorage.setItem('offPopup', `${currentTime + 86400}`);
+    localStorage.setItem('offPopup', `${currentTime + 86400000}`);
   };
 
   return (
