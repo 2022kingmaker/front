@@ -17,6 +17,9 @@ const GlobalStyles = createGlobalStyle`
       background: #F2F2F2;
       font-family: "NotoSansKorean", sans-serif;
     }
+    body.modal-on{
+      overflow-y: hidden;
+    }
     a {
       text-decoration: none; 
       outline: none;
