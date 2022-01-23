@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { categories } from '../../../types/Category';
 import { keywords } from '../../../types/Keyword';
 import { useRouter } from 'next/router';
+import useScrollIntoView from '@atoms/SideBar/useScrollIntoView';
 
 const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   ${flexBox('center', 'center', 'column')};
@@ -76,14 +77,9 @@ export interface SideBarProps {
   activeTopic: string;
   categories?: categories;
 }
-interface IElementMap {
-  [propsName: string]: Element;
-}
-
 const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarProps) => {
   const router = useRouter();
-  const ref = useRef<HTMLUListElement>(null);
-  const titleRef = useRef<IElementMap>({});
+  const titleRef = useScrollIntoView(activeTopic);
 
   const handleTopicClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const target = e.target as HTMLAnchorElement;
@@ -93,30 +89,14 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
     titleRef.current[target.innerHTML].scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    if (Object.keys(titleRef.current).length === 0 && titleRef.current.constructor === Object) {
-      const elemList = [...document.querySelectorAll('h2.title')];
-
-      titleRef.current = elemList.reduce((map, $elem) => {
-        map[$elem.innerHTML] = $elem;
-        return map;
-      }, titleRef.current);
-    }
-  }, []);
-
   const handleBackBtnClick = () => {
     if (categories) {
       router.push(`/#${categories[toc[0].categoryId].name}`);
     }
   };
-  useEffect(() => {
-    setTimeout(() => {
-      document.querySelector('.active')?.scrollIntoView({ inline: 'nearest', behavior: 'smooth' });
-    }, 500);
-  }, [activeTopic]);
 
   return (
-    <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize} ref={ref}>
+    <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
       {categories && (
         <>
           <div className={'back-button'} onClick={handleBackBtnClick}>{`<`}</div>
