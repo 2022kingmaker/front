@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { categories } from '../../../types/Category';
 import { keywords } from '../../../types/Keyword';
-import { useRecoilState } from 'recoil';
-import { tocState } from '../../../states/toc';
 import { useRouter } from 'next/router';
 
 const SideBarBlock = styled.ul<Partial<SideBarProps>>`
@@ -78,20 +76,33 @@ export interface SideBarProps {
   activeTopic: string;
   categories?: categories;
 }
+interface IElementMap {
+  [propsName: string]: Element;
+}
 
 const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarProps) => {
   const router = useRouter();
-  const [table, setToc] = useRecoilState(tocState);
   const ref = useRef<HTMLUListElement>(null);
-  const { currentTopic } = table;
+  const titleRef = useRef<IElementMap>({});
 
   const handleTopicClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const { innerHTML: value } = e.target as HTMLAnchorElement;
-    if (value === currentTopic) {
+    const target = e.target as HTMLAnchorElement;
+    if (target.innerHTML === activeTopic) {
       return;
     }
-    setToc({ currentTopic: value, targetTopic: value });
+    titleRef.current[target.innerHTML].scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    if (Object.keys(titleRef.current).length === 0 && titleRef.current.constructor === Object) {
+      const elemList = [...document.querySelectorAll('h2.title')];
+
+      titleRef.current = elemList.reduce((map, $elem) => {
+        map[$elem.innerHTML] = $elem;
+        return map;
+      }, titleRef.current);
+    }
+  }, []);
 
   const handleBackBtnClick = () => {
     if (categories) {

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
 
 interface IElementMap {
   [propsName: string]: IntersectionObserverEntry;

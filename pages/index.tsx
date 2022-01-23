@@ -9,7 +9,6 @@ import PhraseContents from '@templates/PhraseContents/PhraseContents';
 import IntroModal from '@molecules/IntroModal/IntroModal';
 
 import useModal from '@molecules/Modal/useModal';
-import useTableOfContents from '../hooks/useTableOfContents';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
 import { keywordDetails, keywords } from '../types/Keyword';
@@ -37,7 +36,6 @@ const Home: NextPage = ({ data }: HomeProps) => {
   const { isShowing, toggle } = useModal(true);
   const isPopupShowing = getPopupShowing();
 
-  useTableOfContents();
   useIntersectionObserver(setActiveTopic);
 
   const groupByCategory = groupingByCategory(categories, keywordDetails);
