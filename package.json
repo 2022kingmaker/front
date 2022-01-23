@@ -6,7 +6,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "next build; pm2 start npm --name 'king-maker' -- start",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

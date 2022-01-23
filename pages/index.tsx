@@ -42,14 +42,7 @@ const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const Home: NextPage = ({ data }: HomeProps) => {
   const { categories, keywordDetails } = data;
-  if (!categories.length || !keywordDetails.length) {
-    return (
-      <HomeBlock>
-        <DummyBar />
-      </HomeBlock>
-    );
-  }
-  const [activeTopic, setActiveTopic] = useState(categories[0].name);
+  const [activeTopic, setActiveTopic] = useState(categories[0]?.name || '');
   const { isShowing, toggle } = useModal(true);
   const isPopupShowing = getPopupShowing();
 
