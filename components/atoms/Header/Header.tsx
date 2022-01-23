@@ -11,19 +11,25 @@ const HeaderBlock = styled.div`
   position: fixed;
   z-index: 3;
   .container {
-    ${flexBox('space-between', null, 'row')};
+    ${flexBox('space-between', 'flex-start', 'row')};
     padding: 0 20px;
 
     a {
-      display: inline-flex;
       padding: 0 15px;
       line-height: 44px;
       font-size: 16px;
+      & img {
+        margin-top: 8px;
+        width: 120px;
+        height: auto;
+      }
     }
   }
 `;
 
-const NavigationTab = styled.div``;
+const NavigationTab = styled.div`
+  ${flexBox('space-between', null, 'row')};
+`;
 const UserInfo = styled.div``;
 
 const Header = () => {
@@ -32,7 +38,9 @@ const Header = () => {
       <ul className="container">
         <NavigationTab>
           <Link href={'/'}>
-            <a>LOGO</a>
+            <a>
+              <img src="/images/logo.png" alt="logo" />
+            </a>
           </Link>
           {/*<Link href={'#'}>*/}
           {/*  <a>공약</a>*/}
