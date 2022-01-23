@@ -16,10 +16,19 @@ import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
 import useModal from '@molecules/Modal/useModal';
 import IntroModal from '@molecules/IntroModal/IntroModal';
+import { flexBox } from '@styles/mixin';
 
 const HomeBlock = styled.div`
   height: inherit;
   position: relative;
+`;
+const DummyBar = styled.div`
+  ${flexBox('center', 'center', 'column')};
+  width: 200px;
+  height: 100%;
+  background: ${({ theme }) => theme.colors.primary};
+  position: fixed;
+  z-index: 1;
 `;
 
 interface HomeProps {
@@ -33,6 +42,13 @@ const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const Home: NextPage = ({ data }: HomeProps) => {
   const { categories, keywordDetails } = data;
+  if (!categories.length || !keywordDetails.length) {
+    return (
+      <HomeBlock>
+        <DummyBar />
+      </HomeBlock>
+    );
+  }
   const [activeTopic, setActiveTopic] = useState(categories[0].name);
   const { isShowing, toggle } = useModal(true);
   const isPopupShowing = getPopupShowing();

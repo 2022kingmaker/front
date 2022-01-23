@@ -16,7 +16,7 @@ const HeaderBlock = styled.div`
 
     a {
       padding: 0 15px;
-      line-height: 44px;
+      line-height: 40px;
       font-size: 16px;
       & img {
         margin-top: 8px;
