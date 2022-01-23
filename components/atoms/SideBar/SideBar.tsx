@@ -40,13 +40,11 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     left: 10px;
     color: white;
   }
-
   @media ${({ theme }) => theme.desktop} {
     ${flexBox()};
     z-index: 3;
     top: 44px;
     width: 100%;
-    overflow-x: scroll;
     height: 50px;
     background: ${({ theme }) => theme.colors.primary};
     white-space: nowrap;
@@ -57,11 +55,19 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     }
     &::before {
       content: '';
-      min-width: 300px;
+      min-width: 350px;
+    }
+    &::after {
+      content: '';
+      min-width: 50px;
     }
     > li {
       font-size: 12px;
-      padding: 12px;
+      padding: 0 12px;
+      height: 100%;
+    }
+    a.active {
+      line-height: 44px;
     }
   }
 `;
@@ -93,9 +99,9 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
     }
   };
   useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollLeft = document.querySelector('.active')!.scrollLeft;
-    }
+    setTimeout(() => {
+      document.querySelector('.active')?.scrollIntoView({ inline: 'nearest', behavior: 'smooth' });
+    }, 500);
   }, [activeTopic]);
 
   return (
