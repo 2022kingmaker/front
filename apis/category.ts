@@ -1,4 +1,7 @@
+import { API } from './index';
+
 export const getCategories = async () => {
-  const response = await fetch('http://118.67.128.85:8083/category');
+  console.log(API);
+  const response = await fetch(`${API}/category`);
   return await response.json();
 };

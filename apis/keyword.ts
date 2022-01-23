@@ -1,8 +1,10 @@
+import { API } from './index';
+
 export const getKeywords = async (categoryId: number) => {
-  const response = await fetch(`http://118.67.128.85:8083/keyword?categoryId=${categoryId}`);
+  const response = await fetch(`${API}/keyword?categoryId=${categoryId}`);
   return await response.json();
 };
 export const getKeywordDetails = async () => {
-  const response = await fetch('http://118.67.128.85:8083/keywordDetail');
+  const response = await fetch(`${API}/keywordDetail`);
   return await response.json();
 };
