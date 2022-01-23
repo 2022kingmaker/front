@@ -10,7 +10,6 @@ import { keywords } from '../../types/Keyword';
 import { categories } from '../../types/Category';
 import { policies } from '../../types/Policy';
 
-import useTableOfContents from '../../hooks/useTableOfContents';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 import { getCategories } from '../../apis/category';
@@ -31,7 +30,6 @@ const OpinionPage = ({ data }: IdProps) => {
   const { keywords, policies, categories } = data;
   const [activeTopic, setActiveTopic] = useState(categories[0].name);
 
-  useTableOfContents();
   useIntersectionObserver(setActiveTopic);
 
   const groupByKeyword = groupingByKeyword(policies, keywords);
