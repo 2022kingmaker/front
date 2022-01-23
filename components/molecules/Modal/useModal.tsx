@@ -5,7 +5,7 @@ const $BODY = (typeof window !== 'undefined' && document.body) as Element;
 const useModal = (initShow = false) => {
   const [isShowing, setIsShowing] = useState(initShow);
 
-  const toggle = (e: React.MouseEvent<HTMLDivElement>) => {
+  const toggle = (e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
     const target = e.target as HTMLDivElement;
 
     if (target.closest('.close')) {

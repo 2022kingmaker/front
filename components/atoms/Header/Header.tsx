@@ -2,6 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
+import useModal from '@molecules/Modal/useModal';
+import ReportModal from '@molecules/ReportModal/ReportModal';
+import dynamic from 'next/dynamic';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -23,9 +26,14 @@ const HeaderBlock = styled.div`
         width: 120px;
         height: auto;
       }
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;
+
+const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const NavigationTab = styled.div`
   ${flexBox('space-between', null, 'row')};
@@ -33,6 +41,7 @@ const NavigationTab = styled.div`
 const UserInfo = styled.div``;
 
 const Header = () => {
+  const { isShowing, toggle } = useModal();
   return (
     <HeaderBlock>
       <ul className="container">
@@ -48,18 +57,15 @@ const Header = () => {
           {/*<Link href={'#'}>*/}
           {/*  <a>통계</a>*/}
           {/*</Link>*/}
-          <Link
-            href={
-              'mailto:20dsmd@gmail.com?subject=제보/수정/추가 건의 메일입니다.&body=후보의 이름과 제보/수정/추가 되었으면 하는 부분을 설명해주세요.'
-            }
-          >
-            <a>제보</a>
-          </Link>
+          <a onClick={toggle}>제보</a>
         </NavigationTab>
         {/*<UserInfo>*/}
         {/*  <a href="#">로그인</a>*/}
         {/*</UserInfo>*/}
       </ul>
+      <Modal isShowing={isShowing} close={toggle}>
+        <ReportModal />
+      </Modal>
     </HeaderBlock>
   );
 };

@@ -14,12 +14,19 @@ const IntroModalBlock = styled.div`
 
   .article {
     line-height: 24px;
+    padding: 12px 0;
     > * {
       padding: 5px;
       font-size: 14px;
     }
     h1 {
       font-size: 20px;
+    }
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   &::before {
@@ -33,6 +40,7 @@ const IntroModalBlock = styled.div`
 
   .close-box {
     ${flexBox('space-between', 'center', 'row')};
+    margin-top: 30px;
     position: relative;
     > * {
       &:hover {
@@ -46,7 +54,7 @@ const IntroModalBlock = styled.div`
       text-align: right;
     }
   }
-  @media ${({ theme }) => theme.desktop} {
+  @media ${({ theme }) => theme.mobile} {
     width: 90%;
     margin: auto;
   }
@@ -74,9 +82,9 @@ const IntroModal = () => {
       </div>
       <div className="close-box">
         <div className="close all-day-close" onClick={handleAllDayCloseClick}>
-          X 오늘 하루 열지 않기
+          오늘 하루 열지 않기
         </div>
-        <div className="close">닫기 X</div>
+        <div className="close">닫기</div>
       </div>
     </IntroModalBlock>
   );
