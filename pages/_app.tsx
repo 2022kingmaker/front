@@ -3,7 +3,6 @@ import GlobalStyles from '../styles/global-styles';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import { ReactNode, useEffect } from 'react';
-import { RecoilRoot } from 'recoil';
 import { useRouter } from 'next/router';
 import * as ga from 'lib/ga/index';
 import Head from 'next/head';
@@ -30,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>대선 마당</title>
       </Head>
       <GlobalStyles />
-      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   );
 }
