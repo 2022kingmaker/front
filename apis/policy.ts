@@ -1,6 +1,4 @@
-import { API } from './index';
-
 export const getPolicies = async (categoryId: number) => {
-  const response = await fetch(`${API}/policy?categoryId=${categoryId}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/policy?categoryId=${categoryId}`);
   return await response.json();
 };

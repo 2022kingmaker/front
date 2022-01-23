@@ -6,7 +6,9 @@ import styled from 'styled-components';
 import SideBar from '@atoms/SideBar/SideBar';
 import Layout from '@atoms/Layout/Layout';
 import PhraseContents from '@templates/PhraseContents/PhraseContents';
+import IntroModal from '@molecules/IntroModal/IntroModal';
 
+import useModal from '@molecules/Modal/useModal';
 import useTableOfContents from '../hooks/useTableOfContents';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
@@ -14,21 +16,10 @@ import { keywordDetails, keywords } from '../types/Keyword';
 import { categories } from '../types/Category';
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
-import useModal from '@molecules/Modal/useModal';
-import IntroModal from '@molecules/IntroModal/IntroModal';
-import { flexBox } from '@styles/mixin';
 
 const HomeBlock = styled.div`
   height: inherit;
   position: relative;
-`;
-const DummyBar = styled.div`
-  ${flexBox('center', 'center', 'column')};
-  width: 200px;
-  height: 100%;
-  background: ${({ theme }) => theme.colors.primary};
-  position: fixed;
-  z-index: 1;
 `;
 
 interface HomeProps {
