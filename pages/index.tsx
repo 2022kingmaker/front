@@ -53,7 +53,7 @@ const Home: NextPage = ({ data }: HomeProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const categories = await getCategories();
   const keywordDetails = await getKeywordDetails();
 

@@ -18,6 +18,7 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   clip-path: polygon(${({ rectType }) => RECT_CLIP[rectType! % 3]});
 
   h2 {
+    white-space: pre-wrap;
     font-size: 24px;
     color: white;
     margin-bottom: 20px;

@@ -47,8 +47,17 @@ export default OpinionPage;
 OpinionPage.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
+export const getStaticPaths = async () => {
+  const categories = await getCategories();
 
-export const getServerSideProps = async ({ params }: GetServerSidePropsContext) => {
+  // @ts-ignore
+  const paths = categories.map(category => ({
+    params: { categoryId: category.categoryId.toString() },
+  }));
+  return { paths, fallback: false };
+};
+
+export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   // @ts-ignore
   const { categoryId } = params;
   const categories = await getCategories();
