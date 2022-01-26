@@ -12,16 +12,17 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   position: relative;
   min-width: 550px;
   min-height: 300px;
+  max-width: 600px;
   background: ${({ theme, backgroundColor }) => theme.colors[backgroundColor!]};
   padding: 50px;
   line-height: 24px;
   clip-path: polygon(${({ rectType }) => RECT_CLIP[rectType! % 3]});
 
   h2 {
-    white-space: pre-wrap;
     font-size: 24px;
     color: white;
     margin-bottom: 20px;
+    white-space: pre-wrap;
   }
   p {
     color: white;
