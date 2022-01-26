@@ -86,7 +86,7 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
     if (target.innerHTML === activeTopic) {
       return;
     }
-    titleRef.current[target.innerHTML].scrollIntoView({ behavior: 'smooth' });
+    titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleBackBtnClick = () => {
@@ -100,7 +100,9 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
       {categories && (
         <>
           <div className={'back-button'} onClick={handleBackBtnClick}>{`<`}</div>
-          <li className={'category-item'}>{categories.find.name}</li>
+          <li className={'category-item'}>
+            {categories.find(category => category.categoryId === +router.query.categoryId!)?.name}
+          </li>
         </>
       )}
       {toc.map(({ categoryId, name }) => (
