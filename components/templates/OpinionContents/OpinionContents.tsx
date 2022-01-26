@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { policy } from '../../../types/Policy';
 import Opinion from '@molecules/Opinion/Opinion';
 import { flexBox } from '@styles/mixin';
+import { useRouter } from 'next/router';
 
 const OpinionContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
@@ -39,6 +40,14 @@ export interface OpinionContentsProps {
 }
 
 const OpinionContents = ({ groupByKeyword }: OpinionContentsProps) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const title = decodeURI(router.asPath.split('#')[1]);
+    const $target = document.querySelector(`[data-phrase="${title}"]`);
+    $target?.scrollIntoView({ block: 'center' });
+  }, []);
+
   return (
     <OpinionContentsBlock>
       {groupByKeyword.map((policy, index) => (

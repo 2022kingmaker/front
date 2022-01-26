@@ -36,7 +36,7 @@ export interface SpeechRectProps {
 
 const SpeechRect = ({ backgroundColor = 'black', phrase, text, rectType = 0 }: SpeechRectProps) => {
   return (
-    <SpeechRectBlock backgroundColor={backgroundColor} rectType={rectType}>
+    <SpeechRectBlock data-phrase={phrase} backgroundColor={backgroundColor} rectType={rectType}>
       <h2>{phrase}</h2>
       <p>{text.replaceAll('\\n', '\n')}</p>
     </SpeechRectBlock>
