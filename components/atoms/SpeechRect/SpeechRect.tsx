@@ -10,10 +10,11 @@ const RECT_CLIP = [
 
 const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   position: relative;
-  width: 550px;
+  min-width: 550px;
   min-height: 300px;
   background: ${({ theme, backgroundColor }) => theme.colors[backgroundColor!]};
   padding: 50px;
+  line-height: 24px;
   clip-path: polygon(${({ rectType }) => RECT_CLIP[rectType! % 3]});
 
   h2 {
@@ -24,6 +25,11 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   p {
     color: white;
     white-space: pre-line;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    min-width: 0;
+    width: 300px;
+    padding: 24px;
   }
 `;
 

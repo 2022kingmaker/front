@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 const OpinionContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
   position: relative;
-  padding: 60px 0 200px 200px;
+  padding: 60px 0 0 300px;
   .topic-container > * {
     padding: 24px;
   }
@@ -21,6 +21,13 @@ const OpinionContentsBlock = styled.div`
     font-weight: 650;
     font-size: 32px;
     border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
+  }
+  @media ${({ theme }) => theme.desktop} {
+    width: 100%;
+    padding: 90px 24px 200px 24px;
+    .topic-container {
+      width: 100%;
+    }
   }
 `;
 

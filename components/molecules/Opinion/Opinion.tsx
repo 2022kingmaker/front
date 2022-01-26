@@ -3,12 +3,22 @@ import styled from 'styled-components';
 import BigAvatar from '@molecules/BigAvatar/BigAvatar';
 import SpeechRect from '@atoms/SpeechRect/SpeechRect';
 import { flexBox } from '@styles/mixin';
-import { policy } from '../../../types/Policy';
 
-const OpinionBlock = styled.div`
+const OpinionBlock = styled.div<{ position: string }>`
   ${flexBox('center', 'center', 'row')};
   div:first-child {
     margin-right: 50px;
+  }
+  //flex-direction: column-reverse;
+  @media ${({ theme }) => theme.desktop} {
+    justify-content: space-between;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: ${({ position }) => (position === 'left' ? 'column-reverse' : 'column')};
+
+    div:first-child {
+      margin: 0;
+    }
   }
 `;
 
@@ -23,12 +33,12 @@ const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 
 const Opinion = ({ phrase, text, rectType, candidate }: OpinionProps) => {
   const { name: candidateName, party } = candidate;
-  const { name: partyName, colorCode, partyId } = party;
+  const { name: partyName, partyId } = party;
 
   const position = rectType % 2 === 0 ? 'left' : 'right';
 
   return (
-    <OpinionBlock>
+    <OpinionBlock position={position}>
       {position === 'left' ? (
         <>
           <BigAvatar size={150} imgId={partyId} partyName={partyName} name={candidateName} />

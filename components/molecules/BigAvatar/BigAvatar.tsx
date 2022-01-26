@@ -18,6 +18,9 @@ const BigAvatarBlock = styled.div`
     div {
     }
   }
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: row;
+  }
 `;
 
 export interface BigAvatarProps extends AvatarProps {

@@ -68,7 +68,9 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     a.active {
       line-height: 44px;
     }
-  }
+    .category-item {
+      display: none;
+    }
 `;
 
 export interface SideBarProps {
@@ -89,17 +91,10 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
     titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleBackBtnClick = () => {
-    if (categories) {
-      router.push(`/#${categories[toc[0].categoryId].name}`);
-    }
-  };
-
   return (
     <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
       {categories && (
         <>
-          <div className={'back-button'} onClick={handleBackBtnClick}>{`<`}</div>
           <li className={'category-item'}>
             {categories.find(category => category.categoryId === +router.query.categoryId!)?.name}
           </li>
