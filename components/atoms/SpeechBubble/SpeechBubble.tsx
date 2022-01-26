@@ -65,7 +65,7 @@ const SpeechBubble = ({ color = 'first', position = 'left', phraseText }: Partia
 
   const handleClick = (e: any) => {
     const target = e.target.closest('.topic-container');
-    // router.push(`/opinions/[categoryId]`, `/opinions/${target.dataset.categoryId}`);
+    router.push(`/opinions/[categoryId]`, `/opinions/${target.dataset.categoryId}#${e.target.innerHTML}`);
   };
   return (
     <SpeechBubbleBlock color={color} position={position} onClick={handleClick}>
