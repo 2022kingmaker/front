@@ -28,8 +28,8 @@ const Modal = ({ children, isShowing, close }: ModalProps) => {
   const $portal = document.querySelector('#modal-root') as Element;
 
   useEffect(() => {
-    document.body.classList.add('modal-on');
-  }, []);
+    isShowing ? document.body.classList.add('modal-on') : document.body.classList.remove('modal-on');
+  }, [isShowing]);
 
   return isShowing && $portal
     ? ReactDOM.createPortal(
