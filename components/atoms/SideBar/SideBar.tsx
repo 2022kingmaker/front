@@ -54,7 +54,7 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     }
     &::before {
       content: '';
-      min-width: 350px;
+      min-width: 550px;
     }
     &::after {
       content: '';

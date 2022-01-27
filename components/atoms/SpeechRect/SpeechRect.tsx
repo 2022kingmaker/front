@@ -26,7 +26,8 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   }
   p {
     color: white;
-    white-space: pre-line;
+    width: 100%;
+    word-break: break-all;
   }
   @media ${({ theme }) => theme.mobile} {
     min-width: 0;
