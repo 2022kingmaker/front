@@ -1,10 +1,11 @@
-import Link from 'next/link';
 import React from 'react';
-import styled from 'styled-components';
-import { flexBox } from '@styles/mixin';
-import useModal from '@molecules/Modal/useModal';
-import ReportModal from '@molecules/ReportModal/ReportModal';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import styled from 'styled-components';
+
+import { flexBox } from '@styles/mixin';
+import { useModal } from '@hooks/index';
+import { ReportModal } from '@molecules/index';
 
 const HeaderBlock = styled.div`
   width: 100%;

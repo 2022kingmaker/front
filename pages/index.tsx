@@ -3,16 +3,15 @@ import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
-import SideBar from '@atoms/SideBar/SideBar';
-import Layout from '@atoms/Layout/Layout';
-import PhraseContents from '@templates/PhraseContents/PhraseContents';
-import IntroModal from '@molecules/IntroModal/IntroModal';
+import { SideBar, Layout } from '@atoms/index';
+import { PhraseContents } from '@templates/index';
+import { IntroModal } from '@molecules/index';
 
-import useModal from '@molecules/Modal/useModal';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import { useIntersectionObserver, useModal } from '../hooks/index';
 
 import { keywordDetails, keywords } from '../types/Keyword';
 import { categories } from '../types/Category';
+
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
 

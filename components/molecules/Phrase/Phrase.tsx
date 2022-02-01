@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Avatar from '@atoms/Avatar/Avatar';
-import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
+import { Avatar, SpeechBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
-import { phrase } from '../../../types/Keyword';
+import { phrase } from '@types/Keyword';
 
 const PhraseBlock = styled.div<Partial<PhraseProps>>`
   ${flexBox('flex-start', 'center', 'row')};

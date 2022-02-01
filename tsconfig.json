@@ -38,6 +38,15 @@
       ],
       "@styles/*": [
         "styles/*"
+      ],
+      "@api/*": [
+        "api/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@types/*": [
+        "types/*"
       ]
     }
   },
