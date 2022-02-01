@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Phrase from '@molecules/Phrase/Phrase';
-import { Phrases } from '../../../types/Keyword';
+import { Phrases } from '@models/Keyword';
 import { flexBox } from '@styles/mixin';
 
 const PledgesBlock = styled.div`

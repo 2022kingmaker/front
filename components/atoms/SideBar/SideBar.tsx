@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
-import { Categories } from '../../../types/Category';
-import { Keywords } from '../../../types/Keyword';
+import { Categories } from '@models/Category';
+import { Keywords } from '@models/Keyword';
 import { useRouter } from 'next/router';
 import useScrollIntoView from '@atoms/SideBar/useScrollIntoView';
 

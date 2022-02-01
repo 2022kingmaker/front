@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Policy } from '../../../types/Policy';
+import { Policy } from '@models/Policy';
 import Opinion from '@molecules/Opinion/Opinion';
 import { flexBox } from '@styles/mixin';
 import { useRouter } from 'next/router';

@@ -6,9 +6,9 @@ import Layout from '@atoms/Layout/Layout';
 import SideBar from '@atoms/SideBar/SideBar';
 import OpinionContents from '@templates/OpinionContents/OpinionContents';
 
-import { keywords } from '../../types/Keyword';
-import { categories } from '../../types/Category';
-import { policies } from '../../types/Policy';
+import { Keywords } from '@models/Keyword';
+import { Categories } from '@models/Category';
+import { Policies } from '@models/Policy';
 
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
@@ -20,9 +20,9 @@ const IdBlock = styled.div``;
 
 export interface IdProps {
   data: {
-    keywords: keywords;
-    policies: policies;
-    categories: categories;
+    keywords: Keywords;
+    policies: Policies;
+    categories: Categories;
   };
 }
 
@@ -67,7 +67,7 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   return { props: { data: { policies, categories, keywords } }, revalidate: 3600 };
 };
 
-const groupingByKeyword = (policies: policies, keywords: keywords): any =>
+const groupingByKeyword = (policies: Policies, keywords: Keywords): any =>
   keywords
     .map(({ keywordId, name }) => {
       return policies

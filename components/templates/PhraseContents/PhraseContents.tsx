@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Phrases } from '../../../types/Keyword';
+import { Phrases } from '@models/Keyword';
 import Pledges from '@organisms/Pledges/Pledges';
 import { flexBox } from '@styles/mixin';
 

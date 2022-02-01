@@ -9,8 +9,8 @@ import { IntroModal } from '@molecules/index';
 
 import { useIntersectionObserver, useModal } from '../hooks/index';
 
-import { KeywordDetails, Keywords } from '../types/Keyword';
-import { Categories } from '../types/Category';
+import { KeywordDetails, Keywords } from '@models/Keyword';
+import { Categories } from '@models/Category';
 
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';

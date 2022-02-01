@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const IMAGE_URL = `https://dc4n6vz6gh9cs.cloudfront.net`;
-
 const AvatarBlock = styled.img<Partial<AvatarProps>>`
   position: relative;
   ${({ size }) => `
@@ -22,7 +20,9 @@ export interface AvatarProps {
 }
 
 const Avatar = ({ imgId, size = 55 }: Partial<AvatarProps>) => {
-  return <AvatarBlock src={IMAGE_URL + `/candidate-images/candidate0${imgId}.png`} size={size} />;
+  return (
+    <AvatarBlock src={process.env.NEXT_PUBLIC_IMAGE_URL + `/candidate-images/candidate0${imgId}.png`} size={size} />
+  );
 };
 
 export default Avatar;

@@ -3,24 +3,25 @@ export interface Keyword {
   name: string;
   categoryId: number;
 }
-export interface Phrase {
-  policyId: number;
-  candidate: {
-    candidateId: number;
+export interface Candidate {
+  candidateId: number;
+  name: string;
+  party: {
+    partyId: number;
     name: string;
-    party: {
-      partyId: number;
-      name: string;
-      colorCode?: string;
-    };
+    colorCode?: string;
   };
+}
+export interface IPhrase {
+  policyId: number;
+  candidate: Candidate;
   phrase: string;
 }
 
 export interface KeywordDetail extends Keyword {
-  phrases: Phrase[];
+  phrases: IPhrase[];
 }
 
 export type Keywords = Keyword[];
-export type Phrases = Phrase[];
+export type Phrases = IPhrase[];
 export type KeywordDetails = KeywordDetail[];
