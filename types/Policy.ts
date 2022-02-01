@@ -1,4 +1,4 @@
-export interface policy {
+export interface Policy {
   policyId: number;
   candidate: {
     candidateId: number;
@@ -14,4 +14,4 @@ export interface policy {
   keywordId: number;
 }
 
-export type policies = policy[];
+export type Policies = Policy[];

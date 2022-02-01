@@ -1,9 +1,9 @@
-export interface keyword {
+export interface Keyword {
   keywordId: number;
   name: string;
   categoryId: number;
 }
-export interface phrase {
+export interface Phrase {
   policyId: number;
   candidate: {
     candidateId: number;
@@ -17,10 +17,10 @@ export interface phrase {
   phrase: string;
 }
 
-export interface keywordDetail extends keyword {
-  phrases: phrase[];
+export interface KeywordDetail extends Keyword {
+  phrases: Phrase[];
 }
 
-export type keywords = keyword[];
-export type phrases = phrase[];
-export type keywordDetails = keywordDetail[];
+export type Keywords = Keyword[];
+export type Phrases = Phrase[];
+export type KeywordDetails = KeywordDetail[];

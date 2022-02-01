@@ -9,8 +9,8 @@ import { IntroModal } from '@molecules/index';
 
 import { useIntersectionObserver, useModal } from '../hooks/index';
 
-import { keywordDetails, keywords } from '../types/Keyword';
-import { categories } from '../types/Category';
+import { KeywordDetails, Keywords } from '../types/Keyword';
+import { Categories } from '../types/Category';
 
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
@@ -22,8 +22,8 @@ const HomeBlock = styled.div`
 
 interface HomeProps {
   data: {
-    keywordDetails: keywordDetails;
-    categories: categories;
+    keywordDetails: KeywordDetails;
+    categories: Categories;
   };
 }
 
@@ -65,7 +65,7 @@ Home.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
 
-const groupingByCategory: (categories: categories, keywords: keywords) => any = (categories, keywords) =>
+const groupingByCategory: (categories: Categories, keywords: Keywords) => any = (categories, keywords) =>
   categories
     .map(({ categoryId, name }) => {
       return keywords

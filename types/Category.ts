@@ -1,6 +1,6 @@
-export interface category {
+export interface Category {
   categoryId: number;
   name: string;
 }
 
-export type categories = category[];
+export type Categories = Category[];

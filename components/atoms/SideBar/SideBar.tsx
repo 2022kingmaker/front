@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
-import { categories } from '@types/Category';
-import { keywords } from '@types/Keyword';
+import { Categories } from '../../../types/Category';
+import { Keywords } from '../../../types/Keyword';
 import { useRouter } from 'next/router';
 import useScrollIntoView from '@atoms/SideBar/useScrollIntoView';
 
@@ -74,10 +74,10 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
 `;
 
 export interface SideBarProps {
-  toc: categories | keywords;
-  activeFontSize?: number;
+  toc: Categories | Keywords;
   activeTopic: string;
-  categories?: categories;
+  activeFontSize?: number;
+  categories?: Categories;
 }
 const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarProps) => {
   const router = useRouter();

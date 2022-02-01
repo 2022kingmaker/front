@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { phrases } from '@types/Keyword';
+import { Phrases } from '../../../types/Keyword';
 import Pledges from '@organisms/Pledges/Pledges';
 import { flexBox } from '@styles/mixin';
 
@@ -36,7 +36,7 @@ const ContentsBlock = styled.div`
 `;
 
 export interface ContentsProps {
-  groupByCategory: { categoryName: string; keywordId: number; name: string; categoryId: number; phrases: phrases }[][];
+  groupByCategory: { categoryName: string; keywordId: number; name: string; categoryId: number; phrases: Phrases }[][];
 }
 
 const PhraseContents = ({ groupByCategory }: ContentsProps) => {

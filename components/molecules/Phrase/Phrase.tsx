@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Avatar, SpeechBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
-import { phrase } from '@types/Keyword';
+import { Phrase } from '../../../types/Keyword';
 
 const PhraseBlock = styled.div<Partial<PhraseProps>>`
   ${flexBox('flex-start', 'center', 'row')};
@@ -29,7 +29,7 @@ const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 
 export interface PhraseProps {
   position: string;
-  phrase: phrase;
+  phrase: Phrase;
 }
 
 const Phrase = ({ position, phrase }: PhraseProps) => {

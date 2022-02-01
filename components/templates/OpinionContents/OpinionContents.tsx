@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { policy } from '@types/Policy';
+import { Policy } from '../../../types/Policy';
 import Opinion from '@molecules/Opinion/Opinion';
 import { flexBox } from '@styles/mixin';
 import { useRouter } from 'next/router';
@@ -60,7 +60,7 @@ const OpinionContents = ({ groupByKeyword }: OpinionContentsProps) => {
       {groupByKeyword.map((policy, index) => (
         <div className="topic-container" key={index} data-title={policy[0].keywordName} data-index={index}>
           <h2 className="title">{policy[0].keywordName}</h2>
-          {policy.map(({ text, phrase, candidate }: policy, index) => (
+          {policy.map(({ text, phrase, candidate }: Policy, index) => (
             <Opinion key={phrase + index} phrase={phrase} candidate={candidate} text={text} rectType={index} />
           ))}
         </div>
