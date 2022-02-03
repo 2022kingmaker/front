@@ -11,31 +11,7 @@ const DSMD_DOMAIN = 'http://dsmd.kr';
 
 const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
 (async () => {
-  //   // axios를 이용해 post 리스트 가져오기
-  //   // <API_DOAMIN>, <API_NAME> 등은 실제 값이 아닙니다!
-  //   await axios({
-  //       method: 'post',
-  //       url: 'https://<API_DOMAIN>/<API_NAME>',
-  //       headers: {
-  //           'Content-Type': 'application/graphql',
-  //           'Authorization': [------------]
-  //       },
-  //       data:
-  //           `{
-  //   <GraphQL_APINAME> (
-  //     ...
-  //   ){
-  //     title
-  // 		...
-  //   }
-  // }`
-  //   }).then((res) => {
-  //       response = res.data.data.GraphQL_APINAME
-  //   })
-  //       .catch((e) => {
-  //           console.log(e.response.data)
-  //       })
-  const response = await fetch(`http://118.67.128.85:8083/category`);
+  const response = await fetch(`${DSMD_DOMAIN}:8093/category`);
   const data = await response.json();
 
   // 적절히 파싱
