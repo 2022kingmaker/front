@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { Categories } from '@models/Category';
-import { Keywords } from '@models/Keyword';
 import { useRouter } from 'next/router';
 import useScrollIntoView from '@atoms/SideBar/useScrollIntoView';
+import { ITableContents } from '@models/TableContent';
 
 const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   ${flexBox('center', 'center', 'column')};
@@ -74,7 +74,7 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
 `;
 
 export interface SideBarProps {
-  toc: Categories | Keywords;
+  toc: ITableContents[];
   activeTopic: string;
   activeFontSize?: number;
   categories?: Categories;
@@ -90,7 +90,6 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
     }
     titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
   };
-
   return (
     <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
       {categories && (
@@ -100,8 +99,8 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
           </li>
         </>
       )}
-      {toc.map(({ categoryId, name }) => (
-        <li key={`${categoryId}+${name}`}>
+      {toc.map(({ id, name }) => (
+        <li key={`${id}+${name}`}>
           <a onClick={handleTopicClick} className={activeTopic === name ? 'active' : ''}>
             {name}
           </a>

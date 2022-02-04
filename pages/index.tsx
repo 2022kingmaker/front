@@ -14,6 +14,7 @@ import { Categories } from '@models/Category';
 
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
+import { ITableContents } from '@models/TableContent';
 
 const HomeBlock = styled.div`
   height: inherit;
@@ -39,9 +40,17 @@ const Home: NextPage = ({ data }: HomeProps) => {
 
   const groupByCategory = groupingByCategory(categories, keywordDetails);
 
+  const toc = categories.reduce((toc, { categoryId, name }) => {
+    toc.push({
+      id: categoryId,
+      name: name,
+    });
+    return toc;
+  }, [] as ITableContents[]);
+
   return (
     <HomeBlock>
-      <SideBar toc={categories} activeTopic={activeTopic} />
+      <SideBar toc={toc} activeTopic={activeTopic} />
       <PhraseContents groupByCategory={groupByCategory} />
       {isPopupShowing && (
         <Modal isShowing={isShowing} close={toggle}>

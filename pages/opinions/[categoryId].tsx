@@ -15,6 +15,7 @@ import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { getCategories } from '../../apis/category';
 import { getKeywords } from '../../apis/keyword';
 import { getPolicies } from '../../apis/policy';
+import { ITableContents } from '@models/TableContent';
 
 const IdBlock = styled.div``;
 
@@ -34,9 +35,17 @@ const OpinionPage = ({ data }: IdProps) => {
 
   const groupByKeyword = groupingByKeyword(policies, keywords);
 
+  const toc = keywords.reduce((toc, { keywordId, name }) => {
+    toc.push({
+      id: keywordId,
+      name: name,
+    });
+    return toc;
+  }, [] as ITableContents[]);
+
   return (
     <IdBlock>
-      <SideBar toc={keywords} activeTopic={activeTopic} categories={categories} />
+      <SideBar toc={toc} activeTopic={activeTopic} categories={categories} />
       <OpinionContents groupByKeyword={groupByKeyword} />
     </IdBlock>
   );
