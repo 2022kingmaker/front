@@ -10,7 +10,7 @@ const useScrollIntoView: TUseScrollIntoView = activeTopic => {
 
   useEffect(() => {
     if (Object.keys(titleRef.current).length === 0 && titleRef.current.constructor === Object) {
-      const elemList = [...document.querySelectorAll('h2.title')];
+      const elemList = [...document.querySelectorAll('h2')];
 
       titleRef.current = elemList.reduce((map, $elem) => {
         map[$elem.innerHTML] = $elem;

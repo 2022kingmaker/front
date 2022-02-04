@@ -78,8 +78,9 @@ export interface SideBarProps {
   activeTopic: string;
   activeFontSize?: number;
   categories?: Categories;
+  setActiveTopic?: React.Dispatch<React.SetStateAction<string>>;
 }
-const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarProps) => {
+const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories, setActiveTopic }: SideBarProps) => {
   const router = useRouter();
   const titleRef = useScrollIntoView(activeTopic);
 
@@ -89,6 +90,7 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories }: SideBarP
       return;
     }
     titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
+    setActiveTopic && setActiveTopic(target.innerHTML);
   };
   return (
     <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>

@@ -18,7 +18,7 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   line-height: 24px;
   clip-path: polygon(${({ rectType }) => RECT_CLIP[rectType! % 3]});
 
-  h2 {
+  h3 {
     font-size: 24px;
     color: white;
     margin-bottom: 20px;
@@ -46,7 +46,7 @@ export interface SpeechRectProps {
 const SpeechRect = ({ backgroundColor = 'black', phrase, text, rectType = 0 }: SpeechRectProps) => {
   return (
     <SpeechRectBlock data-phrase={phrase} backgroundColor={backgroundColor} rectType={rectType}>
-      <h2>{phrase}</h2>
+      <h3>{phrase}</h3>
       <p>{text.replace(/\\n/gi, '\n')}</p>
     </SpeechRectBlock>
   );
