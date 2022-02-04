@@ -63,7 +63,7 @@ const BarChart = ({ sortedRates }: BarChartProps) => {
 
   return (
     <BarChartBlock>
-      <H2>주차 별 지지율</H2>
+      <H2>주차별 지지율</H2>
       <select name="week-rates" id="rate" onChange={selectRate} value={currentIndex}>
         {sortedRates.map((rate, index) => (
           <option key={rate.researchId} value={index}>

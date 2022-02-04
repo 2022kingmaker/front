@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 
@@ -31,11 +31,12 @@ const toc = [
 
 const Statistics: NextPage = ({ data }: StatisticsProps) => {
   const { rates } = data;
+  const [activeTopic, setActiveTopic] = useState('기간별 지지율');
 
   return (
     <StatisticsBlock>
-      <SideBar toc={toc} activeTopic={'기간별 지지율'} />
-      <ChartContents rates={rates} />
+      <SideBar toc={toc} activeTopic={activeTopic} setActiveTopic={setActiveTopic} />
+      <ChartContents rates={rates} setActiveTopic={setActiveTopic} />
     </StatisticsBlock>
   );
 };

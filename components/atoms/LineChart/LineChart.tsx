@@ -23,6 +23,7 @@ const LineChartBlock = styled.div`
   width: 100%;
   max-width: 1000px;
   height: 400px;
+  margin-top: 30px;
 `;
 
 export const H2 = styled.h2`
@@ -31,7 +32,7 @@ export const H2 = styled.h2`
   font-weight: 650;
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
-  margin-bottom: 30px;
+  margin-bottom: 80px;
 `;
 
 interface LineChartProps {
