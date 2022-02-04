@@ -39,7 +39,6 @@ const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 const NavigationTab = styled.div`
   ${flexBox('space-between', null, 'row')};
 `;
-const UserInfo = styled.div``;
 
 const Header = () => {
   const { isShowing, toggle } = useModal();
@@ -55,14 +54,11 @@ const Header = () => {
           {/*<Link href={'#'}>*/}
           {/*  <a>공약</a>*/}
           {/*</Link>*/}
-          {/*<Link href={'#'}>*/}
-          {/*  <a>통계</a>*/}
-          {/*</Link>*/}
+          <Link href={'/statistics'}>
+            <a>통계</a>
+          </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>
-        {/*<UserInfo>*/}
-        {/*  <a href="#">로그인</a>*/}
-        {/*</UserInfo>*/}
       </ul>
       <Modal isShowing={isShowing} close={toggle}>
         <ReportModal />
