@@ -12,6 +12,8 @@ module.exports = {
       '@molecules': path.resolve(__dirname, '../components/molecules/'),
       '@organisms': path.resolve(__dirname, '../components/organisms/'),
       '@templates': path.resolve(__dirname, '../components/templates/'),
+      '@hooks': path.resolve(__dirname, '../hooks/'),
+      '@lib': path.resolve(__dirname, '../lib/'),
     };
     return config;
   },
