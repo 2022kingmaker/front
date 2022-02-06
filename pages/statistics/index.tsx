@@ -36,8 +36,8 @@ const Statistics: NextPage = ({ data }: StatisticsProps) => {
 
   return (
     <StatisticsBlock>
-      <SideBar toc={toc} activeTopic={activeTopic} setActiveTopic={setActiveTopic} />
-      <ChartContents rates={rates} setActiveTopic={setActiveTopic} />
+      {/*<SideBar toc={toc} activeTopic={activeTopic} setActiveTopic={setActiveTopic} />*/}
+      {/*<ChartContents rates={rates} setActiveTopic={setActiveTopic} />*/}
     </StatisticsBlock>
   );
 };
@@ -48,8 +48,7 @@ Statistics.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const rates = await getRating();
-
   return { props: { data: { rates } } };
 };
