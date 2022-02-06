@@ -14,8 +14,11 @@ import {
 import React, { useState } from 'react';
 import { IRate } from '@models/Rate';
 import { getChartData } from '@lib/utils';
-import { getWeek } from '@lib/date';
 import { H2 } from '@atoms/LineChart/LineChart';
+import { Calendar } from '@molecules/index';
+import { getThisWeekRange, getWeek } from '@lib/date';
+import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
+import { RangeModifier } from 'react-day-picker/types/Modifiers';
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, BarController, Title, Tooltip, Legend);
 
@@ -27,7 +30,6 @@ const BarChartBlock = styled.div`
   width: 100%;
   max-width: 1000px;
   height: 400px;
-  margin-top: 200px;
   position: relative;
 `;
 
@@ -39,38 +41,38 @@ const Button = styled.button<{ direction: 'left' | 'right'; active: boolean }>`
 
 interface BarChartProps {
   sortedRates: IRate[];
+  labels: string[];
 }
 
-const BarChart = ({ sortedRates }: BarChartProps) => {
-  const [currentIndex, setCurrentIndex] = useState(sortedRates.length - 1);
-  const chartData = getChartData(sortedRates[currentIndex]);
+const BarChart = ({ sortedRates, labels }: BarChartProps) => {
+  const [selectedDays, setSelectedDays] = useState<RangeModifier>({
+    from: null,
+    to: null,
+  });
+  const currentIndex = selectedDays.from ? labels.findIndex(label => label === getWeek(selectedDays.from)) : 0;
 
+  const chartData = getChartData(sortedRates[currentIndex]);
   const nextRate = () => {
-    if (currentIndex === sortedRates.length - 1) {
-      return;
-    }
-    setCurrentIndex(prevState => prevState + 1);
+    // if (currentIndex === sortedRates.length - 1) {
+    return;
+    // }
+    // setCurrentIndex(prevState => prevState + 1);
   };
   const prevRate = () => {
-    if (currentIndex === 0) {
-      return;
-    }
-    setCurrentIndex(prevState => prevState - 1);
+    // if (currentIndex === 0) {
+    return;
+    // }
+    // setCurrentIndex(prevState => prevState - 1);
   };
   const selectRate = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentIndex(+e.target.value);
+    // setCurrentIndex(+e.target.value);
   };
+  const disabledDays = sortedRates.map(rate => getThisWeekRange(rate.startedAt)) as disabledDays[];
 
   return (
     <BarChartBlock>
       <H2>주차별 지지율</H2>
-      <select name="week-rates" id="rate" onChange={selectRate} value={currentIndex}>
-        {sortedRates.map((rate, index) => (
-          <option key={rate.researchId} value={index}>
-            {getWeek(rate.startedAt)}
-          </option>
-        ))}
-      </select>
+      {/*<Calendar disabledDays={disabledDays} selectedDays={selectedDays} setSelectedDays={setSelectedDays} />*/}
       <Bar
         options={{
           indexAxis: 'x',
@@ -123,12 +125,12 @@ const BarChart = ({ sortedRates }: BarChartProps) => {
         data={chartData}
       />
 
-      <Button direction={'right'} active={currentIndex !== sortedRates.length - 1} onClick={nextRate}>
-        다음
-      </Button>
-      <Button direction={'left'} active={currentIndex !== 0} onClick={prevRate}>
-        이전
-      </Button>
+      {/*<Button direction={'right'} active={currentIndex !== sortedRates.length - 1} onClick={nextRate}>*/}
+      {/*  다음*/}
+      {/*</Button>*/}
+      {/*<Button direction={'left'} active={currentIndex !== 0} onClick={prevRate}>*/}
+      {/*  이전*/}
+      {/*</Button>*/}
     </BarChartBlock>
   );
 };

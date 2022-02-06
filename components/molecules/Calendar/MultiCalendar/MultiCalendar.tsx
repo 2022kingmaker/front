@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import DayPicker from 'react-day-picker';
 import { DayModifiers, RangeModifier } from 'react-day-picker/types/Modifiers';
 import { getPlusDate, getThisWeekRange } from '@lib/date';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { MONTHS, WEEKDAYS_SHORT } from '@lib/constant';
 
 const MultiCalendarBlock = styled.div`
@@ -39,18 +39,16 @@ const MultiCalendarBlock = styled.div`
     cursor: pointer;
   }
 `;
-
-interface MultiCalendarProps {
-  disabledDays: {
-    startDate: Date;
-    endDate: Date;
-  }[];
+export interface disabledDays {
+  startDate: Date;
+  endDate: Date;
 }
-const MultiCalendar = ({ disabledDays }: MultiCalendarProps) => {
-  const [selectedWeek, setSelectedWeek] = useState<RangeModifier>({
-    from: null,
-    to: null,
-  });
+interface MultiCalendarProps {
+  disabledDays: disabledDays[];
+  selectedWeek: RangeModifier;
+  setSelectedWeek: React.Dispatch<React.SetStateAction<RangeModifier>>;
+}
+const MultiCalendar = ({ disabledDays, selectedWeek, setSelectedWeek }: MultiCalendarProps) => {
   const { from, to } = selectedWeek;
 
   const handleDayClick = (day: Date, modifiers: DayModifiers) => {
@@ -93,6 +91,7 @@ const MultiCalendar = ({ disabledDays }: MultiCalendarProps) => {
         showOutsideDays
         locale="ko"
         onDayClick={handleDayClick}
+        initialMonth={new Date(2022, 0)}
         // @ts-ignore
         selectedDays={[from, { from, to }]}
         months={MONTHS}

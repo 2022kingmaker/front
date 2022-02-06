@@ -4,13 +4,14 @@ import { IRate } from '@models/Rate';
 import { sortRates } from '@lib/utils';
 import BarChart from '@atoms/BarChart/BarChart';
 import LineChart from '@atoms/LineChart/LineChart';
+import { getWeek } from '@lib/date';
+import { flexBox } from '@styles/mixin';
 
 const ChartContentsBlock = styled.div`
   position: relative;
   padding: 44px 30px 0 230px;
-
   height: 100vh;
-  overflow-y: hidden;
+  //overflow-y: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -26,6 +27,7 @@ const ChartContentsBlock = styled.div`
 `;
 
 const InnerPage = styled.div`
+  ${flexBox('flex-start', 'center', 'column')};
   position: relative;
   height: 100vh;
   width: 100%;
@@ -58,16 +60,17 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
       requestAnimationFrame(() => setActiveTopic(titleRef.current[0].innerHTML));
     }
   };
+  const labels = sortedRates.map(({ startedAt }) => getWeek(startedAt));
 
   return (
     <ChartContentsBlock onWheelCapture={handleWheel}>
       {sortedRates && (
         <>
           <InnerPage>
-            <LineChart sortedRates={sortedRates} />
+            <LineChart sortedRates={sortedRates} labels={labels} />
           </InnerPage>
           <InnerPage>
-            <BarChart sortedRates={sortedRates} />
+            <BarChart sortedRates={sortedRates} labels={labels} />
           </InnerPage>
         </>
       )}

@@ -1,7 +1,7 @@
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { DayModifiers, RangeModifier } from 'react-day-picker/types/Modifiers';
 import { getThisWeekRange } from '@lib/date';
 import { MONTHS, WEEKDAYS_SHORT } from '@lib/constant';
@@ -30,12 +30,10 @@ interface CalendarProps {
     startDate: Date;
     endDate: Date;
   }[];
+  selectedDays: RangeModifier;
+  setSelectedDays: React.Dispatch<React.SetStateAction<RangeModifier>>;
 }
-const Calendar = ({ disabledDays }: CalendarProps) => {
-  const [selectedDays, setSelectedDays] = useState<RangeModifier>({
-    from: null,
-    to: null,
-  });
+const Calendar = ({ disabledDays, selectedDays, setSelectedDays }: CalendarProps) => {
   const { from, to } = selectedDays;
 
   const handleDayClick = (day: Date, modifiers: DayModifiers) => {

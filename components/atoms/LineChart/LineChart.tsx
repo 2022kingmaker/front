@@ -13,8 +13,12 @@ import {
 } from 'chart.js';
 import { IRate } from '@models/Rate';
 import { getLineChartData } from '@lib/utils';
-import { getWeek } from '@lib/date';
+import { getThisWeekRange, getWeek } from '@lib/date';
 import React, { useState } from 'react';
+import { MultiCalendar } from '@molecules/index';
+import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
+import { DayModifiers, RangeModifier } from 'react-day-picker/types/Modifiers';
+import { flexBox } from '@styles/mixin';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip);
 
@@ -23,7 +27,7 @@ const LineChartBlock = styled.div`
   width: 100%;
   max-width: 1000px;
   height: 400px;
-  margin-top: 30px;
+  margin-top: 25px;
 `;
 
 export const H2 = styled.h2`
@@ -32,47 +36,48 @@ export const H2 = styled.h2`
   font-weight: 650;
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
-  margin-bottom: 80px;
+`;
+const CalendarContainer = styled.div<{ isCalendarOpen: boolean }>`
+  position: relative;
+
+  div:nth-child(2) {
+    ${({ isCalendarOpen }) => (isCalendarOpen ? `display: block` : `display: none`)};
+  }
+`;
+const RangeInput = styled.div`
+  width: 200px;
+  height: 100%;
+  border: 1px solid black;
+  div {
+    display: none;
+  }
 `;
 
 interface LineChartProps {
   sortedRates: IRate[];
+  labels: string[];
 }
 
-const LineChart = ({ sortedRates }: LineChartProps) => {
-  const [range, setRange] = useState({
-    from: 0,
-    to: sortedRates.length - 1,
+const LineChart = ({ sortedRates, labels }: LineChartProps) => {
+  const [selectedWeek, setSelectedWeek] = useState<RangeModifier>({
+    from: null,
+    to: null,
   });
-  const { to, from } = range;
-  const chartData = getLineChartData(sortedRates.slice(from, to + 1));
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const selectRange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { target } = e;
-    if (target.name === 'to-week') {
-      setRange({ ...range, to: +target.value });
-      return;
-    }
-    setRange({ ...range, from: +target.value });
+  const handleClick = () => {
+    setIsCalendarOpen(!isCalendarOpen);
   };
+
+  const start = labels.findIndex(label => label === getWeek(selectedWeek.from));
+  const end = labels.findIndex(label => label === getWeek(selectedWeek.to));
+  const chartData = getLineChartData(sortedRates.slice(~start ? start : 0, ~end ? end + 1 : sortedRates.length));
+  const disabledDays = sortedRates.map(rate => getThisWeekRange(rate.startedAt)) as disabledDays[];
 
   return (
     <LineChartBlock>
       <H2>기간별 지지율</H2>
-      <select name="from-week" id="rate" value={from} onChange={selectRange}>
-        {sortedRates.map((rate, index) => (
-          <option key={rate.researchId} value={index}>
-            {getWeek(rate.startedAt)}
-          </option>
-        ))}
-      </select>
-      <select name="to-week" id="rate" value={to} onChange={selectRange}>
-        {sortedRates.map((rate, index) => (
-          <option key={rate.researchId} value={index}>
-            {getWeek(rate.startedAt)}
-          </option>
-        ))}
-      </select>
+      {/*<MultiCalendar disabledDays={disabledDays} selectedWeek={selectedWeek} setSelectedWeek={setSelectedWeek} />*/}
       <Line
         // @ts-ignore
         data={chartData}

@@ -8,6 +8,7 @@ import { getRating } from '../../apis/rating';
 import ChartContents from '@templates/ChartContents/ChartContents';
 import { IRate } from '@models/Rate';
 import { ITableContents } from '@models/TableContent';
+import { getWeek } from '@lib/date';
 const StatisticsBlock = styled.div`
   height: inherit;
   position: relative;
