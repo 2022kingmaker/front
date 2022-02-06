@@ -7,7 +7,7 @@ import fetch from 'node-fetch';
 
 // 오늘 날짜 가져오기 & 도메인 설정
 const getDate = new Date().toISOString();
-const DSMD_DOMAIN = 'http://dsmd.kr';
+const DSMD_DOMAIN = 'https://dsmd.kr';
 
 const formatted = sitemap => prettier.format(sitemap, { parser: 'html' });
 (async () => {
