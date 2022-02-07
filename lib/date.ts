@@ -1,5 +1,3 @@
-import { koWeekString } from '@lib/constant';
-
 export const getThisWeekRange = (date: string | Date | null | undefined) => {
   if (!date) {
     return { startDate: null, endDate: null };
@@ -37,9 +35,9 @@ export const getWeek = (date: string | Date | null | undefined) => {
     return '';
   }
 
-  let year = undefined;
-  let month = undefined;
-  let day = undefined;
+  let year;
+  let month;
+  let day;
 
   if (typeof date === 'string') {
     const [yyyy, mm, dd] = date.split('-').map(v => +v);
@@ -75,5 +73,5 @@ export const getWeek = (date: string | Date | null | undefined) => {
 const week = (date: Date) => {
   const month = date.getMonth();
   const day = date.getDate();
-  return `${month + 1}월 ${koWeekString[Math.ceil(day / 7)]}째 주`;
+  return `${month + 1}월 ${Math.ceil(day / 7)}주 차`;
 };

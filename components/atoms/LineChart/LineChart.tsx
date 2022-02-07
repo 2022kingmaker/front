@@ -17,7 +17,7 @@ import { getThisWeekRange, getWeek } from '@lib/date';
 import React, { useState } from 'react';
 import { MultiCalendar } from '@molecules/index';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
-import { DayModifiers, RangeModifier } from 'react-day-picker/types/Modifiers';
+import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip);
@@ -37,20 +37,39 @@ export const H2 = styled.h2`
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
 `;
-const CalendarContainer = styled.div<{ isCalendarOpen: boolean }>`
-  position: relative;
 
-  div:nth-child(2) {
-    ${({ isCalendarOpen }) => (isCalendarOpen ? `display: block` : `display: none`)};
+const CalendarToggle = styled.div`
+  ${flexBox()};
+  font-size: 18px;
+  position: relative;
+  width: 250px;
+  height: 100%;
+  border: #c2c2c2 1px solid;
+  background: rgba(255, 255, 255, 0.76);
+
+  .split {
+    color: #8c8c8c;
+    margin: 0 8px;
+  }
+
+  :hover {
+    cursor: pointer;
   }
 `;
-const RangeInput = styled.div`
-  width: 200px;
-  height: 100%;
-  border: 1px solid black;
-  div {
-    display: none;
-  }
+
+const ToggleContainer = styled.div`
+  ${flexBox()};
+  width: 100%;
+  height: 50px;
+  margin: 12px 0;
+  word-spacing: 3px;
+`;
+const CalendarBackground = styled.div`
+  position: absolute;
+  top: -25px;
+  left: -100vw;
+  width: 200vw;
+  height: calc(100vh - 60px);
 `;
 
 interface LineChartProps {
@@ -77,7 +96,18 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
   return (
     <LineChartBlock>
       <H2>기간별 지지율</H2>
-      {/*<MultiCalendar disabledDays={disabledDays} selectedWeek={selectedWeek} setSelectedWeek={setSelectedWeek} />*/}
+      <ToggleContainer>
+        <CalendarToggle onClick={handleClick}>
+          {chartData.labels![0]!} <span className={'split'}>-</span> {chartData.labels![chartData.labels!.length - 1]}
+        </CalendarToggle>
+        {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
+      </ToggleContainer>
+      <MultiCalendar
+        isCalendarOpen={isCalendarOpen}
+        disabledDays={disabledDays}
+        selectedWeek={selectedWeek}
+        setSelectedWeek={setSelectedWeek}
+      />
       <Line
         // @ts-ignore
         data={chartData}

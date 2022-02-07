@@ -11,7 +11,7 @@ const ChartContentsBlock = styled.div`
   position: relative;
   padding: 44px 30px 0 230px;
   height: 100vh;
-  //overflow-y: hidden;
+  overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
