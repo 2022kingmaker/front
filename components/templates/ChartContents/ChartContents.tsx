@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { IRate } from '@models/Rate';
 import { sortRates } from '@lib/utils';
 import BarChart from '@atoms/BarChart/BarChart';
 import LineChart from '@atoms/LineChart/LineChart';
 import { getWeek } from '@lib/date';
 import { flexBox } from '@styles/mixin';
+import throttleGenerator from '@lib/throttleGenerator';
 
 const ChartContentsBlock = styled.div`
   position: relative;
@@ -41,6 +42,8 @@ export interface ChartContentsProps {
 const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
   const sortedRates = sortRates(rates);
   const titleRef = useRef<HTMLHeadingElement[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const throttle = useCallback(throttleGenerator(750), []);
 
   useEffect(() => {
     if (titleRef.current.length === 0 && titleRef.current.constructor === Array) {
@@ -48,22 +51,36 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
     }
   }, []);
 
-  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.addEventListener('wheel', handleWheel, { passive: false });
+    }
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
+
+  const handleWheel = useCallback((e: any) => {
     e.preventDefault();
-    const { deltaY } = e;
-    if (deltaY > 100) {
-      titleRef.current[1]?.scrollIntoView({ behavior: 'smooth' });
-      requestAnimationFrame(() => setActiveTopic(titleRef.current[1].innerHTML));
-    }
-    if (deltaY < -100) {
-      titleRef.current[0]?.scrollIntoView({ behavior: 'smooth' });
-      requestAnimationFrame(() => setActiveTopic(titleRef.current[0].innerHTML));
-    }
-  };
+    throttle(() => {
+      const { deltaY } = e;
+      if (deltaY > 10) {
+        titleRef.current[1]?.scrollIntoView({ behavior: 'smooth' });
+        requestAnimationFrame(() => setActiveTopic(titleRef.current[1].innerHTML));
+      }
+      if (deltaY < -10) {
+        titleRef.current[0]?.scrollIntoView({ behavior: 'smooth' });
+        requestAnimationFrame(() => setActiveTopic(titleRef.current[0].innerHTML));
+      }
+    });
+  }, []);
+
   const labels = sortedRates.map(({ startedAt }) => getWeek(startedAt));
 
   return (
-    <ChartContentsBlock onWheelCapture={handleWheel}>
+    <ChartContentsBlock ref={scrollRef}>
       {sortedRates && (
         <>
           <InnerPage>
