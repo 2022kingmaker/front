@@ -36,6 +36,13 @@ export const H2 = styled.h2`
   font-weight: 650;
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
+
+  @media ${({ theme }) => theme.desktop} {
+    padding-top: 40px;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    padding-top: 40px;
+  }
 `;
 
 const CalendarToggle = styled.div`

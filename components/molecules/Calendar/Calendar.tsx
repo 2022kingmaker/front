@@ -15,6 +15,15 @@ const CalendarBlock = styled.div<Pick<CalendarProps, 'isCalendarOpen'>>`
   left: 240px;
   width: 320px;
 
+  @media ${({ theme }) => theme.desktop} {
+    top: 160px;
+    left: 100px;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    top: 160px;
+    left: 0;
+  }
+
   box-shadow: 0 4px 10px rgb(51 51 51), 0 0 4px rgb(51 51 51 / 50%);
   background: rgba(255, 255, 255, 0.87);
   border-radius: 8px;

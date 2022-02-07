@@ -40,7 +40,7 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     color: white;
   }
   @media ${({ theme }) => theme.desktop} {
-    ${flexBox()};
+    ${flexBox('flex-start')};
     z-index: 3;
     top: 44px;
     width: 100%;
@@ -51,14 +51,6 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     overflow-y: hidden;
     &::-webkit-scrollbar {
       display: none;
-    }
-    &::before {
-      content: '';
-      min-width: 550px;
-    }
-    &::after {
-      content: '';
-      min-width: 50px;
     }
     > li {
       font-size: 12px;

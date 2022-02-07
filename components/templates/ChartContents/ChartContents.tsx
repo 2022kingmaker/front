@@ -16,15 +16,15 @@ const ChartContentsBlock = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  //
-  // @media ${({ theme }) => theme.desktop} {
-  //   width: 100%;
-  //   padding: 90px 24px 200px 24px;
-  // }
-  // @media ${({ theme }) => theme.mobile} {
-  //   width: 100%;
-  //   padding: 100px 10px 0 10px;
-  // }
+
+  @media ${({ theme }) => theme.desktop} {
+    width: 100%;
+    padding: 120px 24px 200px 24px;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    width: 100%;
+    padding: 100px 10px 0 10px;
+  }
 `;
 
 const InnerPage = styled.div`
@@ -67,7 +67,7 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
     throttle(() => {
       const { deltaY } = e;
       if (deltaY > 10) {
-        titleRef.current[1]?.scrollIntoView({ behavior: 'smooth' });
+        titleRef.current[1]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         requestAnimationFrame(() => setActiveTopic(titleRef.current[1].innerHTML));
       }
       if (deltaY < -10) {

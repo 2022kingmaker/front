@@ -16,6 +16,15 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
   border-radius: 8px;
   outline: none;
 
+  @media ${({ theme }) => theme.desktop} {
+    top: 160px;
+    left: 100px;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    top: 95px;
+    left: 0;
+  }
+
   .DayPicker-Week {
     & .DayPicker-Day--outside {
       background-color: rgba(255, 255, 255, 0) !important;
@@ -34,7 +43,7 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
       background-color: #4a90e2 !important;
       color: white !important;
 
-      :first-child {
+      :first-child:not(.DayPicker-Day--outside) {
         border-radius: 16px 0 0 16px;
       }
     }
@@ -44,7 +53,7 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
       background-color: #4a90e2 !important;
       color: white !important;
 
-      :last-child {
+      :last-child:not(.DayPicker-Day--outside) {
         border-radius: 0 16px 16px 0;
       }
     }
