@@ -64,6 +64,7 @@ const IntroModal = () => {
   const handleAllDayCloseClick = () => {
     const currentTime = Date.now();
     localStorage.setItem('offPopup', `${currentTime + 86400000}`);
+    document.body.classList.remove('modal-on');
   };
 
   return (
