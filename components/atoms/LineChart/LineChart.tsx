@@ -31,7 +31,7 @@ const LineChartBlock = styled.div`
 `;
 
 export const H2 = styled.h2`
-  padding: 30px 12px 12px 12px;
+  padding: 40px 12px 12px 12px;
   width: 300px;
   font-weight: 650;
   font-size: 32px;
@@ -77,9 +77,12 @@ interface LineChartProps {
 }
 
 const LineChart = ({ sortedRates, labels }: LineChartProps) => {
+  const { startDate: initFromDate } = getThisWeekRange(sortedRates[0].startedAt);
+  const { startDate: initToDate } = getThisWeekRange(sortedRates[sortedRates.length - 1].startedAt);
+
   const [selectedWeek, setSelectedWeek] = useState<RangeModifier>({
-    from: null,
-    to: null,
+    from: initFromDate,
+    to: initToDate,
   });
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 

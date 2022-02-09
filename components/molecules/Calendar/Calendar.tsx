@@ -11,7 +11,7 @@ const CalendarBlock = styled.div<Pick<CalendarProps, 'isCalendarOpen'>>`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: calc(50% - 40px);
+  top: calc(50% - 20px);
   left: calc(50% - 160px);
   width: 320px;
 

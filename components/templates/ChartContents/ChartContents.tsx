@@ -13,16 +13,15 @@ const ChartContentsBlock = styled.div`
   padding: 44px 30px 0 230px;
   height: 100vh;
   overflow: hidden;
+  width: 100%;
   &::-webkit-scrollbar {
     display: none;
   }
 
   @media ${({ theme }) => theme.desktop} {
-    width: 100%;
     padding: 120px 24px 200px 24px;
   }
   @media ${({ theme }) => theme.mobile} {
-    width: 100%;
     padding: 100px 10px 0 10px;
   }
 `;
@@ -53,6 +52,7 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
 
   useEffect(() => {
     if (scrollRef.current) {
+      titleRef.current[0]?.scrollIntoView({ behavior: 'smooth' });
       scrollRef.current.addEventListener('wheel', handleWheel, { passive: false });
     }
     return () => {

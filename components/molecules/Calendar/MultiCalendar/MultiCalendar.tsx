@@ -21,7 +21,7 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
       background-color: rgba(255, 255, 255, 0) !important;
     }
 
-    & .DayPicker-Day--disabled {
+    & .DayPicker-Day--disabled:not(.DayPicker-Day--outside) {
       background-color: rgba(255, 255, 255, 0);
     }
 
@@ -31,7 +31,7 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
 
     > .DayPicker-Day--selectStartWeek {
       border-radius: 0;
-      background-color: #4a90e2 !important;
+      background-color: #4a90e2;
       color: white !important;
 
       :first-child:not(.DayPicker-Day--outside) {
@@ -41,7 +41,7 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
 
     > .DayPicker-Day--selectEndWeek {
       border-radius: 0;
-      background-color: #4a90e2 !important;
+      background-color: #4a90e2;
       color: white !important;
 
       :last-child:not(.DayPicker-Day--outside) {
@@ -49,7 +49,7 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
       }
     }
 
-    > .DayPicker-Day--betweenDates {
+    > .DayPicker-Day--betweenDates:not(.DayPicker-Day--selectEndWeek):not(.DayPicker-Day--selectStartWeek) {
       background-color: #6fa9ef;
       color: white;
       border-radius: 0;
@@ -90,7 +90,13 @@ const MultiCalendar = ({ isCalendarOpen, disabledDays, selectedWeek, setSelected
       return;
     }
     const { startDate } = getThisWeekRange(day);
-    if (!from) {
+
+    if (from && to) {
+      setSelectedWeek({ from: startDate, to: null });
+      return;
+    }
+
+    if (!from || from > startDate!) {
       setSelectedWeek({ ...selectedWeek, from: startDate });
       return;
     }
@@ -98,7 +104,6 @@ const MultiCalendar = ({ isCalendarOpen, disabledDays, selectedWeek, setSelected
       setSelectedWeek({ ...selectedWeek, to: startDate });
       return;
     }
-    setSelectedWeek({ from: startDate, to: null });
   };
 
   const { startDate: startDayInStartWeek, endDate: startEndInStartWeek } = getThisWeekRange(from);

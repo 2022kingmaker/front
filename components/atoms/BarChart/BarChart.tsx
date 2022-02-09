@@ -70,11 +70,11 @@ interface BarChartProps {
 }
 
 const BarChart = ({ sortedRates, labels }: BarChartProps) => {
+  const initDate = getThisWeekRange(sortedRates[sortedRates.length - 1].startedAt);
   const [selectedDays, setSelectedDays] = useState<RangeModifier>({
-    from: null,
-    to: null,
+    from: initDate.startDate,
+    to: initDate.endDate,
   });
-
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const handleClick = () => {
