@@ -8,7 +8,6 @@ import { getRating } from '../../apis/rating';
 import ChartContents from '@templates/ChartContents/ChartContents';
 import { IRate } from '@models/Rate';
 import { ITableContents } from '@models/TableContent';
-import { getWeek } from '@lib/date';
 const StatisticsBlock = styled.div`
   height: inherit;
   position: relative;
@@ -36,8 +35,8 @@ const Statistics: NextPage = ({ data }: StatisticsProps) => {
 
   return (
     <StatisticsBlock>
-      {/*<SideBar toc={toc} activeTopic={activeTopic} setActiveTopic={setActiveTopic} />*/}
-      {/*<ChartContents rates={rates} setActiveTopic={setActiveTopic} />*/}
+      <SideBar toc={toc} activeTopic={activeTopic} setActiveTopic={setActiveTopic} />
+      <ChartContents rates={rates} setActiveTopic={setActiveTopic} />
     </StatisticsBlock>
   );
 };

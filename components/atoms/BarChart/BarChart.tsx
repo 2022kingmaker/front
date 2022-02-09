@@ -19,24 +19,49 @@ import { Calendar } from '@molecules/index';
 import { getThisWeekRange, getWeek } from '@lib/date';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
 import { RangeModifier } from 'react-day-picker/types/Modifiers';
+import { flexBox } from '@styles/mixin';
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, BarController, Title, Tooltip, Legend);
 
 const BarChartBlock = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
   width: 100%;
   max-width: 1000px;
   height: 400px;
   position: relative;
 `;
 
-const Button = styled.button<{ direction: 'left' | 'right'; active: boolean }>`
+const CalendarToggle = styled.div`
+  ${flexBox()};
+  font-size: 18px;
+  position: relative;
+  width: 250px;
+  height: 100%;
+  background: rgba(196, 196, 196, 0.76);
+  border-radius: 8px;
+
+  .split {
+    color: #8c8c8c;
+    margin: 0 8px;
+  }
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const ToggleContainer = styled.div`
+  ${flexBox()};
+  width: 100%;
+  height: 50px;
+  margin: 30px 0 12px 0;
+  word-spacing: 3px;
+`;
+const CalendarBackground = styled.div`
   position: absolute;
-  top: 10px;
-  ${({ direction }) => (direction === 'left' ? 'left:0;' : `right: 0;`)}
+  top: -25px;
+  left: -100vw;
+  width: 200vw;
+  height: calc(100vh - 60px);
 `;
 
 interface BarChartProps {
@@ -45,34 +70,35 @@ interface BarChartProps {
 }
 
 const BarChart = ({ sortedRates, labels }: BarChartProps) => {
+  const initDate = getThisWeekRange(sortedRates[sortedRates.length - 1].startedAt);
   const [selectedDays, setSelectedDays] = useState<RangeModifier>({
-    from: null,
-    to: null,
+    from: initDate.startDate,
+    to: initDate.endDate,
   });
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
   const currentIndex = selectedDays.from ? labels.findIndex(label => label === getWeek(selectedDays.from)) : 0;
 
   const chartData = getChartData(sortedRates[currentIndex]);
-  const nextRate = () => {
-    // if (currentIndex === sortedRates.length - 1) {
-    return;
-    // }
-    // setCurrentIndex(prevState => prevState + 1);
-  };
-  const prevRate = () => {
-    // if (currentIndex === 0) {
-    return;
-    // }
-    // setCurrentIndex(prevState => prevState - 1);
-  };
-  const selectRate = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // setCurrentIndex(+e.target.value);
-  };
   const disabledDays = sortedRates.map(rate => getThisWeekRange(rate.startedAt)) as disabledDays[];
 
   return (
     <BarChartBlock>
       <H2>주차별 지지율</H2>
-      {/*<Calendar disabledDays={disabledDays} selectedDays={selectedDays} setSelectedDays={setSelectedDays} />*/}
+      <ToggleContainer>
+        <CalendarToggle onClick={handleClick}>{chartData.labels}</CalendarToggle>
+        {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
+      </ToggleContainer>
+      <Calendar
+        isCalendarOpen={isCalendarOpen}
+        disabledDays={disabledDays}
+        selectedDays={selectedDays}
+        setSelectedDays={setSelectedDays}
+      />
       <Bar
         options={{
           indexAxis: 'x',

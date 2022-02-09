@@ -17,7 +17,7 @@ import { getThisWeekRange, getWeek } from '@lib/date';
 import React, { useState } from 'react';
 import { MultiCalendar } from '@molecules/index';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
-import { DayModifiers, RangeModifier } from 'react-day-picker/types/Modifiers';
+import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip);
@@ -31,26 +31,44 @@ const LineChartBlock = styled.div`
 `;
 
 export const H2 = styled.h2`
-  padding: 12px;
+  padding: 40px 12px 12px 12px;
   width: 300px;
   font-weight: 650;
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
 `;
-const CalendarContainer = styled.div<{ isCalendarOpen: boolean }>`
-  position: relative;
 
-  div:nth-child(2) {
-    ${({ isCalendarOpen }) => (isCalendarOpen ? `display: block` : `display: none`)};
+const CalendarToggle = styled.div`
+  ${flexBox()};
+  font-size: 18px;
+  position: relative;
+  width: 250px;
+  height: 100%;
+  background: rgba(196, 196, 196, 0.76);
+  border-radius: 8px;
+  .split {
+    color: #595959;
+    margin: 0 8px;
+  }
+
+  :hover {
+    cursor: pointer;
   }
 `;
-const RangeInput = styled.div`
-  width: 200px;
-  height: 100%;
-  border: 1px solid black;
-  div {
-    display: none;
-  }
+
+const ToggleContainer = styled.div`
+  ${flexBox()};
+  width: 100%;
+  height: 50px;
+  margin: 24px 0 12px 0;
+  word-spacing: 3px;
+`;
+const CalendarBackground = styled.div`
+  position: absolute;
+  top: -25px;
+  left: -100vw;
+  width: 200vw;
+  height: calc(100vh - 60px);
 `;
 
 interface LineChartProps {
@@ -59,9 +77,12 @@ interface LineChartProps {
 }
 
 const LineChart = ({ sortedRates, labels }: LineChartProps) => {
+  const { startDate: initFromDate } = getThisWeekRange(sortedRates[0].startedAt);
+  const { startDate: initToDate } = getThisWeekRange(sortedRates[sortedRates.length - 1].startedAt);
+
   const [selectedWeek, setSelectedWeek] = useState<RangeModifier>({
-    from: null,
-    to: null,
+    from: initFromDate,
+    to: initToDate,
   });
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -77,7 +98,18 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
   return (
     <LineChartBlock>
       <H2>기간별 지지율</H2>
-      {/*<MultiCalendar disabledDays={disabledDays} selectedWeek={selectedWeek} setSelectedWeek={setSelectedWeek} />*/}
+      <ToggleContainer>
+        <CalendarToggle onClick={handleClick}>
+          {chartData.labels![0]!} <span className={'split'}>~</span> {chartData.labels![chartData.labels!.length - 1]}
+        </CalendarToggle>
+        {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
+      </ToggleContainer>
+      <MultiCalendar
+        isCalendarOpen={isCalendarOpen}
+        disabledDays={disabledDays}
+        selectedWeek={selectedWeek}
+        setSelectedWeek={setSelectedWeek}
+      />
       <Line
         // @ts-ignore
         data={chartData}

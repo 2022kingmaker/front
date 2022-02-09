@@ -2,26 +2,56 @@ import styled from 'styled-components';
 import DayPicker from 'react-day-picker';
 import { DayModifiers, RangeModifier } from 'react-day-picker/types/Modifiers';
 import { getPlusDate, getThisWeekRange } from '@lib/date';
-import React, { useState } from 'react';
+import React from 'react';
 import { MONTHS, WEEKDAYS_SHORT } from '@lib/constant';
 
-const MultiCalendarBlock = styled.div`
+const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>>`
+  display: ${({ isCalendarOpen }) => (isCalendarOpen ? 'block' : 'none')};
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 262px);
+
+  box-shadow: 0 4px 10px rgb(51 51 51), 0 0 4px rgb(51 51 51 / 50%);
+  background: rgba(255, 255, 255, 0.87);
+  border-radius: 8px;
+  outline: none;
+
   .DayPicker-Week {
+    & .DayPicker-Day--outside {
+      background-color: rgba(255, 255, 255, 0) !important;
+    }
+
+    & .DayPicker-Day--disabled:not(.DayPicker-Day--outside) {
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0) !important;
+    }
+
     > .DayPicker-Day--selectStartWeek {
       border-radius: 0;
       background-color: #4a90e2;
-      color: white;
+      color: white !important;
+
+      :first-child:not(.DayPicker-Day--outside) {
+        border-radius: 16px 0 0 16px;
+      }
     }
 
     > .DayPicker-Day--selectEndWeek {
       border-radius: 0;
       background-color: #4a90e2;
-      color: white;
+      color: white !important;
+
+      :last-child:not(.DayPicker-Day--outside) {
+        border-radius: 0 16px 16px 0;
+      }
     }
 
-    > .DayPicker-Day--betweenDates {
-      background-color: #d1e8f8 !important;
-      color: #4a90e2;
+    > .DayPicker-Day--betweenDates:not(.DayPicker-Day--selectEndWeek):not(.DayPicker-Day--selectStartWeek) {
+      background-color: #6fa9ef;
+      color: white;
       border-radius: 0;
     }
 
@@ -33,10 +63,13 @@ const MultiCalendarBlock = styled.div`
         background-color: #d0cfcf;
       }
     }
+
+    .DayPicker-Day--disabled:hover {
+      background-color: rgba(255, 255, 255, 0);
+    }
   }
 
   .DayPicker-Day:not(.DayPicker-Day--disabled) {
-    cursor: pointer;
   }
 `;
 export interface disabledDays {
@@ -47,8 +80,9 @@ interface MultiCalendarProps {
   disabledDays: disabledDays[];
   selectedWeek: RangeModifier;
   setSelectedWeek: React.Dispatch<React.SetStateAction<RangeModifier>>;
+  isCalendarOpen: boolean;
 }
-const MultiCalendar = ({ disabledDays, selectedWeek, setSelectedWeek }: MultiCalendarProps) => {
+const MultiCalendar = ({ isCalendarOpen, disabledDays, selectedWeek, setSelectedWeek }: MultiCalendarProps) => {
   const { from, to } = selectedWeek;
 
   const handleDayClick = (day: Date, modifiers: DayModifiers) => {
@@ -56,7 +90,13 @@ const MultiCalendar = ({ disabledDays, selectedWeek, setSelectedWeek }: MultiCal
       return;
     }
     const { startDate } = getThisWeekRange(day);
-    if (!from) {
+
+    if (from && to) {
+      setSelectedWeek({ from: startDate, to: null });
+      return;
+    }
+
+    if (!from || from > startDate!) {
       setSelectedWeek({ ...selectedWeek, from: startDate });
       return;
     }
@@ -64,7 +104,6 @@ const MultiCalendar = ({ disabledDays, selectedWeek, setSelectedWeek }: MultiCal
       setSelectedWeek({ ...selectedWeek, to: startDate });
       return;
     }
-    setSelectedWeek({ from: startDate, to: null });
   };
 
   const { startDate: startDayInStartWeek, endDate: startEndInStartWeek } = getThisWeekRange(from);
@@ -83,12 +122,12 @@ const MultiCalendar = ({ disabledDays, selectedWeek, setSelectedWeek }: MultiCal
       to: startEndInEndWeek,
     },
   };
+
   return (
-    <MultiCalendarBlock>
+    <MultiCalendarBlock isCalendarOpen={isCalendarOpen}>
       <DayPicker
         className="Selectable"
         numberOfMonths={2}
-        showOutsideDays
         locale="ko"
         onDayClick={handleDayClick}
         initialMonth={new Date(2022, 0)}
