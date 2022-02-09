@@ -47,7 +47,13 @@ const SpeechRect = ({ backgroundColor = 'black', phrase, text, rectType = 0 }: S
   return (
     <SpeechRectBlock data-phrase={phrase} backgroundColor={backgroundColor} rectType={rectType}>
       <h3>{phrase}</h3>
-      <p>{text.replace(/\\n/gi, '\n')}</p>
+      <p>
+        {text.split('\\n').map(v => (
+          <>
+            {v} <br />
+          </>
+        ))}
+      </p>
     </SpeechRectBlock>
   );
 };
