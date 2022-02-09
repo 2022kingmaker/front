@@ -11,18 +11,9 @@ const CalendarBlock = styled.div<Pick<CalendarProps, 'isCalendarOpen'>>`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 130px;
-  left: 240px;
+  top: calc(50% - 40px);
+  left: calc(50% - 160px);
   width: 320px;
-
-  @media ${({ theme }) => theme.desktop} {
-    top: 160px;
-    left: 100px;
-  }
-  @media ${({ theme }) => theme.mobile} {
-    top: 160px;
-    left: 0;
-  }
 
   box-shadow: 0 4px 10px rgb(51 51 51), 0 0 4px rgb(51 51 51 / 50%);
   background: rgba(255, 255, 255, 0.87);

@@ -36,8 +36,8 @@ const CalendarToggle = styled.div`
   position: relative;
   width: 250px;
   height: 100%;
-  border: #c2c2c2 1px solid;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(196, 196, 196, 0.76);
+  border-radius: 8px;
 
   .split {
     color: #8c8c8c;
@@ -53,7 +53,7 @@ const ToggleContainer = styled.div`
   ${flexBox()};
   width: 100%;
   height: 50px;
-  margin: 12px 0;
+  margin: 30px 0 12px 0;
   word-spacing: 3px;
 `;
 const CalendarBackground = styled.div`

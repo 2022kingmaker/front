@@ -8,22 +8,13 @@ import { MONTHS, WEEKDAYS_SHORT } from '@lib/constant';
 const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>>`
   display: ${({ isCalendarOpen }) => (isCalendarOpen ? 'block' : 'none')};
   position: absolute;
-  top: 130px;
-  left: 120px;
+  top: calc(50% - 30px);
+  left: calc(50% - 262px);
 
   box-shadow: 0 4px 10px rgb(51 51 51), 0 0 4px rgb(51 51 51 / 50%);
   background: rgba(255, 255, 255, 0.87);
   border-radius: 8px;
   outline: none;
-
-  @media ${({ theme }) => theme.desktop} {
-    top: 160px;
-    left: 100px;
-  }
-  @media ${({ theme }) => theme.mobile} {
-    top: 95px;
-    left: 0;
-  }
 
   .DayPicker-Week {
     & .DayPicker-Day--outside {

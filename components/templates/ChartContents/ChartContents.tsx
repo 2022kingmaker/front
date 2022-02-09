@@ -66,14 +66,11 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
     e.preventDefault();
     throttle(() => {
       const { deltaY } = e;
-      console.log('ee');
       if (deltaY > 10) {
-        console.log(titleRef.current[1]);
         titleRef.current[1]?.scrollIntoView({ behavior: 'smooth' });
         requestAnimationFrame(() => setActiveTopic(titleRef.current[1].innerHTML));
       }
       if (deltaY < -10) {
-        console.log(titleRef.current[0]);
         titleRef.current[0]?.scrollIntoView({ behavior: 'smooth' });
         requestAnimationFrame(() => setActiveTopic(titleRef.current[0].innerHTML));
       }

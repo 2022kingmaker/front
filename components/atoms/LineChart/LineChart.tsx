@@ -31,18 +31,11 @@ const LineChartBlock = styled.div`
 `;
 
 export const H2 = styled.h2`
-  padding: 12px;
+  padding: 30px 12px 12px 12px;
   width: 300px;
   font-weight: 650;
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
-  padding-top: 40px;
-  @media ${({ theme }) => theme.desktop} {
-    padding-top: 40px;
-  }
-  @media ${({ theme }) => theme.mobile} {
-    padding-top: 40px;
-  }
 `;
 
 const CalendarToggle = styled.div`
@@ -51,11 +44,10 @@ const CalendarToggle = styled.div`
   position: relative;
   width: 250px;
   height: 100%;
-  border: #c2c2c2 1px solid;
-  background: rgba(255, 255, 255, 0.76);
-
+  background: rgba(196, 196, 196, 0.76);
+  border-radius: 8px;
   .split {
-    color: #8c8c8c;
+    color: #595959;
     margin: 0 8px;
   }
 
@@ -68,7 +60,7 @@ const ToggleContainer = styled.div`
   ${flexBox()};
   width: 100%;
   height: 50px;
-  margin: 12px 0;
+  margin: 24px 0 12px 0;
   word-spacing: 3px;
 `;
 const CalendarBackground = styled.div`
@@ -105,7 +97,7 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
       <H2>기간별 지지율</H2>
       <ToggleContainer>
         <CalendarToggle onClick={handleClick}>
-          {chartData.labels![0]!} <span className={'split'}>-</span> {chartData.labels![chartData.labels!.length - 1]}
+          {chartData.labels![0]!} <span className={'split'}>~</span> {chartData.labels![chartData.labels!.length - 1]}
         </CalendarToggle>
         {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
       </ToggleContainer>
