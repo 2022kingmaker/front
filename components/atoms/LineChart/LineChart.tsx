@@ -36,7 +36,7 @@ export const H2 = styled.h2`
   font-weight: 650;
   font-size: 32px;
   border-bottom: 3px solid #3d7b80;
-
+  padding-top: 40px;
   @media ${({ theme }) => theme.desktop} {
     padding-top: 40px;
   }

@@ -17,13 +17,17 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   a:hover {
     cursor: pointer;
   }
+  li{
+    text-align: center;
+    margin-top: 35px;
+  }
+}
   a {
     color: #fff;
-    line-height: 44px;
     font-weight: 350;
-    transition: 0.45s;
+    transition: 0.45s;      
     &.active {
-      line-height: 66px;
+      
       font-size: ${({ activeFontSize }) => activeFontSize}px;
     }
   }
@@ -31,7 +35,6 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
     color: white;
     font-size: 32px;
     font-weight: 700;
-    margin-bottom: 20px;
   }
   .back-button {
     position: absolute;
@@ -56,8 +59,7 @@ const SideBarBlock = styled.ul<Partial<SideBarProps>>`
       font-size: 12px;
       padding: 0 12px;
       height: 100%;
-    }
-    a.active {
+      margin: 0;
       line-height: 44px;
     }
     .category-item {

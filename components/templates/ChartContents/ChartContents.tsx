@@ -43,7 +43,7 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
   const sortedRates = sortRates(rates);
   const titleRef = useRef<HTMLHeadingElement[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const throttle = useCallback(throttleGenerator(750), []);
+  const throttle = useCallback(throttleGenerator(1000), []);
 
   useEffect(() => {
     if (titleRef.current.length === 0 && titleRef.current.constructor === Array) {
@@ -66,11 +66,14 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
     e.preventDefault();
     throttle(() => {
       const { deltaY } = e;
+      console.log('ee');
       if (deltaY > 10) {
-        titleRef.current[1]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        console.log(titleRef.current[1]);
+        titleRef.current[1]?.scrollIntoView({ behavior: 'smooth' });
         requestAnimationFrame(() => setActiveTopic(titleRef.current[1].innerHTML));
       }
       if (deltaY < -10) {
+        console.log(titleRef.current[0]);
         titleRef.current[0]?.scrollIntoView({ behavior: 'smooth' });
         requestAnimationFrame(() => setActiveTopic(titleRef.current[0].innerHTML));
       }
