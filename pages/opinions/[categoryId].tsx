@@ -73,7 +73,7 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   const keywords = await getKeywords(categoryId);
   const policies = await getPolicies(categoryId);
 
-  return { props: { data: { policies, categories, keywords } }, revalidate: 3600 };
+  return { props: { data: { policies, categories, keywords } }, revalidate: 1200 };
 };
 
 const groupingByKeyword = (policies: Policies, keywords: Keywords): any =>
