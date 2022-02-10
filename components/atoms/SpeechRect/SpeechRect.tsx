@@ -12,12 +12,16 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
   position: relative;
   min-width: 550px;
   min-height: 300px;
+  max-height: 400px;
   max-width: 600px;
   background: ${({ theme, backgroundColor }) => theme.colors[backgroundColor!]};
   padding: 50px;
   line-height: 24px;
   clip-path: polygon(${({ rectType }) => RECT_CLIP[rectType! % 3]});
-
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   h3 {
     font-size: 24px;
     color: white;
@@ -28,6 +32,7 @@ const SpeechRectBlock = styled.div<Partial<SpeechRectProps>>`
     color: white;
     width: 100%;
     word-break: break-all;
+    margin: 5px 0;
   }
   @media ${({ theme }) => theme.mobile} {
     min-width: 0;
@@ -47,9 +52,11 @@ const SpeechRect = ({ backgroundColor = 'black', phrase, text, rectType = 0 }: S
   return (
     <SpeechRectBlock data-phrase={phrase} backgroundColor={backgroundColor} rectType={rectType}>
       <h3>{phrase}</h3>
-      {text.split('\\n').map(v => (
-        <p key={v}>{v}</p>
-      ))}
+      <div className={'text-container'}>
+        {text.split('\\n').map(v => (
+          <p key={v}>{v}</p>
+        ))}
+      </div>
     </SpeechRectBlock>
   );
 };
