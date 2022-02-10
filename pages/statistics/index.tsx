@@ -36,7 +36,7 @@ const Statistics: NextPage = ({ data }: StatisticsProps) => {
   return (
     <StatisticsBlock>
       <SideBar toc={toc} activeTopic={activeTopic} setActiveTopic={setActiveTopic} />
-      <ChartContents rates={rates} setActiveTopic={setActiveTopic} />
+      {rates && rates.length && <ChartContents rates={rates} setActiveTopic={setActiveTopic} />}
     </StatisticsBlock>
   );
 };

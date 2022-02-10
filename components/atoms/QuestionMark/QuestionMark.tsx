@@ -14,19 +14,32 @@ const HiddenBox = styled.div<{ isMouseOver: boolean }>`
   position: absolute;
   opacity: ${({ isMouseOver }) => (isMouseOver ? 1 : 0)};
   transition: 0.45s;
-  top: -200px;
+  top: -80px;
   left: 10px;
-  width: 200px;
-  height: 200px;
+  width: 350px;
+  height: 80px;
   border: 1px solid gray;
   padding: 12px;
   border-radius: 10px;
   background: white;
+  font-size: 14px;
+  font-weight: 400;
+  div {
+    margin-bottom: 5px;
+  }
+  .title {
+    color: gray;
+  }
 `;
 
-const QuestionMark = () => {
-  const [isMouseOver, setIsMouseOver] = useState(false);
+interface QuestionMarkProps {
+  agency: string;
+  period: string[];
+  requester: string;
+}
 
+const QuestionMark = ({ agency, period, requester }: QuestionMarkProps) => {
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const handleMouseOver = () => {
     setIsMouseOver(true);
   };
@@ -36,7 +49,17 @@ const QuestionMark = () => {
   return (
     <QuestionMarkBlock>
       <img src={QuestionImg.src} alt="물음표 이미지" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
-      <HiddenBox isMouseOver={isMouseOver}>asdfsadfsadfsadfs</HiddenBox>
+      <HiddenBox isMouseOver={isMouseOver}>
+        <div>
+          <span className={'title'}>조사 기관 </span>: {agency}
+        </div>
+        <div>
+          <span className={'title'}>조사 기간 </span>: {period[0]} - {period[1]}
+        </div>
+        <div>
+          <span className={'title'}>조사 의뢰 </span> : {requester}
+        </div>
+      </HiddenBox>
     </QuestionMarkBlock>
   );
 };
