@@ -14,6 +14,7 @@ module.exports = {
       '@templates': path.resolve(__dirname, '../components/templates/'),
       '@hooks': path.resolve(__dirname, '../hooks/'),
       '@lib': path.resolve(__dirname, '../lib/'),
+      '@assets': path.resolve(__dirname, '../assets/'),
     };
     return config;
   },

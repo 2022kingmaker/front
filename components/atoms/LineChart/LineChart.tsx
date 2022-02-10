@@ -19,6 +19,7 @@ import { MultiCalendar } from '@molecules/index';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
 import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
+import QuestionMark from '@atoms/QuestionMark/QuestionMark';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip);
 
@@ -145,6 +146,7 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
           maintainAspectRatio: false,
         }}
       />
+      <QuestionMark />
     </LineChartBlock>
   );
 };

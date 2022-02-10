@@ -20,6 +20,7 @@ import { getThisWeekRange, getWeek } from '@lib/date';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
 import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
+import QuestionMark from '@atoms/QuestionMark/QuestionMark';
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, BarController, Title, Tooltip, Legend);
 
@@ -157,6 +158,7 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
       {/*<Button direction={'left'} active={currentIndex !== 0} onClick={prevRate}>*/}
       {/*  이전*/}
       {/*</Button>*/}
+      <QuestionMark />
     </BarChartBlock>
   );
 };
