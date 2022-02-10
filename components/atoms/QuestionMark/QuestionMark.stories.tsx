@@ -7,7 +7,7 @@ export default {
   component: QuestionMark,
 } as Meta;
 
-const Template: ComponentStory<typeof QuestionMark> = () => <QuestionMark />;
+const Template: ComponentStory<typeof QuestionMark> = props => <QuestionMark {...props} />;
 
 export const Default = Template.bind({});
 Default.args = {};
