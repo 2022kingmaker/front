@@ -20,6 +20,8 @@ import { getThisWeekRange, getWeek } from '@lib/date';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
 import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
+import QuestionMark from '@atoms/QuestionMark/QuestionMark';
+import calendarIcon from '@assets/icons/calendar_icon.png';
 
 ChartJS.register(LinearScale, CategoryScale, BarElement, BarController, Title, Tooltip, Legend);
 
@@ -44,6 +46,13 @@ const CalendarToggle = styled.div`
     margin: 0 8px;
   }
 
+  img {
+    position: absolute;
+    top: 12px;
+    left: 40px;
+    width: 30px;
+    height: 30px;
+  }
   :hover {
     cursor: pointer;
   }
@@ -90,7 +99,10 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
     <BarChartBlock>
       <H2>주차별 지지율</H2>
       <ToggleContainer>
-        <CalendarToggle onClick={handleClick}>{chartData.labels}</CalendarToggle>
+        <CalendarToggle onClick={handleClick}>
+          <img src={calendarIcon.src} alt="달력 이미지" />
+          {chartData.labels}
+        </CalendarToggle>
         {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
       </ToggleContainer>
       <Calendar
@@ -157,6 +169,11 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
       {/*<Button direction={'left'} active={currentIndex !== 0} onClick={prevRate}>*/}
       {/*  이전*/}
       {/*</Button>*/}
+      <QuestionMark
+        agency={sortedRates[0].agency}
+        requester={sortedRates[0].requester}
+        period={[sortedRates[currentIndex].startedAt, sortedRates[currentIndex].finishedAt]}
+      />
     </BarChartBlock>
   );
 };

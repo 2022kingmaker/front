@@ -19,6 +19,8 @@ import { MultiCalendar } from '@molecules/index';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
 import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
+import QuestionMark from '@atoms/QuestionMark/QuestionMark';
+import calendarIcon from '@assets/icons/calendar_icon.png';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip);
 
@@ -42,7 +44,7 @@ const CalendarToggle = styled.div`
   ${flexBox()};
   font-size: 18px;
   position: relative;
-  width: 250px;
+  width: 270px;
   height: 100%;
   background: rgba(196, 196, 196, 0.76);
   border-radius: 8px;
@@ -50,7 +52,12 @@ const CalendarToggle = styled.div`
     color: #595959;
     margin: 0 8px;
   }
-
+  img {
+    margin-top: 4px;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+  }
   :hover {
     cursor: pointer;
   }
@@ -100,6 +107,7 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
       <H2>기간별 지지율</H2>
       <ToggleContainer>
         <CalendarToggle onClick={handleClick}>
+          <img src={calendarIcon.src} alt="달력 이미지" />
           {chartData.labels![0]!} <span className={'split'}>~</span> {chartData.labels![chartData.labels!.length - 1]}
         </CalendarToggle>
         {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
@@ -144,6 +152,12 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
           },
           maintainAspectRatio: false,
         }}
+      />
+
+      <QuestionMark
+        agency={sortedRates[0].agency}
+        requester={sortedRates[0].requester}
+        period={[sortedRates[~start ? start : 0].startedAt, sortedRates[~end ? end : 0].finishedAt]}
       />
     </LineChartBlock>
   );
