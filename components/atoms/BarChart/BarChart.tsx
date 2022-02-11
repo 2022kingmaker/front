@@ -47,11 +47,10 @@ const CalendarToggle = styled.div`
   }
 
   img {
-    position: absolute;
-    top: 12px;
-    left: 40px;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
+    margin-top: 3px;
+    margin-right: 3px;
   }
   :hover {
     cursor: pointer;
@@ -119,7 +118,7 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
           scales: {
             y: {
               suggestedMin: 0,
-              suggestedMax: 50,
+              suggestedMax: 40,
               axis: 'y', // 이 축이 y축임을 명시해줍니다.
               display: true, // 축의 가시성 여부도 설정할 수 있습니다.
               position: 'left', // 축이 왼쪽에 표시될지, 오른쪽에 표시될지 정할 수 있습니다.

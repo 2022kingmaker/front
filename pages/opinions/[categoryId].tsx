@@ -57,9 +57,8 @@ OpinionPage.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
 export const getStaticPaths = async () => {
-  const categories = await getCategories();
+  const categories: Categories = await getCategories();
 
-  // @ts-ignore
   const paths = categories.map(category => ({
     params: { categoryId: category.categoryId.toString() },
   }));

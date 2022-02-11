@@ -35,7 +35,7 @@ export const getLineChartData = (rates: IRate[]) => {
           data: [],
           borderColor: `${party.colorCode}`,
           backgroundColor: `${party.colorCode}`,
-          tension: 0.3,
+          tension: 0,
         });
       }
       chartData.datasets[candidateId - 1].data.push(statistic.rating);
