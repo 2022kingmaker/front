@@ -54,9 +54,9 @@ const Header = () => {
           {/*<Link href={'#'}>*/}
           {/*  <a>공약</a>*/}
           {/*</Link>*/}
-          {/*<Link href={'/statistics'}>*/}
-          {/*  <a>통계</a>*/}
-          {/*</Link>*/}
+          <Link href={'/statistics'}>
+            <a>통계</a>
+          </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>
       </ul>
