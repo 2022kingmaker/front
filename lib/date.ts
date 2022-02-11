@@ -6,7 +6,7 @@ export const getThisWeekRange = (date: string | Date | null | undefined) => {
     const [yyyy, mm, dd] = date.split('-').map(v => +v);
     const startDate = new Date(yyyy, mm - 1, dd - new Date(date).getDay());
     const endDate = new Date(yyyy, mm - 1, 7 + dd - new Date(date).getDay());
-    console.log(startDate, endDate);
+
     return { startDate, endDate };
   }
   const year = date.getFullYear();

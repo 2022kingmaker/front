@@ -29,7 +29,7 @@ const CalendarBlock = styled.div<Pick<CalendarProps, 'isCalendarOpen'>>`
     }
 
     & .DayPicker-Day--disabled {
-      background-color: rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0) !important;
     }
     > .DayPicker-Day--selected {
       border-radius: 0;

@@ -13,10 +13,11 @@ export const getChartData = (currentRate: IRate) => {
     chartData.datasets.push({
       label: v.candidate.name,
       data: [v.rating],
-      backgroundColor: v.candidate.party.colorCode,
+      backgroundColor: v.candidate.party.colorCode + 'BF',
       borderColor: v.candidate.party.colorCode,
       barPercentage: 0.7,
       categoryPercentage: 1,
+      borderWidth: 2,
     });
   });
   return chartData;

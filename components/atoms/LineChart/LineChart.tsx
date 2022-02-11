@@ -125,7 +125,7 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
           scales: {
             y: {
               suggestedMin: 0,
-              suggestedMax: 100,
+              suggestedMax: 50,
               axis: 'y',
               display: true,
               position: 'left',
@@ -138,6 +138,9 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
             },
           },
           plugins: {
+            datalabels: {
+              display: false,
+            },
             legend: {
               labels: {
                 usePointStyle: true,

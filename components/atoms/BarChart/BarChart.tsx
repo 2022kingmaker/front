@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import React, { useState } from 'react';
 import { IRate } from '@models/Rate';
@@ -23,7 +24,7 @@ import { flexBox } from '@styles/mixin';
 import QuestionMark from '@atoms/QuestionMark/QuestionMark';
 import calendarIcon from '@assets/icons/calendar_icon.png';
 
-ChartJS.register(LinearScale, CategoryScale, BarElement, BarController, Title, Tooltip, Legend);
+ChartJS.register(LinearScale, CategoryScale, BarElement, BarController, Title, Tooltip, Legend, ChartDataLabels);
 
 const BarChartBlock = styled.div`
   width: 100%;
@@ -78,7 +79,8 @@ interface BarChartProps {
 }
 
 const BarChart = ({ sortedRates, labels }: BarChartProps) => {
-  const initDate = getThisWeekRange(sortedRates[sortedRates.length - 1].startedAt);
+  const initDate = getThisWeekRange(sortedRates[sortedRates.length - 1].finishedAt);
+
   const [selectedDays, setSelectedDays] = useState<RangeModifier>({
     from: initDate.startDate,
     to: initDate.endDate,
@@ -118,7 +120,7 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
           scales: {
             y: {
               suggestedMin: 0,
-              suggestedMax: 40,
+              suggestedMax: 50,
               axis: 'y', // 이 축이 y축임을 명시해줍니다.
               display: true, // 축의 가시성 여부도 설정할 수 있습니다.
               position: 'left', // 축이 왼쪽에 표시될지, 오른쪽에 표시될지 정할 수 있습니다.
@@ -144,6 +146,10 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
             },
           },
           plugins: {
+            datalabels: {
+              align: 'end',
+              color: '#333',
+            },
             legend: {
               labels: {
                 padding: 10,
