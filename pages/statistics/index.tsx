@@ -49,5 +49,5 @@ Statistics.getLayout = function getLayout(page: React.ReactNode) {
 
 export const getStaticProps = async () => {
   const rates = await getRating();
-  return { props: { data: { rates } } };
+  return { props: { data: { rates } }, revalidate: 60 };
 };
