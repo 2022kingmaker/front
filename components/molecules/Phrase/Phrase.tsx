@@ -30,9 +30,10 @@ const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 export interface PhraseProps {
   position: string;
   phrase: IPhrase;
+  policyId: number;
 }
 
-const Phrase = ({ position, phrase }: PhraseProps) => {
+const Phrase = ({ policyId, position, phrase }: PhraseProps) => {
   const phraseText = phrase.phrase;
   const { partyId, colorCode } = phrase.candidate.party;
 
@@ -43,11 +44,11 @@ const Phrase = ({ position, phrase }: PhraseProps) => {
       {position === 'left' ? (
         <>
           <Avatar imgId={partyId} />
-          <SpeechBubble color={color} position={position} phraseText={phraseText} />
+          <SpeechBubble color={color} position={position} phraseText={phraseText} policyId={policyId} />
         </>
       ) : (
         <>
-          <SpeechBubble color={color} position={position} phraseText={phraseText} />
+          <SpeechBubble color={color} position={position} phraseText={phraseText} policyId={policyId} />
           <Avatar imgId={partyId} />
         </>
       )}

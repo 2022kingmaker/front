@@ -58,14 +58,16 @@ export interface SpeechBubbleProps {
   color: string;
   position: string;
   phraseText: string;
+  policyId: number;
 }
 
-const SpeechBubble = ({ color = 'first', position = 'left', phraseText }: Partial<SpeechBubbleProps>) => {
+const SpeechBubble = ({ color = 'first', position = 'left', phraseText, policyId }: Partial<SpeechBubbleProps>) => {
   const router = useRouter();
 
-  const handleClick = (e: any) => {
-    const target = e.target.closest('.topic-container');
-    router.push(`/opinions/[categoryId]`, `/opinions/${target.dataset.categoryId}#${e.target.innerHTML}`);
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = (e.target as HTMLDivElement).closest('.topic-container') as HTMLDivElement;
+
+    router.push(`/opinions/[categoryId]`, `/opinions/${target.dataset.categoryId}#${policyId}`);
   };
   return (
     <SpeechBubbleBlock color={color} position={position} onClick={handleClick}>

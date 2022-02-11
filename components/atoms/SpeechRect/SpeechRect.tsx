@@ -50,7 +50,7 @@ export interface SpeechRectProps {
 
 const SpeechRect = ({ backgroundColor = 'black', phrase, text, rectType = 0 }: SpeechRectProps) => {
   return (
-    <SpeechRectBlock data-phrase={phrase} backgroundColor={backgroundColor} rectType={rectType}>
+    <SpeechRectBlock backgroundColor={backgroundColor} rectType={rectType}>
       <h3>{phrase}</h3>
       <div className={'text-container'}>
         {text.split('\\n').map(v => (

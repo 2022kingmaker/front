@@ -27,18 +27,18 @@ export interface OpinionProps {
   text: string;
   rectType: number;
   candidate: any;
+  policyId: number;
 }
 
 const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 
-const Opinion = ({ phrase, text, rectType, candidate }: OpinionProps) => {
+const Opinion = ({ policyId, phrase, text, rectType, candidate }: OpinionProps) => {
   const { name: candidateName, party } = candidate;
   const { name: partyName, partyId } = party;
 
   const position = rectType % 2 === 0 ? 'left' : 'right';
-
   return (
-    <OpinionBlock position={position}>
+    <OpinionBlock position={position} data-policy={policyId}>
       {position === 'left' ? (
         <>
           <BigAvatar size={150} imgId={partyId} partyName={partyName} name={candidateName} />

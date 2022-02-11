@@ -162,13 +162,6 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
         // @ts-ignore
         data={chartData}
       />
-
-      {/*<Button direction={'right'} active={currentIndex !== sortedRates.length - 1} onClick={nextRate}>*/}
-      {/*  다음*/}
-      {/*</Button>*/}
-      {/*<Button direction={'left'} active={currentIndex !== 0} onClick={prevRate}>*/}
-      {/*  이전*/}
-      {/*</Button>*/}
       <QuestionMark
         agency={sortedRates[0].agency}
         requester={sortedRates[0].requester}

@@ -50,18 +50,24 @@ const OpinionContents = ({ groupByKeyword }: OpinionContentsProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    const title = decodeURI(router.asPath.split('#')[1]);
-    const $target = document.querySelector(`[data-phrase="${title}"]`);
+    const policyId = decodeURI(router.asPath.split('#')[1]);
+    const $target = document.querySelector(`[data-policy="${policyId}"]`);
     $target?.scrollIntoView({ block: 'center' });
   }, []);
-
   return (
     <OpinionContentsBlock>
       {groupByKeyword.map((policy, index) => (
         <div className="topic-container" key={index} data-title={policy[0].keywordName} data-index={index}>
           <h2 className="title">{policy[0].keywordName}</h2>
-          {policy.map(({ text, phrase, candidate }: Policy, index) => (
-            <Opinion key={phrase + index} phrase={phrase} candidate={candidate} text={text} rectType={index} />
+          {policy.map(({ text, phrase, candidate, policyId }: Policy, index) => (
+            <Opinion
+              key={phrase + index}
+              phrase={phrase}
+              candidate={candidate}
+              text={text}
+              rectType={index}
+              policyId={policyId}
+            />
           ))}
         </div>
       ))}

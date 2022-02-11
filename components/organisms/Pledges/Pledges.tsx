@@ -37,6 +37,7 @@ const Pledges = ({ keyword, phrases }: PledgesProps) => {
           key={phrase.phrase}
           position={(phrase.candidate.candidateId - 1) % 2 === 0 ? 'left' : 'right'}
           phrase={phrase}
+          policyId={phrase.policyId}
         />
       ))}
     </PledgesBlock>
