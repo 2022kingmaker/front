@@ -6,6 +6,18 @@ export const sortRates = (rates: IRate[]) => {
   return rates.sort(sortCallback);
 };
 
+const sortCallback = (a: IRate, b: IRate) => {
+  const [yearA, monthA, dayA] = a.startedAt.split('-').map(v => +v);
+  const [yearB, monthB, dayB] = b.startedAt.split('-').map(v => +v);
+  if (yearA !== yearB) {
+    return yearA - yearB;
+  }
+  if (monthA !== monthB) {
+    return monthA - monthB;
+  }
+  return dayA - dayB;
+};
+
 export const getChartData = (currentRate: IRate) => {
   const chartData: ChartData = { datasets: [], labels: [] };
   chartData.labels!.push(getWeek(currentRate.startedAt));
@@ -44,14 +56,4 @@ export const getLineChartData = (rates: IRate[]) => {
   });
 
   return chartData;
-};
-
-const sortCallback = (a: IRate, b: IRate) => {
-  const [_A, monthA, dayA] = a.startedAt.split('-').map(v => +v);
-  const [_B, monthB, dayB] = b.startedAt.split('-').map(v => +v);
-
-  if (monthA !== monthB) {
-    return monthA - monthB;
-  }
-  return dayA - dayB;
 };
