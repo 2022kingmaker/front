@@ -6,7 +6,7 @@ import React from 'react';
 import { MONTHS, WEEKDAYS_SHORT } from '@lib/constant';
 
 const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>>`
-  z-index: 100;
+  z-index: 2;
   display: ${({ isCalendarOpen }) => (isCalendarOpen ? 'block' : 'none')};
   position: absolute;
   top: calc(50% - 30px);
