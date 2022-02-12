@@ -19,6 +19,12 @@ const useScrollIntoView: TUseScrollIntoView = activeTopic => {
     }
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      document.querySelector('.active')?.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+    }, 750);
+  }, [activeTopic]);
+
   return titleRef;
 };
 

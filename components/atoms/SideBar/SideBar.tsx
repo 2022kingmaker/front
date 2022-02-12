@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { Categories } from '@models/Category';
 import { useRouter } from 'next/router';
 import useScrollIntoView from '@atoms/SideBar/useScrollIntoView';
 import { ITableContents } from '@models/TableContent';
+import throttleGenerator from '@lib/throttleGenerator';
 
 const SideBarBlock = styled.ul<Partial<SideBarProps>>`
   ${flexBox('center', 'center', 'column')};
@@ -77,14 +78,17 @@ export interface SideBarProps {
 const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories, setActiveTopic }: SideBarProps) => {
   const router = useRouter();
   const titleRef = useScrollIntoView(activeTopic);
+  const throttle = useCallback(throttleGenerator(1000), []);
 
   const handleTopicClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const target = e.target as HTMLAnchorElement;
-    if (target.innerHTML === activeTopic) {
-      return;
-    }
-    titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
-    setActiveTopic && setActiveTopic(target.innerHTML);
+    throttle(() => {
+      const target = e.target as HTMLAnchorElement;
+      if (target.innerHTML === activeTopic) {
+        return;
+      }
+      titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
+      setActiveTopic && setActiveTopic(target.innerHTML);
+    });
   };
   return (
     <SideBarBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
