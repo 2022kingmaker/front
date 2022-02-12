@@ -6,6 +6,7 @@ import React from 'react';
 import { MONTHS, WEEKDAYS_SHORT } from '@lib/constant';
 
 const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>>`
+  z-index: 100;
   display: ${({ isCalendarOpen }) => (isCalendarOpen ? 'block' : 'none')};
   position: absolute;
   top: calc(50% - 30px);
@@ -15,7 +16,10 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
   background: rgba(255, 255, 255, 0.87);
   border-radius: 8px;
   outline: none;
-
+  @media ${({ theme }) => theme.mobile} {
+    left: 0;
+    top: 110px;
+  }
   .DayPicker-Week {
     & .DayPicker-Day--outside {
       background-color: rgba(255, 255, 255, 0) !important;
@@ -67,9 +71,6 @@ const MultiCalendarBlock = styled.div<Pick<MultiCalendarProps, 'isCalendarOpen'>
     .DayPicker-Day--disabled:hover {
       background-color: rgba(255, 255, 255, 0);
     }
-  }
-
-  .DayPicker-Day:not(.DayPicker-Day--disabled) {
   }
 `;
 export interface disabledDays {
