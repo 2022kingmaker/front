@@ -78,7 +78,7 @@ export interface SideBarProps {
 const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories, setActiveTopic }: SideBarProps) => {
   const router = useRouter();
   const titleRef = useScrollIntoView(activeTopic);
-  const throttle = useCallback(throttleGenerator(1000), []);
+  const throttle = useCallback(throttleGenerator(1400), []);
 
   const handleTopicClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     throttle(() => {
@@ -86,6 +86,7 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories, setActiveT
       if (target.innerHTML === activeTopic) {
         return;
       }
+      console.log('sideBar click');
       titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
       setActiveTopic && setActiveTopic(target.innerHTML);
     });
