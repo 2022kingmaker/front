@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <title>대선 마당</title>
+        <title>대선마당 | 대한민국 20대 대선 정책 공약 비교</title>
       </Head>
       <GlobalStyles />
       {getLayout(<Component {...pageProps} />)}

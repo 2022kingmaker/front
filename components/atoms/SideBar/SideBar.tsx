@@ -86,7 +86,7 @@ const SideBar = ({ toc, activeFontSize = 25, activeTopic, categories, setActiveT
       if (target.innerHTML === activeTopic) {
         return;
       }
-      console.log('sideBar click');
+
       titleRef.current[target.innerHTML]?.scrollIntoView({ behavior: 'smooth' });
       setActiveTopic && setActiveTopic(target.innerHTML);
     });

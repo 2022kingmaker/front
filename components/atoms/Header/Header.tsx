@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { useModal } from '@hooks/index';
 import { ReportModal } from '@molecules/index';
+const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -33,8 +34,6 @@ const HeaderBlock = styled.div`
     }
   }
 `;
-
-const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const NavigationTab = styled.div`
   ${flexBox('space-between', null, 'row')};
