@@ -34,6 +34,7 @@ class MyDocument extends Document {
             name={'description'}
             content={'대한민국 20대 대선 후보들의 공약을 간략하게 요약해서 제공하는 사이트입니다.'}
           />
+          <meta name="image" property="og:image" content="%PUBLIC_URL%/images/logo.png" />
           <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
           <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-VDT6ENG204" />

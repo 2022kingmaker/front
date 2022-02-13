@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { GetServerSidePropsContext } from 'next/types';
 import styled from 'styled-components';
 
@@ -45,6 +46,9 @@ const OpinionPage = ({ data }: IdProps) => {
 
   return (
     <IdBlock>
+      <Head>
+        <meta name="description" content="각 후보들의 공약을 상세히 제공합니다. " />
+      </Head>
       <SideBar toc={toc} activeTopic={activeTopic} categories={categories} />
       <OpinionContents groupByKeyword={groupByKeyword} />
     </IdBlock>
