@@ -14,7 +14,7 @@ const KeywordContainer = styled.div`
   ${flexBox()};
 
   position: sticky;
-  top: 75px;
+  top: 50px;
   z-index: 2;
   margin: auto auto 15px auto;
   width: 200px;
@@ -24,7 +24,7 @@ const KeywordContainer = styled.div`
   border-radius: 10px;
   background: #f2f2f2;
   @media ${({ theme }) => theme.desktop} {
-    top: 125px;
+    top: 100px;
   }
 `;
 
