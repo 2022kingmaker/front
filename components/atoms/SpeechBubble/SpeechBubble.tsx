@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { flexBox } from '@styles/mixin';
 import Link from 'next/link';
 
-const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
+const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
   ${flexBox()};
 
   position: absolute;
@@ -14,10 +14,9 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
   height: 55px;
   padding: 18px;
   text-align: center;
-  .link-text {
-    font-size: 20px;
-    color: white;
-  }
+  font-size: 20px;
+  color: white;
+
   background: ${({ theme, color }) => theme.colors[color!]};
   -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
@@ -53,10 +52,7 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
       cursor: pointer;
       transform: none;
     }
-    .link-text {
-      font-size: 14px;
-      color: white;
-    }
+    font-size: 14px;
   }
 `;
 
@@ -76,11 +72,11 @@ const SpeechBubble = ({
   categoryId,
 }: Partial<SpeechBubbleProps>) => {
   return (
-    <SpeechBubbleBlock color={color} position={position}>
-      <Link href={'/opinions/[categoryId]'} as={`/opinions/${categoryId}#${policyId}`}>
-        <a className={'link-text'}>{phraseText}</a>
-      </Link>
-    </SpeechBubbleBlock>
+    <Link href={'/opinions/[categoryId]'} as={`/opinions/${categoryId}#${policyId}`} passHref>
+      <SpeechBubbleBlock color={color} position={position}>
+        {phraseText}
+      </SpeechBubbleBlock>
+    </Link>
   );
 };
 
