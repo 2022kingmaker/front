@@ -12,13 +12,20 @@ const PledgesBlock = styled.div`
 
 const KeywordContainer = styled.div`
   ${flexBox()};
-  margin: auto;
+
+  position: sticky;
+  top: 75px;
+  z-index: 2;
+  margin: auto auto 15px auto;
   width: 200px;
   height: 25px;
 
   border: 1px solid black;
   border-radius: 10px;
-  margin-bottom: 15px;
+  background: #f2f2f2;
+  @media ${({ theme }) => theme.desktop} {
+    top: 125px;
+  }
 `;
 
 export interface PledgesProps {
