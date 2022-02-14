@@ -51,8 +51,8 @@ const PhraseContents = ({ groupByCategory }: ContentsProps) => {
           data-category-id={keywords[0].categoryId}
         >
           <h2 className="title">{keywords[0].categoryName}</h2>
-          {keywords.map(({ name, phrases }) => (
-            <Pledges key={name} keyword={name} phrases={phrases} />
+          {keywords.map(({ name, phrases, categoryId }) => (
+            <Pledges key={name} keyword={name} phrases={phrases} categoryId={categoryId} />
           ))}
         </div>
       ))}

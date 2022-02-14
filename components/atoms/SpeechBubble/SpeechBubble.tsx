@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { flexBox } from '@styles/mixin';
+import Link from 'next/link';
 
 const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
   ${flexBox()};
@@ -12,9 +13,11 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
   min-width: 405px;
   height: 55px;
   padding: 18px;
-  font-size: 20px;
   text-align: center;
-  color: white;
+  .link-text {
+    font-size: 20px;
+    color: white;
+  }
   background: ${({ theme, color }) => theme.colors[color!]};
   -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
@@ -46,10 +49,13 @@ const SpeechBubbleBlock = styled.div<Partial<SpeechBubbleProps>>`
     ${flexBox()};
     ${({ position }) => (position === 'left' ? 'left:50px' : 'left:0')};
     min-width: 250px;
-    font-size: 14px;
     &:hover {
       cursor: pointer;
       transform: none;
+    }
+    .link-text {
+      font-size: 14px;
+      color: white;
     }
   }
 `;
@@ -59,19 +65,21 @@ export interface SpeechBubbleProps {
   position: string;
   phraseText: string;
   policyId: number;
+  categoryId: number;
 }
 
-const SpeechBubble = ({ color = 'first', position = 'left', phraseText, policyId }: Partial<SpeechBubbleProps>) => {
-  const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = (e.target as HTMLDivElement).closest('.topic-container') as HTMLDivElement;
-
-    router.push(`/opinions/[categoryId]`, `/opinions/${target.dataset.categoryId}#${policyId}`);
-  };
+const SpeechBubble = ({
+  color = 'first',
+  position = 'left',
+  phraseText,
+  policyId,
+  categoryId,
+}: Partial<SpeechBubbleProps>) => {
   return (
-    <SpeechBubbleBlock color={color} position={position} onClick={handleClick}>
-      {phraseText}
+    <SpeechBubbleBlock color={color} position={position}>
+      <Link href={'/opinions/[categoryId]'} as={`/opinions/${categoryId}#${policyId}`}>
+        <a className={'link-text'}>{phraseText}</a>
+      </Link>
     </SpeechBubbleBlock>
   );
 };

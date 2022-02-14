@@ -31,9 +31,10 @@ export interface PhraseProps {
   position: string;
   phrase: IPhrase;
   policyId: number;
+  categoryId: number;
 }
 
-const Phrase = ({ policyId, position, phrase }: PhraseProps) => {
+const Phrase = ({ policyId, position, phrase, categoryId }: PhraseProps) => {
   const phraseText = phrase.phrase;
   const { partyId, colorCode } = phrase.candidate.party;
 
@@ -44,11 +45,23 @@ const Phrase = ({ policyId, position, phrase }: PhraseProps) => {
       {position === 'left' ? (
         <>
           <Avatar imgId={partyId} />
-          <SpeechBubble color={color} position={position} phraseText={phraseText} policyId={policyId} />
+          <SpeechBubble
+            color={color}
+            position={position}
+            phraseText={phraseText}
+            policyId={policyId}
+            categoryId={categoryId}
+          />
         </>
       ) : (
         <>
-          <SpeechBubble color={color} position={position} phraseText={phraseText} policyId={policyId} />
+          <SpeechBubble
+            color={color}
+            position={position}
+            phraseText={phraseText}
+            policyId={policyId}
+            categoryId={categoryId}
+          />
           <Avatar imgId={partyId} />
         </>
       )}

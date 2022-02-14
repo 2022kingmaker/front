@@ -31,9 +31,10 @@ const KeywordContainer = styled.div`
 export interface PledgesProps {
   keyword: string;
   phrases: Phrases;
+  categoryId: number;
 }
 
-const Pledges = ({ keyword, phrases }: PledgesProps) => {
+const Pledges = ({ keyword, phrases, categoryId }: PledgesProps) => {
   return (
     <PledgesBlock>
       <KeywordContainer>
@@ -45,6 +46,7 @@ const Pledges = ({ keyword, phrases }: PledgesProps) => {
           position={(phrase.candidate.candidateId - 1) % 2 === 0 ? 'left' : 'right'}
           phrase={phrase}
           policyId={phrase.policyId}
+          categoryId={categoryId}
         />
       ))}
     </PledgesBlock>
