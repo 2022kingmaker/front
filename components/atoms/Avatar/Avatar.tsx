@@ -21,7 +21,11 @@ export interface AvatarProps {
 
 const Avatar = ({ imgId, size = 55 }: Partial<AvatarProps>) => {
   return (
-    <AvatarBlock src={process.env.NEXT_PUBLIC_IMAGE_URL + `/candidate-images/candidate0${imgId}.png`} size={size} />
+    <AvatarBlock
+      src={process.env.NEXT_PUBLIC_IMAGE_URL + `/candidate-images/candidate0${imgId}.png`}
+      size={size}
+      alt={'대선 후보 아바타 이미지'}
+    />
   );
 };
 
