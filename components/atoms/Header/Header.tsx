@@ -45,16 +45,16 @@ const Header = () => {
     <HeaderBlock>
       <ul className="container">
         <NavigationTab>
-          <Link href={'/'}>
+          <Link href={'/'} passHref>
             <a>
               <img src="/images/logo.png" alt="logo" />
             </a>
           </Link>
-          {/*<Link href={'#'}>*/}
-          {/*  <a>공약</a>*/}
-          {/*</Link>*/}
-          <Link href={'/statistics'}>
+          <Link href={'/statistics'} passHref>
             <a>통계</a>
+          </Link>
+          <Link href={'/talks/2'} passHref>
+            <a>국민 톡</a>
           </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>

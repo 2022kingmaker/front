@@ -14,7 +14,7 @@ import { Categories } from '@models/Category';
 
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
-import { ITableContents } from '@models/TableContent';
+import { getToc } from '@lib/utils';
 
 const HomeBlock = styled.div`
   height: inherit;
@@ -40,13 +40,7 @@ const Home: NextPage = ({ data }: HomeProps) => {
 
   const groupByCategory = groupingByCategory(categories, keywordDetails);
 
-  const toc = categories.reduce((toc, { categoryId, name }) => {
-    toc.push({
-      id: categoryId,
-      name: name,
-    });
-    return toc;
-  }, [] as ITableContents[]);
+  const toc = getToc(categories);
 
   return (
     <HomeBlock>

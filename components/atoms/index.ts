@@ -5,3 +5,4 @@ export { default as PolicyKeyword } from './PolicyKeyword/PolicyKeyword';
 export { default as Layout } from './Layout/Layout';
 export { default as Header } from './Header/Header';
 export { default as Avatar } from './Avatar/Avatar';
+export { default as SideBarRoute } from './SideBarRoute/SideBarRoute';
