@@ -47,7 +47,8 @@ const OpinionPage = ({ data }: IdProps) => {
   return (
     <IdBlock>
       <Head>
-        <meta name="description" content="각 후보들의 공약을 상세히 제공합니다. " />
+        <title>대선마당 | 대한민국 20대 대선 정책 공약 상세보기</title>
+        <meta name="description" content="각 후보들의 공약을 상세히 제공합니다." />
       </Head>
       <SideBar toc={toc} activeTopic={activeTopic} categories={categories} />
       <OpinionContents groupByKeyword={groupByKeyword} />

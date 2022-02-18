@@ -15,6 +15,7 @@ import { Categories } from '@models/Category';
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
 import { ITableContents } from '@models/TableContent';
+import Head from 'next/head';
 
 const HomeBlock = styled.div`
   height: inherit;
@@ -50,6 +51,9 @@ const Home: NextPage = ({ data }: HomeProps) => {
 
   return (
     <HomeBlock>
+      <Head>
+        <title>대선마당 | 대한민국 20대 대선 정책 공약 비교</title>
+      </Head>
       <SideBar toc={toc} activeTopic={activeTopic} />
       <PhraseContents groupByCategory={groupByCategory} />
       {isPopupShowing && (
