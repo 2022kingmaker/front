@@ -9,9 +9,13 @@ const SortButtonBlock = styled.div`
   height: auto;
   font-size: 15px;
   position: absolute;
-  top: 75px;
-  right: -20px;
+  top: 30px;
+  right: 0px;
 
+  @media ${({ theme }) => theme.desktop} {
+    top: 75px;
+    right: -20px;
+  }
   :hover {
     cursor: pointer;
   }

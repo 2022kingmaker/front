@@ -7,5 +7,4 @@ export { default as Header } from './Header/Header';
 export { default as Avatar } from './Avatar/Avatar';
 export { default as SideBarRoute } from './SideBarRoute/SideBarRoute';
 export { default as SideBarAgora } from './SideBarAgora/SideBarAgora';
-export { default as Talk } from './Talk/Talk';
 export { default as Agora } from './Agora/Agora';

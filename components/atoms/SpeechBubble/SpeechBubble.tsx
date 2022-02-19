@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
 import { flexBox } from '@styles/mixin';
 import Link from 'next/link';
 
-const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
+export const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
   ${flexBox()};
 
   position: absolute;

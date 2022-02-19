@@ -1,0 +1,73 @@
+import styled from 'styled-components';
+import TalkInput from '@atoms/TalkInput/TalkInput';
+import { flexBox } from '@styles/mixin';
+import { Avatar } from '@atoms/index';
+import { Writer } from '@atoms/TalkBubble/TalkBubble';
+import Submit from '@assets/icons/submit.svg';
+
+const CommentContainerBlock = styled.form`
+  ${flexBox('center', 'flex-start')};
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+
+  @media ${({ theme }) => theme.desktop} {
+    width: 100%;
+    height: auto;
+  }
+`;
+const InputContainer = styled.section`
+  width: 90%;
+  height: 180px;
+  border-radius: 13px;
+  border: 1px solid black;
+  background: white;
+  padding: 8px 12px 40px 12px;
+  position: relative;
+`;
+const CommentWriter = styled(Writer)`
+  color: black;
+`;
+const ToolBox = styled.div`
+  ${flexBox('space-between')};
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  padding: 4px 12px 0 12px;
+  border-top: 1px solid rgba(162, 162, 162, 0.54);
+`;
+
+const InfoTab = styled.div``;
+const ButtonTab = styled.div`
+  button {
+    ${flexBox()};
+    width: 45px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+interface CommentContainerProps {}
+
+const CommentContainer = ({}: CommentContainerProps) => {
+  return (
+    <CommentContainerBlock>
+      <Avatar writer={'고양이'} />
+      <InputContainer>
+        <CommentWriter>고양이</CommentWriter>
+        <TalkInput height={80} />
+        <ToolBox>
+          <InfoTab>0/500</InfoTab>
+          <ButtonTab>
+            <button children={<Submit />} />
+          </ButtonTab>
+        </ToolBox>
+      </InputContainer>
+    </CommentContainerBlock>
+  );
+};
+
+export default CommentContainer;

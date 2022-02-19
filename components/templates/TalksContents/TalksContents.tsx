@@ -4,9 +4,11 @@ import Agora from '@atoms/Agora/Agora';
 
 const TalksContentsBlock = styled.div`
   position: relative;
-  padding: 44px 30px 0 230px;
+  padding: 80px 30px 0 230px;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+
   width: 100%;
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
@@ -23,7 +25,14 @@ const TalksContents = () => {
       <SortButton />
       <ul>
         <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
+          <Agora
+            agenda={'야권 단일화 어떻게 생각하시나요?'}
+            description={
+              '모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?\n' +
+              '자유로운 의견 나눠주세요!'
+            }
+            talks={[]}
+          />
         </li>
         <li>
           <Agora agenda={'e'} description={'e'} talks={[]} />
