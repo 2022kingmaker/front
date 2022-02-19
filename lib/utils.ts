@@ -1,6 +1,8 @@
 import { IRate } from '@models/Rate';
 import { ChartData } from 'chart.js';
 import { getWeek } from '@lib/date';
+import { Categories } from '@models/Category';
+import { ITableContents } from '@models/TableContent';
 
 export const sortRates = (rates: IRate[]) => {
   return rates.sort(sortCallback);
@@ -57,3 +59,12 @@ export const getLineChartData = (rates: IRate[]) => {
 
   return chartData;
 };
+
+export const getToc = (categories: Categories) =>
+  categories.reduce((toc, { categoryId, name }) => {
+    toc.push({
+      id: categoryId,
+      name: name,
+    });
+    return toc;
+  }, [] as ITableContents[]);

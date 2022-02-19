@@ -17,10 +17,8 @@ const HeaderBlock = styled.div`
   z-index: 3;
   .container {
     ${flexBox('space-between', 'flex-start', 'row')};
-    padding: 0 20px;
-
     a {
-      padding: 0 15px;
+      padding: 0 10px;
       line-height: 40px;
       font-size: 16px;
       & img {
@@ -45,16 +43,16 @@ const Header = () => {
     <HeaderBlock>
       <ul className="container">
         <NavigationTab>
-          <Link href={'/'}>
+          <Link href={'/'} passHref>
             <a>
               <img src="/images/logo.png" alt="logo" />
             </a>
           </Link>
-          {/*<Link href={'#'}>*/}
-          {/*  <a>공약</a>*/}
-          {/*</Link>*/}
-          <Link href={'/statistics'}>
+          <Link href={'/statistics'} passHref>
             <a>통계</a>
+          </Link>
+          <Link href={'/talks/2'} passHref>
+            <a>국민 톡</a>
           </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>
