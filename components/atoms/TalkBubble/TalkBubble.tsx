@@ -24,7 +24,7 @@ const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
 `;
 export const Writer = styled.div`
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin: 5px 0 10px 0;
 `;
 
@@ -54,7 +54,6 @@ interface TalkBubbleProps {
 const TalkBubble = ({ color }: TalkBubbleProps) => {
   return (
     <TalkBubbleBlock color={color}>
-      <Writer>고양이</Writer>
       <p>
         가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
         가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하

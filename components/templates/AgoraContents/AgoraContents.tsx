@@ -51,6 +51,17 @@ const TalkInfoTab = styled.section`
     margin: 1px 0 0 8px;
   }
 `;
+const UserTab = styled.section`
+  ${flexBox('center', 'center', 'column')};
+  margin-right: 5px;
+  width: auto;
+`;
+
+const Writer = styled.div`
+  margin-top: 5px;
+  color: #333;
+  font-size: 8px;
+`;
 
 interface AgoraContentsProps {}
 
@@ -62,19 +73,30 @@ const AgoraContents = ({}: AgoraContentsProps) => {
         description={'모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?'}
       />
       <TalkContainer>
-        <Avatar writer={'고양이'} backgroundColor={'#1F4D9C'} />
+        <UserTab>
+          <Avatar writer={'섬뜩한 '} backgroundColor={'#1F4D9C'} />
+          <Writer>섬뜩한 고양이</Writer>
+        </UserTab>
         <TalkBubble color={'#1F4D9C'}></TalkBubble>
       </TalkContainer>
       <TalkContainer>
-        <Avatar writer={'고양이'} backgroundColor={'#D33736'} />
+        <UserTab>
+          <Avatar writer={'고양이'} backgroundColor={'#D33736'} />
+          <Writer>고양이</Writer>
+        </UserTab>
         <TalkBubble color={'#D33736'}></TalkBubble>
       </TalkContainer>
       <TalkContainer>
-        <Avatar writer={'고양이'} backgroundColor={'#F7CE46'} />
+        <UserTab>
+          <Avatar writer={'고양이'} backgroundColor={'#F7CE46'} />
+        </UserTab>
         <TalkBubble color={'#F7CE46'}></TalkBubble>
       </TalkContainer>
       <TalkContainer>
-        <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
+        <UserTab>
+          <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
+          <Writer>고양이</Writer>
+        </UserTab>
         <TalkBubble color={'#D95F29'}></TalkBubble>
       </TalkContainer>
       <TalkInfoTab>

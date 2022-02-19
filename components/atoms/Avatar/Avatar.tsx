@@ -22,7 +22,7 @@ const AvatarStringBlock = styled.div<Partial<AvatarProps>>`
   border-radius: 50%;
   background: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : '#C4C4C4')};
   color: white;
-  margin: 2px 5px 0 0;
+  margin: 2px 0 0 0;
 `;
 
 export interface AvatarProps {
