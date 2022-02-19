@@ -17,10 +17,8 @@ const HeaderBlock = styled.div`
   z-index: 3;
   .container {
     ${flexBox('space-between', 'flex-start', 'row')};
-    padding: 0 20px;
-
     a {
-      padding: 0 15px;
+      padding: 0 10px;
       line-height: 40px;
       font-size: 16px;
       & img {

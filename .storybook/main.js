@@ -4,6 +4,10 @@ module.exports = {
   stories: ['../components/', '../pages/'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   webpackFinal: async config => {
+    config.module.rules.unshift({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
     config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules', 'styles'];
     config.resolve.alias = {
       ...config.resolve.alias,

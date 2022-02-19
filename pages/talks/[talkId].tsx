@@ -8,6 +8,7 @@ import { Categories } from '@models/Category';
 import { getToc } from '@lib/utils';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps } from 'next/types';
+import TalksContents from '@templates/TalksContents/TalksContents';
 
 const TalksBlock = styled.div`
   height: inherit;
@@ -28,9 +29,11 @@ const Talks: NextPage = ({ data }: TalksProps) => {
   return (
     <TalksBlock>
       <Head>
+        <title>대선마당 | 국민 톡</title>
         <meta name="description" content="토론의 장" />
       </Head>
       <SideBarRoute toc={toc} currentCategoryId={+talkId} />
+      <TalksContents />
     </TalksBlock>
   );
 };
