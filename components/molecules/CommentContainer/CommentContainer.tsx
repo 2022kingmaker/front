@@ -17,6 +17,7 @@ const CommentContainerBlock = styled.form`
   }
 `;
 const InputContainer = styled.section`
+  margin-left: 5px;
   width: 90%;
   height: 180px;
   border-radius: 13px;

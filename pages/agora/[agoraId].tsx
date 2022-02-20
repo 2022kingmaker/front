@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
@@ -25,6 +25,8 @@ const toc = [
 interface AgoraPageProps {}
 
 const AgoraPage: NextPage = ({}: AgoraPageProps) => {
+  useEffect(() => {}, []);
+
   return (
     <AgoraPageBlock>
       <Head>

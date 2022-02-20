@@ -22,13 +22,13 @@ const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
     margin-bottom: 5px;
   }
   ${({ removed, theme }) =>
-    removed &&
-    `
+          removed &&
+          `
   background: ${theme.colors.primary}A3`};
 `;
 export const Writer = styled.div`
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin: 5px 0 10px 0;
 `;
 
@@ -62,33 +62,34 @@ const Removed = styled.div`
   }
 `;
 interface TalkBubbleProps {
-  color?: string;
-  removed?: boolean;
+    color?: string;
+    removed?: boolean;
 }
 
 const TalkBubble = ({ color = 'none', removed = false }: TalkBubbleProps) => {
-  return (
-    <TalkBubbleBlock color={color} removed={removed}>
-      {removed ? (
-        <Removed>
-          <div>부적절한 게시글로 판단되어 삭제된 글입니다.</div>
-        </Removed>
-      ) : (
-        <>
-          <Writer>고양이</Writer>
-          <p>
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-          </p>
-          <TalkInfo>
-            <li>신고하기</li>
-            <li className={'time'}>09:34</li>
-          </TalkInfo>
-        </>
-      )}
-    </TalkBubbleBlock>
-  );
+    return (
+        <TalkBubbleBlock color={color} removed={removed}>
+            {removed ? (
+                <Removed>
+                    <div>부적절한 게시글로 판단되어 삭제된 글입니다.</div>
+                </Removed>
+            ) : (
+                <>
+                    <Writer>고양이</Writer>
+                    <p>
+                        가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
+                        가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
+                        가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
+                    </p>
+                    <TalkInfo>
+                        <li>신고하기</li>
+                        <li className={'time'}>09:34</li>
+                    </TalkInfo>
+                </>
+            )}
+  font-size: 16px;
+        </TalkBubbleBlock>
+    );
 };
 
 export default TalkBubble;
