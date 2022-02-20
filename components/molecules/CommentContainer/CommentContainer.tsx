@@ -5,8 +5,9 @@ import { Avatar } from '@atoms/index';
 import { Writer } from '@atoms/TalkBubble/TalkBubble';
 import Submit from '@assets/icons/submit.svg';
 
-const CommentContainerBlock = styled.form`
+const CommentContainerBlock = styled.form<{ toggle: boolean }>`
   ${flexBox('center', 'flex-start')};
+  display: ${({ toggle }) => (toggle ? 'flex' : 'none')};
   margin-top: 10px;
   width: 100%;
   height: auto;
@@ -50,11 +51,13 @@ const ButtonTab = styled.div`
   }
 `;
 
-interface CommentContainerProps {}
+interface CommentContainerProps {
+  toggle: boolean;
+}
 
-const CommentContainer = ({}: CommentContainerProps) => {
+const CommentContainer = ({ toggle }: CommentContainerProps) => {
   return (
-    <CommentContainerBlock>
+    <CommentContainerBlock toggle={toggle}>
       <Avatar writer={'고양이'} />
       <InputContainer>
         <CommentWriter>고양이</CommentWriter>
