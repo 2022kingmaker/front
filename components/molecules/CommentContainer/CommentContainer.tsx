@@ -2,28 +2,27 @@ import styled from 'styled-components';
 import TalkInput from '@atoms/TalkInput/TalkInput';
 import { flexBox } from '@styles/mixin';
 import { Avatar } from '@atoms/index';
-import { Writer } from '@atoms/TalkBubble/TalkBubble';
 import Submit from '@assets/icons/submit.svg';
 
 const CommentContainerBlock = styled.form<{ toggle: boolean }>`
   ${flexBox('center', 'flex-start')};
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 100%;
+  width: 80%;
   height: auto;
 
   @media ${({ theme }) => theme.desktop} {
-    width: 100%;
+    width: 90%;
     height: auto;
   }
   position: absolute;
-  bottom: 50px;
+  bottom: 35px;
   display: ${({ toggle }) => (toggle ? 'flex' : 'none')};
 `;
 const InputContainer = styled.section`
   margin-left: 5px;
   width: 90%;
-  height: 180px;
+  height: 140px;
   border-radius: 13px;
   border: 1px solid black;
   background: white;
@@ -42,16 +41,18 @@ const ToolBox = styled.div`
   position: absolute;
   bottom: 5px;
   left: 0;
-  padding: 4px 12px 0 12px;
+  padding: 3px 12px 0 12px;
   border-top: 1px solid rgba(162, 162, 162, 0.54);
 `;
 
-const InfoTab = styled.div``;
+const InfoTab = styled.div`
+  font-size: 12px;
+`;
 const ButtonTab = styled.div`
   button {
     ${flexBox()};
-    width: 45px;
-    height: 35px;
+    width: 35px;
+    height: 25px;
     border: none;
     border-radius: 5px;
     background: ${({ theme }) => theme.colors.primary};
@@ -65,10 +66,10 @@ interface CommentContainerProps {
 const CommentContainer = ({ toggle }: CommentContainerProps) => {
   return (
     <CommentContainerBlock toggle={toggle}>
-      <Avatar writer={'고양이'} />
+      {/*<Avatar writer={'고양이'} />*/}
       <InputContainer>
         <CommentWriter>고양이</CommentWriter>
-        <TalkInput height={80} />
+        <TalkInput height={50} />
         <ToolBox>
           <InfoTab>0/500</InfoTab>
           <ButtonTab>

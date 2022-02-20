@@ -59,6 +59,20 @@ const TalkListContainer = ({}: TalkListContainerProps) => {
         </UserTab>
         <TalkBubble color={'#D95F29'}></TalkBubble>
       </TalkContainer>
+      <TalkContainer>
+        <UserTab>
+          <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
+          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
+        </UserTab>
+        <TalkBubble color={'#D95F29'}></TalkBubble>
+      </TalkContainer>
+      <TalkContainer>
+        <UserTab>
+          <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
+          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
+        </UserTab>
+        <TalkBubble color={'#D95F29'}></TalkBubble>
+      </TalkContainer>
     </TalkListContainerBlock>
   );
 };
