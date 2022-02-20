@@ -7,7 +7,6 @@ import Submit from '@assets/icons/submit.svg';
 
 const CommentContainerBlock = styled.form<{ toggle: boolean }>`
   ${flexBox('center', 'flex-start')};
-  display: ${({ toggle }) => (toggle ? 'flex' : 'none')};
   margin-top: 10px;
   width: 100%;
   height: auto;
@@ -16,6 +15,9 @@ const CommentContainerBlock = styled.form<{ toggle: boolean }>`
     width: 100%;
     height: auto;
   }
+  position: absolute;
+  bottom: 50px;
+  display: ${({ toggle }) => (toggle ? 'flex' : 'none')};
 `;
 const InputContainer = styled.section`
   width: 90%;

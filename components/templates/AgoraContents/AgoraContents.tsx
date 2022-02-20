@@ -10,7 +10,7 @@ import { useState } from 'react';
 const AgoraContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
   position: relative;
-  padding: 70px 30px 50px 230px;
+  padding: 35px 30px 20px 230px;
   height: 100vh;
   overflow-y: auto;
   .topic-container {
@@ -30,7 +30,7 @@ const AgoraContentsBlock = styled.div`
   }
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
-    padding: 90px 24px 50px 24px;
+    padding: 90px 24px 20px 24px;
     .topic-container {
       width: 320px;
       & > * {
@@ -44,7 +44,7 @@ const TalkInfoTab = styled.section`
   ${flexBox('flex-start', 'center')};
   width: 93%;
   padding-left: 40px;
-  margin-top: 25px;
+  margin-top: 10px;
   .refreshIcon {
     margin: 1px 0 0 8px;
   }
@@ -65,6 +65,9 @@ const AgoraContents = ({}: AgoraContentsProps) => {
         description={'모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?'}
       />
       <TalkListContainer />
+
+      <CommentContainer toggle={commentToggle} />
+
       <TalkInfoTab>
         <span>전체 의견 4개</span>
 
@@ -73,7 +76,6 @@ const AgoraContents = ({}: AgoraContentsProps) => {
           <Pencil onClick={handleClick} />
         </span>
       </TalkInfoTab>
-      <CommentContainer toggle={commentToggle} />
     </AgoraContentsBlock>
   );
 };
