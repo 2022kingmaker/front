@@ -77,6 +77,10 @@ const AgoraContents = ({}: AgoraContentsProps) => {
         <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
         <TalkBubble color={'#D95F29'}></TalkBubble>
       </TalkContainer>
+      <TalkContainer>
+        <Avatar writer={''} backgroundColor={'none'} />
+        <TalkBubble removed={true} />
+      </TalkContainer>
       <TalkInfoTab>
         <span>전체 의견 4개</span>
         <Refresh className={'refreshIcon'} />
