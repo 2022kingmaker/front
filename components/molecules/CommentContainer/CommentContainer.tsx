@@ -26,8 +26,11 @@ const InputContainer = styled.section`
   padding: 8px 12px 40px 12px;
   position: relative;
 `;
-const CommentWriter = styled(Writer)`
+
+export const CommentWriter = styled.div`
   color: black;
+  font-size: 16px;
+  margin: 5px 0 10px 0;
 `;
 const ToolBox = styled.div`
   ${flexBox('space-between')};
