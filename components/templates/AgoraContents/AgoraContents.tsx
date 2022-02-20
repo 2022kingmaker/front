@@ -61,6 +61,13 @@ const AgoraContents = ({}: AgoraContentsProps) => {
         agenda={'야권 단일화 어떻게 생각하시나요?'}
         description={'모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?'}
       />
+
+      <TalkInfoTab>
+        <span>전체 의견 4개</span>
+        <Refresh className={'refreshIcon'} />
+      </TalkInfoTab>
+      <CommentContainer />
+
       <TalkContainer>
         <Avatar writer={'고양이'} backgroundColor={'#1F4D9C'} />
         <TalkBubble color={'#1F4D9C'}></TalkBubble>
@@ -77,11 +84,6 @@ const AgoraContents = ({}: AgoraContentsProps) => {
         <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
         <TalkBubble color={'#D95F29'}></TalkBubble>
       </TalkContainer>
-      <TalkInfoTab>
-        <span>전체 의견 4개</span>
-        <Refresh className={'refreshIcon'} />
-      </TalkInfoTab>
-      <CommentContainer />
     </AgoraContentsBlock>
   );
 };
