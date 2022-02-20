@@ -8,6 +8,7 @@ import Submit from '@assets/icons/submit.svg';
 const CommentContainerBlock = styled.form`
   ${flexBox('center', 'flex-start')};
   margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
   height: auto;
 
