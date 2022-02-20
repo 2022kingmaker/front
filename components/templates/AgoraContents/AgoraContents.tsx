@@ -81,12 +81,3 @@ const AgoraContents = ({}: AgoraContentsProps) => {
 };
 
 export default AgoraContents;
-
-//['섬뜩한','고양이']
-const makeNewLine = (nickname: string) =>
-  nickname.split(' ').map(word => (
-    <>
-      <span>{word}</span>
-      <br />
-    </>
-  ));

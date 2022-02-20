@@ -9,7 +9,7 @@ const Test = styled.div`
   position: relative;
 `;
 
-const AgoraBlock = styled.a<{ fixed: boolean }>`
+const AgoraBlock = styled.a<{ fixed?: boolean }>`
   ${flexBox('space-around', 'flex-start', 'column')};
   padding: 12px;
   width: 100%;
@@ -67,7 +67,7 @@ interface AgoraProps {
   agenda: string;
   description: string;
   talks?: Talk[];
-  fixed: boolean;
+  fixed?: boolean;
 }
 
 const Agora = ({
