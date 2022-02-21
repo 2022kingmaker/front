@@ -1,23 +1,18 @@
 import styled from 'styled-components';
 import TalkInput from '@atoms/TalkInput/TalkInput';
 import { flexBox } from '@styles/mixin';
-import { Avatar } from '@atoms/index';
 import Submit from '@assets/icons/submit.svg';
 
-const CommentContainerBlock = styled.form<{ toggle: boolean }>`
-  ${flexBox('center', 'flex-start')};
+const CommentContainerBlock = styled.form`
+  ${flexBox('flex-start', 'flex-start')};
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 80%;
+  width: 100%;
   height: auto;
-
   @media ${({ theme }) => theme.desktop} {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
-  position: absolute;
-  bottom: 35px;
-  display: ${({ toggle }) => (toggle ? 'flex' : 'none')};
 `;
 const InputContainer = styled.section`
   margin-left: 5px;
@@ -59,24 +54,12 @@ const ButtonTab = styled.div`
   }
 `;
 
-interface CommentContainerProps {
-  toggle: boolean;
-}
+interface CommentContainerProps {}
 
-const CommentContainer = ({ toggle }: CommentContainerProps) => {
+const CommentContainer = ({}: CommentContainerProps) => {
   return (
-    <CommentContainerBlock toggle={toggle}>
-      {/*<Avatar writer={'고양이'} />*/}
-      <InputContainer>
-        <CommentWriter>고양이</CommentWriter>
-        <TalkInput height={50} />
-        <ToolBox>
-          <InfoTab>0/500</InfoTab>
-          <ButtonTab>
-            <button children={<Submit />} />
-          </ButtonTab>
-        </ToolBox>
-      </InputContainer>
+    <CommentContainerBlock>
+      <TalkInput height={50} />
     </CommentContainerBlock>
   );
 };

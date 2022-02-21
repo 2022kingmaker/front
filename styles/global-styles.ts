@@ -8,6 +8,9 @@ const GlobalStyles = createGlobalStyle`
       font-display: fallback;
       src: url("/fonts/NotoSansKR-Medium-Hestia.woff") format("woff");
     }
+    textarea{
+      font-family: "NotoSansKorean", sans-serif;
+    }
     *{
       color: #333;
       box-sizing: border-box;
