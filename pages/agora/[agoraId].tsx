@@ -32,6 +32,7 @@ const AgoraPage: NextPage = ({}: AgoraPageProps) => {
       <Head>
         <title>대선마당 | {111}</title>
         <meta name="description" content="토론의 장" />
+        <meta name={'viewport'} content={'initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width'} />
       </Head>
       <SideBarAgora toc={toc} currentCategoryId={0} />
       <AgoraContents />
