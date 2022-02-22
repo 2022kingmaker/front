@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 
 const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
-  ${flexBox('center', 'center', 'row')};
+  ${flexBox('flex-start', 'flex-start', 'row')};
   position: relative;
   width: 90%;
   height: auto;
-  min-height: 80px;
-  padding: 8px 12px 8px 12px;
+
+  min-height: 40px;
+  padding: 12px;
 
   background: ${({ color }) => (color ? color : 'black')};
   -webkit-border-radius: 13px;

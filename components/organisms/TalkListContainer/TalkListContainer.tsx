@@ -4,8 +4,13 @@ import TalkBubble from '@atoms/TalkBubble/TalkBubble';
 import { flexBox } from '@styles/mixin';
 
 const TalkListContainerBlock = styled.ul`
-  overflow-y: auto;
+  width: 100%;
   height: 100%;
+
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const TalkContainer = styled.li`
@@ -68,10 +73,17 @@ const TalkListContainer = ({}: TalkListContainerProps) => {
       </TalkContainer>
       <TalkContainer>
         <UserTab>
-          <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
+          <Avatar writer={'고양이'} backgroundColor={'#c4c4c4'} />
           <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
         </UserTab>
-        <TalkBubble color={'#D95F29'}></TalkBubble>
+        <TalkBubble color={'#c4c4c4'}></TalkBubble>
+      </TalkContainer>
+      <TalkContainer>
+        <UserTab>
+          <Avatar writer={''} backgroundColor={'none'} />
+          <Writer>{makeNewLine('')}</Writer>
+        </UserTab>
+        <TalkBubble color={'none'} removed={true}></TalkBubble>
       </TalkContainer>
     </TalkListContainerBlock>
   );

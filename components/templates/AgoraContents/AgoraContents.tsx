@@ -49,7 +49,7 @@ const TalkInfoTab = styled.section`
     position: absolute;
     left: -30px;
     top: 0;
-    width: 110%;
+    width: 120%;
     border-top: 1px solid #c4c4c4;
   }
   .refreshIcon {
