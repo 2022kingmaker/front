@@ -9,11 +9,22 @@ const CommentContainerBlock = styled.form`
   margin-bottom: 10px;
   width: 100%;
   height: auto;
+
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
     height: auto;
   }
 `;
+
+const Button = styled.button`
+  ${flexBox()};
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background: ${({ theme }) => theme.colors.primary};
+`;
+
 const InputContainer = styled.section`
   margin-left: 5px;
   width: 90%;
@@ -43,23 +54,17 @@ const ToolBox = styled.div`
 const InfoTab = styled.div`
   font-size: 12px;
 `;
-const ButtonTab = styled.div`
-  button {
-    ${flexBox()};
-    width: 35px;
-    height: 25px;
-    border: none;
-    border-radius: 5px;
-    background: ${({ theme }) => theme.colors.primary};
-  }
-`;
+const ButtonTab = styled.div``;
 
 interface CommentContainerProps {}
 
 const CommentContainer = ({}: CommentContainerProps) => {
   return (
     <CommentContainerBlock>
-      <TalkInput height={50} />
+      <TalkInput />
+      <Button>
+        <Submit />
+      </Button>
     </CommentContainerBlock>
   );
 };
