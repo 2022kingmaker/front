@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 const MAX_HEIGHT = 141;
-const HEIGHT_UNIT = 13;
+const HEIGHT_UNIT = 3;
 
 const TalkInputBlock = styled.textarea`
   width: 100%;
@@ -10,7 +10,7 @@ const TalkInputBlock = styled.textarea`
   border: 0.5px solid #c4c4c4;
   height: 50px;
   resize: none;
-  padding: 12px 8px;
+  padding: 12px 45px 12px 8px;
   font-size: 16px;
 `;
 

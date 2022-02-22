@@ -9,6 +9,7 @@ const CommentContainerBlock = styled.form`
   margin-bottom: 10px;
   width: 100%;
   height: auto;
+  position: relative;
 
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
@@ -17,44 +18,16 @@ const CommentContainerBlock = styled.form`
 `;
 
 const Button = styled.button`
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
   ${flexBox()};
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   background: ${({ theme }) => theme.colors.primary};
 `;
-
-const InputContainer = styled.section`
-  margin-left: 5px;
-  width: 90%;
-  height: 140px;
-  border-radius: 13px;
-  border: 1px solid black;
-  background: white;
-  padding: 8px 12px 40px 12px;
-  position: relative;
-`;
-
-export const CommentWriter = styled.div`
-  color: black;
-  font-size: 16px;
-  margin: 5px 0 10px 0;
-`;
-const ToolBox = styled.div`
-  ${flexBox('space-between')};
-  width: 100%;
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  padding: 3px 12px 0 12px;
-  border-top: 1px solid rgba(162, 162, 162, 0.54);
-`;
-
-const InfoTab = styled.div`
-  font-size: 12px;
-`;
-const ButtonTab = styled.div``;
 
 interface CommentContainerProps {}
 
