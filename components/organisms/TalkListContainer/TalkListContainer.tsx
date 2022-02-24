@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Avatar } from '@atoms/index';
-import TalkBubble from '@atoms/TalkBubble/TalkBubble';
+import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
+import { useLayoutEffect, useRef } from 'react';
 
 const TalkListContainerBlock = styled.ul`
   width: 100%;
@@ -34,8 +34,16 @@ const Writer = styled.div`
 interface TalkListContainerProps {}
 
 const TalkListContainer = ({}: TalkListContainerProps) => {
+  const ref = useRef<HTMLUListElement>(null);
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+    }
+  }, []);
+
   return (
-    <TalkListContainerBlock>
+    <TalkListContainerBlock ref={ref}>
       <TalkContainer>
         <UserTab>
           <Avatar writer={'섬뜩한 '} backgroundColor={'#1F4D9C'} />

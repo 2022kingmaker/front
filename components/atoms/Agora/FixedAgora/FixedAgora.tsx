@@ -7,6 +7,10 @@ const FoldAgora = css`
   width: 50px;
   height: 50px;
   left: 85%;
+
+  :hover {
+    cursor: pointer;
+  }
   @media ${({ theme }) => theme.desktop} {
     width: 50px;
     height: 50px;
@@ -36,6 +40,9 @@ const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
     .fold-button {
       margin-right: 20px;
       font-size: 14px;
+      :hover {
+        cursor: pointer;
+      }
     }
   }
 
