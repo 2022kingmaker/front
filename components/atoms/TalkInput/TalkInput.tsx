@@ -8,9 +8,9 @@ const TalkInputBlock = styled.textarea`
   width: 100%;
   border-radius: 10px;
   border: 0.5px solid #c4c4c4;
-  height: 50px;
+  height: 42px;
   resize: none;
-  padding: 12px 45px 12px 8px;
+  padding: 8px 45px 8px 8px;
   font-size: 16px;
 `;
 
