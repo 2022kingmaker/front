@@ -30,7 +30,7 @@ const AgoraContentsBlock = styled.div<{ vh: number | null }>`
   }
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
-    height: ${({ vh }) => (vh ? vh * 100 : 100)}vh;
+    height: ${({ vh }) => (vh ? `${vh}vh` : `1vh`)} * 100;
     padding: 90px 24px 10px 24px;
     .topic-container {
       width: 320px;

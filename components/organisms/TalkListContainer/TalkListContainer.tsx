@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 const TalkListContainerBlock = styled.ul`
   width: 100%;
@@ -36,7 +36,7 @@ interface TalkListContainerProps {}
 const TalkListContainer = ({}: TalkListContainerProps) => {
   const ref = useRef<HTMLUListElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (ref.current) {
       ref.current.scrollTop = ref.current.scrollHeight;
     }
