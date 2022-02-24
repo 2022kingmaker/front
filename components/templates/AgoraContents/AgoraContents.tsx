@@ -6,11 +6,11 @@ import TalkListContainer from '@organisms/TalkListContainer/TalkListContainer';
 import FixedAgora from '@atoms/Agora/FixedAgora/FixedAgora';
 import { useEffect, useState } from 'react';
 
-const AgoraContentsBlock = styled.div<{ vh: number | null }>`
+const AgoraContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
   position: relative;
   padding: 35px 30px 20px 230px;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   .topic-container {
@@ -30,7 +30,6 @@ const AgoraContentsBlock = styled.div<{ vh: number | null }>`
   }
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
-    height: ${({ vh }) => (vh ? `${vh}vh` : `1vh`)} * 100;
     padding: 90px 24px 10px 24px;
     .topic-container {
       width: 320px;
@@ -60,30 +59,11 @@ const TalkInfoTab = styled.section`
   }
 `;
 
-const ONE_PERCENT = 0.01;
-
 interface AgoraContentsProps {}
 
 const AgoraContents = ({}: AgoraContentsProps) => {
-  const [vh, setVh] = useState<number | null>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const { innerHeight, innerWidth } = window;
-      if (innerWidth >= 880) {
-        return;
-      }
-      setVh(innerHeight * ONE_PERCENT);
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
-    <AgoraContentsBlock vh={vh}>
+    <AgoraContentsBlock>
       <FixedAgora
         agenda={'야권 단일화 어떻게 생각하시나요?'}
         description={'모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?'}

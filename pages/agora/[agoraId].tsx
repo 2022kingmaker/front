@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ import { ITableContents } from '@models/TableContent';
 import AgoraContents from '@templates/AgoraContents/AgoraContents';
 
 const AgoraPageBlock = styled.div`
-  height: inherit;
+  height: 100%;
   position: relative;
 `;
 
@@ -23,10 +23,9 @@ const toc = [
 ] as ITableContents[];
 
 interface AgoraPageProps {}
+const ONE_PERCENT = 0.01;
 
 const AgoraPage: NextPage = ({}: AgoraPageProps) => {
-  useEffect(() => {}, []);
-
   return (
     <AgoraPageBlock>
       <Head>
