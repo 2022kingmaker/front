@@ -31,9 +31,8 @@ const Writer = styled.div`
   line-height: 1.3;
   word-break: break-word;
 `;
-interface TalkListContainerProps {}
 
-const TalkListContainer = ({}: TalkListContainerProps) => {
+const TalkListContainer = () => {
   const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {

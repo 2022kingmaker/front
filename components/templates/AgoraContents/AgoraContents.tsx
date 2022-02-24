@@ -59,9 +59,7 @@ const TalkInfoTab = styled.section`
   }
 `;
 
-interface AgoraContentsProps {}
-
-const AgoraContents = ({}: AgoraContentsProps) => {
+const AgoraContents = () => {
   return (
     <AgoraContentsBlock>
       <FixedAgora

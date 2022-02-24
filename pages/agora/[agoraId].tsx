@@ -22,10 +22,7 @@ const toc = [
   },
 ] as ITableContents[];
 
-interface AgoraPageProps {}
-const ONE_PERCENT = 0.01;
-
-const AgoraPage: NextPage = ({}: AgoraPageProps) => {
+const AgoraPage: NextPage = () => {
   return (
     <AgoraPageBlock>
       <Head>
