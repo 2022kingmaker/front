@@ -50,7 +50,7 @@ export const getStaticPaths = async () => {
   const paths = categories.map(category => ({
     params: { talkId: category.categoryId.toString() },
   }));
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 interface Params extends ParsedUrlQuery {

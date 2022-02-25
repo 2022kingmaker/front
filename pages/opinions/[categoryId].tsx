@@ -66,7 +66,7 @@ export const getStaticPaths = async () => {
   const paths = categories.map(category => ({
     params: { categoryId: category.categoryId.toString() },
   }));
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
