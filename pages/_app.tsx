@@ -26,7 +26,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <title>대선마당 | 대한민국 20대 대선 정책 공약 비교</title>
+        <title>공약비교 | 대선마당</title>
+        <meta
+          name={'description'}
+          content={
+            '대선마당 | 대한민국 20대 대선 현명한 선택의 길잡이! 후보들의 정책과 공약을 손쉽게 비교하고 여러 사람들과 의견을 나눠보세요! 이번 대선 각 후보를 꼼꼼히 비교하고 살펴보고 싶어도 복잡하고 장황한 공약에 엄두가 나지 않죠. 모바일 최적화된 친근한 화면 구성으로 편리하고 핵심적으로 후보들의 공약을 정리하였습니다! 소중한 한표, 더 귀중하게 사용하실 수 있도록 도와드립니다'
+          }
+        />
       </Head>
       <GlobalStyles />
       {getLayout(<Component {...pageProps} />)}

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { Agora, Layout, SideBarAgora } from '@atoms/index';
+import { Layout, SideBarAgora } from '@atoms/index';
 import { ITableContents } from '@models/TableContent';
 import AgoraContents from '@templates/AgoraContents/AgoraContents';
 
@@ -26,7 +26,7 @@ const AgoraPage: NextPage = () => {
   return (
     <AgoraPageBlock>
       <Head>
-        <title>대선마당 | {111}</title>
+        <title>국민 톡방 | 대선마당 </title>
         <meta name="description" content="토론의 장" />
         <meta name={'viewport'} content={'initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width'} />
       </Head>

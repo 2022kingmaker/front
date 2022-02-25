@@ -46,7 +46,7 @@ const OpinionPage = ({ data }: IdProps) => {
   return (
     <IdBlock>
       <Head>
-        <title>대선마당 | 공약 상세보기</title>
+        <title>공약 상세보기 | 대선마당 </title>
         <meta name="description" content="각 후보들의 공약을 상세히 제공합니다. " />
       </Head>
       <SideBar toc={toc} activeTopic={activeTopic} categories={categories} />
@@ -66,7 +66,7 @@ export const getStaticPaths = async () => {
   const paths = categories.map(category => ({
     params: { categoryId: category.categoryId.toString() },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {

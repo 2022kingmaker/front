@@ -29,7 +29,7 @@ const Talks: NextPage = ({ data }: TalksProps) => {
   return (
     <TalksBlock>
       <Head>
-        <title>대선마당 | 국민 톡</title>
+        <title>국민 톡 | 대선마당</title>
         <meta name="description" content="토론의 장" />
       </Head>
       <SideBarRoute toc={toc} currentCategoryId={+talkId} />
@@ -50,7 +50,7 @@ export const getStaticPaths = async () => {
   const paths = categories.map(category => ({
     params: { talkId: category.categoryId.toString() },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 interface Params extends ParsedUrlQuery {
