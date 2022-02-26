@@ -7,7 +7,7 @@ const theme: DefaultTheme = {
     second: '#D33736',
     third: '#F7CE46',
     fourth: '#D95F29',
-    activeBorder: '#2fbaee',
+    activeBorder: '#22c3d3',
   },
   font: {
     small: '12px',

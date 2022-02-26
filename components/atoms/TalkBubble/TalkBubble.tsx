@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { ReactNode } from 'react';
 import { format } from 'date-fns';
+import { reportMessage } from '../../../apis/agora';
+import { useMutation } from 'react-query';
 
 const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
   ${flexBox('flex-start', 'flex-start', 'row')};
@@ -67,6 +69,13 @@ interface TalkBubbleProps {
 }
 
 const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: TalkBubbleProps) => {
+  const reportMutation = useMutation(['reportMessage'], () => reportMessage(2));
+
+  const handleClick = () => {
+    console.log('e');
+    reportMutation.mutate();
+  };
+
   return (
     <TalkBubbleBlock color={color} removed={removed}>
       {removed ? (
@@ -77,7 +86,7 @@ const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: Ta
         <>
           <p>{children}</p>
           <TalkInfo>
-            <li>신고하기</li>
+            <li onClick={handleClick}>신고하기</li>
             <li className={'time'}>{format(new Date(createdAt), 'MM월 dd일 hh:mm')}</li>
           </TalkInfo>
         </>

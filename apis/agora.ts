@@ -1,4 +1,5 @@
 import { getURL } from '@lib/utils';
+import axios from 'axios';
 
 export const getAgoraCategories = async () => {
   const response = await fetch(`${getURL()}/agora/category`);
@@ -25,9 +26,21 @@ export const getTalks = async ({ cur = -1, size = 10, roomId }: getTalksProps) =
   return await response.json();
 };
 
-export const postMessage = async () => {
-  const response = await fetch(`${getURL()}/agora/talk`, {
-    method: 'POST',
-  });
-  return await response.json();
+export const postMessage = async (roomId: number, message: string) => {
+  const response = await axios.post(`${getURL()}/agora/talk/${roomId}`, { text: message }, { withCredentials: true });
+  return await response.data;
+};
+
+export const reportMessage = async (talkId: number) => {
+  const response = await axios.post(
+    `${getURL()}/agora/report`,
+    { body: { talkId } },
+    {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  return await response.data;
 };

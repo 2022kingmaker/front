@@ -22,7 +22,10 @@ const AvatarStringBlock = styled.div<Partial<AvatarProps>>`
   height: 35px;
   background: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : '#C4C4C4')};
   color: white;
-  margin: 2px 0 0 0;
+  margin: ${({ margin }) => (margin ? '' : '2px 5px 0 0')};
+  &.active {
+    border: 3px solid ${({ theme }) => theme.colors.activeBorder};
+  }
   ${({ size }) => (size ? `width: ${size}px; height:${size}px;` : ``)};
 `;
 
@@ -31,11 +34,19 @@ export interface AvatarProps {
   imgId: number;
   writer?: string;
   backgroundColor?: string;
+  margin?: boolean;
+  active?: boolean;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const Avatar = ({ imgId, size = 55, writer, backgroundColor }: Partial<AvatarProps>) => {
+const Avatar = ({ imgId, size = 55, writer, backgroundColor, margin, active, onClick }: Partial<AvatarProps>) => {
   return typeof writer !== 'undefined' ? (
-    <AvatarStringBlock backgroundColor={backgroundColor} size={size}>
+    <AvatarStringBlock
+      backgroundColor={backgroundColor}
+      margin={margin}
+      className={active ? 'active' : ''}
+      onClick={onClick}
+    >
       {writer[0]}
     </AvatarStringBlock>
   ) : (

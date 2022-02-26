@@ -3,6 +3,7 @@ import TalkInput from '@atoms/TalkInput/TalkInput';
 import { flexBox } from '@styles/mixin';
 import Submit from '@assets/icons/submit.svg';
 import { useMutation } from 'react-query';
+import { postMessage } from '../../../apis/agora';
 
 const CommentContainerBlock = styled.form`
   ${flexBox('flex-start', 'flex-start')};
@@ -32,12 +33,18 @@ const Button = styled.button`
 interface CommentContainerProps {}
 
 const CommentContainer = ({}: CommentContainerProps) => {
-  const submitMessage = useMutation(['']);
+  const submitMessage = useMutation(['postMessage'], () => postMessage(1, '테스팅'));
+
+  const handleClick = () => {
+    console.log('e');
+    submitMessage.mutate();
+  };
+
   return (
-    <CommentContainerBlock>
+    <CommentContainerBlock onSubmit={e => e.preventDefault()}>
       <TalkInput />
       <Button>
-        <Submit />
+        <Submit onClick={handleClick} />
       </Button>
     </CommentContainerBlock>
   );

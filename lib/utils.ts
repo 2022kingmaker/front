@@ -84,3 +84,14 @@ export const sortRooms = (rooms: Room[], stand: SortStand) => {
   // @ts-ignore
   return rooms.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 };
+
+interface SetCookie {
+  key: string;
+  value: string;
+  exp?: number | string;
+}
+export const setCookie = ({ key, value, exp = 1 }: SetCookie) => {
+  const date = new Date();
+  date.setTime(date.getTime() + +exp * 24 * 60 * 60 * 1000);
+  document.cookie = `${key}=${value}; expires=${date.toUTCString()}; path=${window.location.pathname};`;
+};

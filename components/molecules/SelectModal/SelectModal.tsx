@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { Avatar } from '@atoms/index';
+import { setCookie } from '@lib/utils';
 
 const IntroModalBlock = styled.div`
   ${flexBox('space-between', null, 'column')};
@@ -59,6 +60,7 @@ const IntroModal = () => {
   const handleClick = (partyName: string) => {
     return () => {
       setCurrentParty(partyName);
+      setCookie({ key: 'support_candidate', value: partyName });
     };
   };
   useEffect(() => {

@@ -3,6 +3,7 @@ import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
 import React, { useEffect, useRef } from 'react';
 import { ITalk } from '@models/Agora';
+import { reportMessage } from '../../../apis/agora';
 
 const TalkListContainerBlock = styled.ul`
   width: 100%;

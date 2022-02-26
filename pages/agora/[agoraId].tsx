@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import { Layout, SideBarAgora } from '@atoms/index';
 import { ITableContents } from '@models/TableContent';
 import AgoraContents from '@templates/AgoraContents/AgoraContents';
-import {  useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { getRoomDetail, getTalks } from '../../apis/agora';
 import { IRoomDetail, ITalkList } from '@models/Agora';
 import { useModal } from '@hooks/index';
 import SelectModal from '@molecules/SelectModal/SelectModal';
 import dynamic from 'next/dynamic';
+import { GetServerSidePropsContext } from 'next/types';
 const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const AgoraPageBlock = styled.div`
@@ -66,4 +67,14 @@ export default AgoraPage;
 
 AgoraPage.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
+};
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const { agoraId } = context.params as { agoraId: string };
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['getRoomDetail'], () => getRoomDetail(+agoraId));
+  await queryClient.prefetchQuery(['getTalks'], () => getTalks({ roomId: +agoraId }));
+
+  return { props: { agoraId, deHydratedState: dehydrate(queryClient) } };
 };
