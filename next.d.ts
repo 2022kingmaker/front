@@ -16,3 +16,10 @@ declare global {
     gtag: (param1: string, param2: string, param3: object) => void;
   }
 }
+
+declare module '*.svg' {
+  import * as React from 'react';
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  const src: string;
+  export default src;
+}

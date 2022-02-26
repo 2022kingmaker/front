@@ -37,7 +37,7 @@ const Statistics: NextPage = ({ data }: StatisticsProps) => {
   return (
     <StatisticsBlock>
       <Head>
-        <title>대선마당 | 여론 조사 통계</title>
+        <title>여론 조사 | 대선마당</title>
         <meta
           name="description"
           content="각 후보들의 기간별 지지율, 주차별 지지율을 한 눈에 볼 수 있는 차트를 제공합니다."

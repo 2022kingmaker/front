@@ -3,8 +3,7 @@ import Head from 'next/head';
 import { GetServerSidePropsContext } from 'next/types';
 import styled from 'styled-components';
 
-import Layout from '@atoms/Layout/Layout';
-import SideBar from '@atoms/SideBar/SideBar';
+import { Layout, SideBar } from '@atoms/index';
 import OpinionContents from '@templates/OpinionContents/OpinionContents';
 
 import { Keywords } from '@models/Keyword';
@@ -47,8 +46,8 @@ const OpinionPage = ({ data }: IdProps) => {
   return (
     <IdBlock>
       <Head>
-        <title>대선마당 | 대한민국 20대 대선 정책 공약 상세보기</title>
-        <meta name="description" content="각 후보들의 공약을 상세히 제공합니다." />
+        <title>공약 상세보기 | 대선마당 </title>
+        <meta name="description" content="각 후보들의 공약을 상세히 제공합니다. " />
       </Head>
       <SideBar toc={toc} activeTopic={activeTopic} categories={categories} />
       <OpinionContents groupByKeyword={groupByKeyword} />
@@ -67,7 +66,7 @@ export const getStaticPaths = async () => {
   const paths = categories.map(category => ({
     params: { categoryId: category.categoryId.toString() },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
