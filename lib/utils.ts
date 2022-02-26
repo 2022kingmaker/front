@@ -3,6 +3,8 @@ import { ChartData } from 'chart.js';
 import { getWeek } from '@lib/date';
 import { Categories } from '@models/Category';
 import { ITableContents } from '@models/TableContent';
+import { SortStand } from '@lib/constant';
+import { Room } from '@models/Agora';
 
 export const sortRates = (rates: IRate[]) => {
   return rates.sort(sortCallback);
@@ -71,3 +73,14 @@ export const getToc = (categories: Categories) =>
 
 export const getURL = () =>
   process.env.NODE_ENV === 'development' && typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API : '/api';
+
+export const sortRooms = (rooms: Room[], stand: SortStand) => {
+  if (stand === SortStand.many) {
+  }
+  if (stand === SortStand.created) {
+    // @ts-ignore
+    return rooms.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+  }
+  // @ts-ignore
+  return rooms.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+};

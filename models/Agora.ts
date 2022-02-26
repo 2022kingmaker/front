@@ -23,10 +23,10 @@ export interface ITalkList {
 export interface ITalk {
   talkId: number;
   text: string;
-  writer: string;
+  writer?: string;
   createdAt: Date;
-  candidateId: number;
-  colorCode: string;
+  candidateId?: number;
+  colorCode?: string;
   reported: boolean;
 }
 

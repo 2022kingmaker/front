@@ -34,7 +34,7 @@ const TalkInfo = styled.ul`
   ${flexBox('center', 'center')};
   position: absolute;
   left: 5px;
-  bottom: -15px;
+  bottom: -17px;
 
   > * {
     color: #333333;
@@ -52,7 +52,7 @@ const TalkInfo = styled.ul`
 const Removed = styled.div`
   ${flexBox()};
   width: 100%;
-  height: 88px;
+  height: 25px;
 
   div {
     font-size: 14px;
@@ -71,14 +71,14 @@ const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: Ta
     <TalkBubbleBlock color={color} removed={removed}>
       {removed ? (
         <Removed>
-          <div>부적절한 게시글로 판단되어 삭제된 글입니다.</div>
+          <div>{children}</div>
         </Removed>
       ) : (
         <>
           <p>{children}</p>
           <TalkInfo>
             <li>신고하기</li>
-            <li className={'time'}>{format(new Date(createdAt), 'hh:mm')}</li>
+            <li className={'time'}>{format(new Date(createdAt), 'MM월 dd일 hh:mm')}</li>
           </TalkInfo>
         </>
       )}

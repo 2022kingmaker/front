@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import TalkInput from '@atoms/TalkInput/TalkInput';
 import { flexBox } from '@styles/mixin';
 import Submit from '@assets/icons/submit.svg';
+import { useMutation } from 'react-query';
 
 const CommentContainerBlock = styled.form`
   ${flexBox('flex-start', 'flex-start')};
@@ -31,6 +32,7 @@ const Button = styled.button`
 interface CommentContainerProps {}
 
 const CommentContainer = ({}: CommentContainerProps) => {
+  const submitMessage = useMutation(['']);
   return (
     <CommentContainerBlock>
       <TalkInput />

@@ -1,3 +1,5 @@
+import { differenceInMinutes } from 'date-fns';
+
 export const getThisWeekRange = (date: string | Date | null | undefined) => {
   if (!date) {
     return { startDate: null, endDate: null };
@@ -74,4 +76,22 @@ const week = (date: Date) => {
   const month = date.getMonth();
   const day = date.getDate();
   return `${month + 1}월 ${Math.ceil(day / 7)}주 차`;
+};
+
+export const getPast = (targetDate: Date) => {
+  const pastInMin = differenceInMinutes(new Date(), new Date(targetDate));
+
+  if (pastInMin >= 1440 * 30) {
+    return Math.floor(pastInMin / (1440 * 30)) + '개월 전';
+  }
+  if (pastInMin >= 1440) {
+    return Math.floor(pastInMin / 1440) + '일 전';
+  }
+  if (pastInMin >= 60) {
+    return Math.floor(pastInMin / 60) + '시간 전';
+  }
+  if (pastInMin >= 1) {
+    return Math.floor(pastInMin / 60) + '분 전';
+  }
+  return '방금';
 };

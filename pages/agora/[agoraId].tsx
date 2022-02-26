@@ -27,10 +27,11 @@ const toc = [
   },
 ] as ITableContents[];
 
-const AgoraPage: NextPage = () => {
-  const { query } = useRouter();
-  const { agoraId } = query;
+interface AgoraPageProps {
+  agoraId: string;
+}
 
+const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
   const { data: roomDetail, isLoading: isRoomDetailLoading } = useQuery<IRoomDetail>(['getRoomDetail'], () =>
     getRoomDetail(+agoraId),
   );
@@ -61,12 +62,12 @@ AgoraPage.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
 
-const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const { agoraId } = context.params as { agoraId: string };
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(['getRoomDetail'], () => getRoomDetail(+agoraId));
-  await queryClient.prefetchQuery(['getTalks'], () => getTalks({}));
+  await queryClient.prefetchQuery(['getTalks'], () => getTalks({ roomId: +agoraId }));
 
-  return { props: { agoraId }, deHydratedState: dehydrate(queryClient) };
+  return { props: { agoraId, deHydratedState: dehydrate(queryClient) } };
 };

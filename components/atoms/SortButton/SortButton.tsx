@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SortIcon from '@assets/icons/sort.svg';
 import { flexBox } from '@styles/mixin';
+import { SortStand } from '@lib/constant';
 
 const SortButtonBlock = styled.div`
   ${flexBox('space-around', 'center')};
@@ -39,18 +40,20 @@ const SortButtonBlock = styled.div`
   }
 `;
 
-interface SortButtonProps {}
+interface SortButtonProps {
+  setStand: any;
+}
 
-const SortButton = ({}: SortButtonProps) => {
+const SortButton = ({ setStand }: SortButtonProps) => {
   return (
     <SortButtonBlock className={'sort-button'}>
       <SortIcon />
       정렬
       <label>
-        <select name="sorted" id="sorted">
-          <option value="">최근 의견 순</option>
-          <option value="">의견 개수 순</option>
-          <option value="">토론 등록일 순</option>
+        <select name="sorted" id="sorted" defaultValue={SortStand.recent} onChange={e => setStand(e.target.value)}>
+          <option value={SortStand.recent}>최근 의견 순</option>
+          <option value={SortStand.many}>의견 개수 순</option>
+          <option value={SortStand.created}>토론 등록일 순</option>
         </select>
       </label>
     </SortButtonBlock>

@@ -4,7 +4,9 @@ import Agora from '@atoms/Agora/Agora';
 import { useQuery } from 'react-query';
 import { getRooms } from '../../../apis/agora';
 import { Room } from '@models/Agora';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { SortStand } from '@lib/constant';
+import { sortRooms } from '@lib/utils';
 
 const TalksContentsBlock = styled.div`
   position: relative;
@@ -29,18 +31,20 @@ interface TalksContentsProps {
 
 const TalksContents = ({ talkId }: TalksContentsProps) => {
   const { data, isLoading, refetch, isRefetching } = useQuery<Room[]>(['getRooms'], () => getRooms(talkId));
+  const [stand, setStand] = useState<SortStand>(SortStand.recent);
+
   useEffect(() => {
     refetch();
   }, [talkId]);
 
   return (
     <TalksContentsBlock>
-      <SortButton />
+      <SortButton setStand={setStand} />
       <ul>
         {isLoading || isRefetching ? (
           <>토론 방 불러오는 중...</>
         ) : (
-          data!.map(({ agenda, description, roomId, candidateTalkCounts, updatedAt }) => (
+          sortRooms(data!, stand).map(({ agenda, description, roomId, candidateTalkCounts, updatedAt }) => (
             <Agora
               key={roomId}
               roomId={roomId}

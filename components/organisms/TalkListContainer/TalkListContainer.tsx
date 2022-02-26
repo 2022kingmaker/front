@@ -44,23 +44,28 @@ const TalkListContainer = ({ talks }: TalkListContainer) => {
     if (ref.current) {
       ref.current.scrollTop = ref.current.scrollHeight;
     }
-  }, []);
+  }, [talks]);
 
   return (
     <TalkListContainerBlock ref={ref}>
-      {React.Children.toArray(
-        talks.map(({ talkId, colorCode, createdAt, text, writer, reported }) => (
-          <TalkContainer>
+      {talks.map(({ talkId, colorCode, createdAt, text, writer, reported }) => (
+        <TalkContainer key={talkId}>
+          {!reported ? (
             <UserTab>
               <Avatar size={35} writer={writer} backgroundColor={colorCode} />
-              <Writer>{makeNewLine(writer)}</Writer>
+              <Writer key={createdAt.toString()}>{makeNewLine(writer!)}</Writer>
             </UserTab>
-            <TalkBubble color={colorCode} removed={reported} createdAt={createdAt}>
-              {text}
-            </TalkBubble>
-          </TalkContainer>
-        )),
-      )}
+          ) : (
+            <UserTab>
+              <Avatar size={35} writer={''} backgroundColor={'none'} />
+              <Writer>{makeNewLine('')}</Writer>
+            </UserTab>
+          )}
+          <TalkBubble color={colorCode!} removed={reported} createdAt={createdAt}>
+            {text}
+          </TalkBubble>
+        </TalkContainer>
+      ))}
     </TalkListContainerBlock>
   );
 };
@@ -68,9 +73,11 @@ const TalkListContainer = ({ talks }: TalkListContainer) => {
 export default TalkListContainer;
 
 const makeNewLine = (nickname: string) =>
-  nickname.split(' ').map(word => (
-    <>
-      <span>{word}</span>
-      <br />
-    </>
-  ));
+  React.Children.toArray(
+    nickname.split(' ').map(word => (
+      <>
+        <span>{word}</span>
+        <br />
+      </>
+    )),
+  );

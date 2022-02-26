@@ -3,7 +3,7 @@ import { CandidateTalkCount } from '@models/Agora';
 import { flexBox } from '@styles/mixin';
 import Link from 'next/link';
 import { Avatar } from '@atoms/index';
-import { format } from 'date-fns';
+import { getPast } from '@lib/date';
 
 export const AgoraStyle = css`
   ${flexBox('space-around', 'flex-start', 'column')};
@@ -86,7 +86,7 @@ const Agora = ({
                 </div>
               ))}
             </Parties>
-            <UpdateTime>{format(updatedAt, 'yyyy-MM-dd')}</UpdateTime>
+            <UpdateTime>{getPast(updatedAt)}</UpdateTime>
           </Info>
         </AgoraBlock>
       </Link>

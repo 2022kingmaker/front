@@ -24,3 +24,10 @@ export const getTalks = async ({ cur = -1, size = 10, roomId }: getTalksProps) =
   const response = await fetch(`${getURL()}/agora/talks?roomId=${roomId}&cur=${cur}&size=${size}`);
   return await response.json();
 };
+
+export const postMessage = async () => {
+  const response = await fetch(`${getURL()}/agora/talk`, {
+    method: 'POST',
+  });
+  return await response.json();
+};

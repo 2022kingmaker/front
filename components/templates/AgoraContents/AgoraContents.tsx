@@ -43,8 +43,9 @@ const AgoraContentsBlock = styled.div`
 const TalkInfoTab = styled.section`
   ${flexBox('flex-start', 'center')};
   position: relative;
-  width: 95%;
+  width: 100%;
   padding-top: 10px;
+  margin-left: 15px;
   font-size: 12px;
   ::before {
     content: '';
