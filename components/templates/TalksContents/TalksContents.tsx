@@ -4,7 +4,7 @@ import Agora from '@atoms/Agora/Agora';
 import { useQuery } from 'react-query';
 import { getRooms } from '../../../apis/agora';
 import { Room } from '@models/Agora';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const TalksContentsBlock = styled.div`
   position: relative;
@@ -29,7 +29,6 @@ interface TalksContentsProps {
 
 const TalksContents = ({ talkId }: TalksContentsProps) => {
   const { data, isLoading, refetch, isRefetching } = useQuery<Room[]>(['getRooms'], () => getRooms(talkId));
-
   useEffect(() => {
     refetch();
   }, [talkId]);
@@ -41,10 +40,15 @@ const TalksContents = ({ talkId }: TalksContentsProps) => {
         {isLoading || isRefetching ? (
           <>토론 방 불러오는 중...</>
         ) : (
-          data!.map(({ agenda, description, roomId, candidateTalkCounts }) => (
-            <li key={roomId}>
-              <Agora agenda={agenda} description={description} talks={candidateTalkCounts} />
-            </li>
+          data!.map(({ agenda, description, roomId, candidateTalkCounts, updatedAt }) => (
+            <Agora
+              key={roomId}
+              roomId={roomId}
+              agenda={agenda}
+              description={description}
+              talks={candidateTalkCounts}
+              updatedAt={new Date(updatedAt)}
+            />
           ))
         )}
       </ul>

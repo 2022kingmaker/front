@@ -4,7 +4,7 @@ import CommentContainer from '@molecules/CommentContainer/CommentContainer';
 import Refresh from '@assets/icons/refresh.svg';
 import TalkListContainer from '@organisms/TalkListContainer/TalkListContainer';
 import FixedAgora from '@atoms/Agora/FixedAgora/FixedAgora';
-import { useEffect, useState } from 'react';
+import { IRoomDetail, ITalkList } from '@models/Agora';
 
 const AgoraContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
@@ -59,14 +59,18 @@ const TalkInfoTab = styled.section`
   }
 `;
 
-const AgoraContents = () => {
+interface AgoraContents {
+  roomDetail: IRoomDetail;
+  talkList: ITalkList;
+}
+
+const AgoraContents = ({ roomDetail, talkList }: AgoraContents) => {
+  const { agenda, description, link } = roomDetail;
+  const { talks } = talkList;
   return (
     <AgoraContentsBlock>
-      <FixedAgora
-        agenda={'야권 단일화 어떻게 생각하시나요?'}
-        description={'모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?'}
-      />
-      <TalkListContainer />
+      <FixedAgora agenda={agenda} description={description} />
+      <TalkListContainer talks={talks} />
 
       <TalkInfoTab>
         <span>전체 의견 4개</span>

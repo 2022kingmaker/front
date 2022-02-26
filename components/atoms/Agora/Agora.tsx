@@ -3,6 +3,7 @@ import { CandidateTalkCount } from '@models/Agora';
 import { flexBox } from '@styles/mixin';
 import Link from 'next/link';
 import { Avatar } from '@atoms/index';
+import { format } from 'date-fns';
 
 export const AgoraStyle = css`
   ${flexBox('space-around', 'flex-start', 'column')};
@@ -41,8 +42,11 @@ const Info = styled.div`
 const Parties = styled.div`
   ${flexBox('flex-start')};
   width: 230px;
-  > * {
-    margin-right: 10px;
+  div {
+    ${flexBox()};
+    > * {
+      margin-right: 10px;
+    }
   }
   span {
     font-size: 12px;
@@ -56,31 +60,37 @@ interface AgoraProps {
   description: string;
   talks?: CandidateTalkCount[];
   fixed?: boolean;
+  updatedAt: Date;
+  roomId: number;
 }
 
 const Agora = ({
   agenda = '일자리 창출 이런게 필요해요~',
   description = '모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?',
   talks,
+  updatedAt,
+  roomId,
 }: AgoraProps) => {
   return (
-    <Link href={'/agora/1'} passHref>
-      <AgoraBlock>
-        <Title>{agenda}</Title>
-        <Description>{description}</Description>
-        <Info>
-          <Parties>
-            {talks?.map(({ colorCode, count }) => (
-              <>
-                <Avatar key={colorCode} size={15} writer={''} backgroundColor={colorCode} />
-                <span>{count}</span>
-              </>
-            ))}
-          </Parties>
-          <UpdateTime>3분 전</UpdateTime>
-        </Info>
-      </AgoraBlock>
-    </Link>
+    <li>
+      <Link href={`/agora/${roomId}`} passHref>
+        <AgoraBlock>
+          <Title>{agenda}</Title>
+          <Description>{description}</Description>
+          <Info>
+            <Parties>
+              {talks?.map(({ colorCode, count, candidateId }) => (
+                <div key={candidateId}>
+                  <Avatar key={colorCode} size={15} writer={''} backgroundColor={colorCode} />
+                  <span>{count}</span>
+                </div>
+              ))}
+            </Parties>
+            <UpdateTime>{format(updatedAt, 'yyyy-MM-dd')}</UpdateTime>
+          </Info>
+        </AgoraBlock>
+      </Link>
+    </li>
   );
 };
 

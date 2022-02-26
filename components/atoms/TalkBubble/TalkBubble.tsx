@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
+import { ReactNode } from 'react';
+import { format } from 'date-fns';
 
 const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
   ${flexBox('flex-start', 'flex-start', 'row')};
@@ -58,11 +60,13 @@ const Removed = styled.div`
   }
 `;
 interface TalkBubbleProps {
-  color?: string;
-  removed?: boolean;
+  color: string;
+  removed: boolean;
+  children: ReactNode;
+  createdAt: Date;
 }
 
-const TalkBubble = ({ color = 'none', removed = false }: TalkBubbleProps) => {
+const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: TalkBubbleProps) => {
   return (
     <TalkBubbleBlock color={color} removed={removed}>
       {removed ? (
@@ -71,13 +75,10 @@ const TalkBubble = ({ color = 'none', removed = false }: TalkBubbleProps) => {
         </Removed>
       ) : (
         <>
-          <p>
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-          </p>
+          <p>{children}</p>
           <TalkInfo>
             <li>신고하기</li>
-            <li className={'time'}>09:34</li>
+            <li className={'time'}>{format(new Date(createdAt), 'hh:mm')}</li>
           </TalkInfo>
         </>
       )}

@@ -51,7 +51,7 @@ const Header = () => {
           <Link href={'/statistics'} passHref>
             <a>통계</a>
           </Link>
-          <Link href={'/talks/2'} passHref>
+          <Link href={'/talks/1'} passHref>
             <a>국민 톡</a>
           </Link>
           <a onClick={toggle}>제보</a>
