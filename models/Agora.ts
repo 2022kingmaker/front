@@ -7,3 +7,16 @@ export interface Talk {
   colorCode: string;
   imgUrl: string;
 }
+
+export interface Room {
+  roomId: number;
+  agenda: string;
+  description: string;
+  candidateTalkCounts: CandidateTalkCount[];
+}
+
+export interface CandidateTalkCount {
+  candidateId: number;
+  colorCode: string;
+  count: number;
+}

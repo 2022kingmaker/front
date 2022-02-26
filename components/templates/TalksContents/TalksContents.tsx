@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import SortButton from '@atoms/SortButton/SortButton';
 import Agora from '@atoms/Agora/Agora';
+import { useQuery } from 'react-query';
+import { getRooms } from '../../../apis/agora';
+import { Room } from '@models/Agora';
+import { useEffect } from 'react';
 
 const TalksContentsBlock = styled.div`
   position: relative;
@@ -19,30 +23,30 @@ const TalksContentsBlock = styled.div`
   }
 `;
 
-const TalksContents = () => {
+interface TalksContentsProps {
+  talkId: number;
+}
+
+const TalksContents = ({ talkId }: TalksContentsProps) => {
+  const { data, isLoading, refetch, isRefetching } = useQuery<Room[]>(['getRooms'], () => getRooms(talkId));
+
+  useEffect(() => {
+    refetch();
+  }, [talkId]);
+
   return (
     <TalksContentsBlock>
       <SortButton />
       <ul>
-        <li>
-          <Agora
-            agenda={'야권 단일화 어떻게 생각하시나요?'}
-            description={
-              '모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?\n' +
-              '자유로운 의견 나눠주세요!'
-            }
-            talks={[]}
-          />
-        </li>
-        <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
-        </li>
-        <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
-        </li>
-        <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
-        </li>
+        {isLoading || isRefetching ? (
+          <>토론 방 불러오는 중...</>
+        ) : (
+          data!.map(({ agenda, description, roomId, candidateTalkCounts }) => (
+            <li key={roomId}>
+              <Agora agenda={agenda} description={description} talks={candidateTalkCounts} />
+            </li>
+          ))
+        )}
       </ul>
     </TalksContentsBlock>
   );

@@ -17,12 +17,13 @@ const AvatarBlock = styled.img<Partial<AvatarProps>>`
 const AvatarStringBlock = styled.div<Partial<AvatarProps>>`
   ${flexBox()};
   position: relative;
+  border-radius: 50%;
   width: 35px;
   height: 35px;
-  border-radius: 50%;
   background: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : '#C4C4C4')};
   color: white;
   margin: 2px 0 0 0;
+  ${({ size }) => (size ? `width: ${size}px; height:${size}px;` : ``)};
 `;
 
 export interface AvatarProps {
@@ -34,7 +35,9 @@ export interface AvatarProps {
 
 const Avatar = ({ imgId, size = 55, writer, backgroundColor }: Partial<AvatarProps>) => {
   return typeof writer !== 'undefined' ? (
-    <AvatarStringBlock backgroundColor={backgroundColor}>{writer[0]}</AvatarStringBlock>
+    <AvatarStringBlock backgroundColor={backgroundColor} size={size}>
+      {writer[0]}
+    </AvatarStringBlock>
   ) : (
     <AvatarBlock
       src={process.env.NEXT_PUBLIC_IMAGE_URL + `/candidate-images/candidate0${imgId}.png`}

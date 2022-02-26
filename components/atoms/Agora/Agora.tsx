@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-import { Talk } from '@models/Agora';
+import { CandidateTalkCount } from '@models/Agora';
 import { flexBox } from '@styles/mixin';
 import Link from 'next/link';
+import { Avatar } from '@atoms/index';
 
 export const AgoraStyle = css`
   ${flexBox('space-around', 'flex-start', 'column')};
@@ -37,14 +38,23 @@ const Info = styled.div`
   width: 100%;
 `;
 
-const Parties = styled.div``;
+const Parties = styled.div`
+  ${flexBox('flex-start')};
+  width: 230px;
+  > * {
+    margin-right: 10px;
+  }
+  span {
+    font-size: 12px;
+  }
+`;
 
 const UpdateTime = styled.div``;
 
 interface AgoraProps {
   agenda: string;
   description: string;
-  talks?: Talk[];
+  talks?: CandidateTalkCount[];
   fixed?: boolean;
 }
 
@@ -59,7 +69,14 @@ const Agora = ({
         <Title>{agenda}</Title>
         <Description>{description}</Description>
         <Info>
-          <Parties>ㅁ ㅁ ㅁ ㅁ </Parties>
+          <Parties>
+            {talks?.map(({ colorCode, count }) => (
+              <>
+                <Avatar key={colorCode} size={15} writer={''} backgroundColor={colorCode} />
+                <span>{count}</span>
+              </>
+            ))}
+          </Parties>
           <UpdateTime>3분 전</UpdateTime>
         </Info>
       </AgoraBlock>

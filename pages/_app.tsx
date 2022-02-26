@@ -2,16 +2,17 @@ import type { AppProps } from 'next/app';
 import GlobalStyles from '../styles/global-styles';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import * as ga from 'lib/ga/index';
 import Head from 'next/head';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
   const router = useRouter();
   // @ts-ignore
   const getLayout = Component.getLayout || ((page: ReactNode) => page);
-
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       ga.pageView(url);
@@ -34,8 +35,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
         />
       </Head>
-      <GlobalStyles />
-      {getLayout(<Component {...pageProps} />)}
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyles />
+        {getLayout(<Component {...pageProps} />)}
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
