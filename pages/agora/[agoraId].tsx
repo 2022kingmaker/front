@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
@@ -12,12 +12,15 @@ import { useModal } from '@hooks/index';
 import SelectModal from '@molecules/SelectModal/SelectModal';
 import dynamic from 'next/dynamic';
 import { GetServerSidePropsContext } from 'next/types';
+import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
 const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const AgoraPageBlock = styled.div`
   height: 100%;
   position: relative;
 `;
+
+const SpeechBubbleContainer = styled.div``;
 
 const toc = [
   {
@@ -36,6 +39,7 @@ interface AgoraPageProps {
 
 const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
   const { isShowing, toggle } = useModal(true);
+  const [currentCategoryId, setCurrentCategoryId] = useState(0);
   const { data: roomDetail, isLoading: isRoomDetailLoading } = useQuery<IRoomDetail>(['getRoomDetail'], () =>
     getRoomDetail(+agoraId),
   );
@@ -50,11 +54,11 @@ const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
         <meta name="description" content="토론의 장" />
         <meta name={'viewport'} content={'initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width'} />
       </Head>
-      <SideBarAgora toc={toc} currentCategoryId={0} />
+      <SideBarAgora toc={toc} currentCategoryId={currentCategoryId} setCurrentCategoryId={setCurrentCategoryId} />
       {isRoomDetailLoading || isTalkListLoading ? (
-        <>aaa</>
+        <>Loading...</>
       ) : (
-        <AgoraContents roomDetail={roomDetail!} talkList={talkList!} />
+        <AgoraContents roomDetail={roomDetail!} talkList={talkList!} currentCategoryId={currentCategoryId} />
       )}
       <Modal isShowing={isShowing} close={toggle}>
         <SelectModal />

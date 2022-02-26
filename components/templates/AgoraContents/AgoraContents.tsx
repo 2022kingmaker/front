@@ -5,6 +5,10 @@ import Refresh from '@assets/icons/refresh.svg';
 import TalkListContainer from '@organisms/TalkListContainer/TalkListContainer';
 import FixedAgora from '@atoms/Agora/FixedAgora/FixedAgora';
 import { IRoomDetail, ITalkList } from '@models/Agora';
+import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
+import React from 'react';
+import Pledges, { PledgesBlock } from '@organisms/Pledges/Pledges';
+import Phrase from '@molecules/Phrase/Phrase';
 
 const AgoraContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
@@ -63,24 +67,35 @@ const TalkInfoTab = styled.section`
 interface AgoraContents {
   roomDetail: IRoomDetail;
   talkList: ITalkList;
+  currentCategoryId: number;
 }
 
-const AgoraContents = ({ roomDetail, talkList }: AgoraContents) => {
+const AgoraContents = ({ roomDetail, talkList, currentCategoryId }: AgoraContents) => {
   const { agenda, description, link } = roomDetail;
   const { talks } = talkList;
+
   return (
     <AgoraContentsBlock>
-      <FixedAgora agenda={agenda} description={description} />
-      <TalkListContainer talks={talks} />
+      {currentCategoryId === 0 ? (
+        <>
+          <FixedAgora agenda={agenda} description={description} />
+          <TalkListContainer talks={talks} />
+          <TalkInfoTab>
+            <span>전체 의견 4개</span>
 
-      <TalkInfoTab>
-        <span>전체 의견 4개</span>
-
-        <span>
-          <Refresh className={'refreshIcon'} />
-        </span>
-      </TalkInfoTab>
-      <CommentContainer />
+            <span>
+              <Refresh className={'refreshIcon'} />
+            </span>
+          </TalkInfoTab>
+          <CommentContainer />
+        </>
+      ) : (
+        <PledgesBlock>
+          {link.phrases.map(phrase => (
+            <Phrase key={phrase.phrase} position={'left'} phrase={phrase} policyId={phrase.policyId} categoryId={1} />
+          ))}
+        </PledgesBlock>
+      )}
     </AgoraContentsBlock>
   );
 };
