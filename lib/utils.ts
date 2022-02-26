@@ -68,3 +68,6 @@ export const getToc = (categories: Categories) =>
     });
     return toc;
   }, [] as ITableContents[]);
+
+export const getURL = () =>
+  process.env.NODE_ENV === 'development' && typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API : '/api';
