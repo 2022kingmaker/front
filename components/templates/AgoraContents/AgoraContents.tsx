@@ -11,7 +11,7 @@ import Phrase from '@molecules/Phrase/Phrase';
 import { useQueryClient } from 'react-query';
 
 const AgoraContentsBlock = styled.div`
-  ${flexBox('center', 'center', 'column')};
+  ${flexBox('flex-start', 'flex-start', 'column')};
   position: relative;
   padding: 35px 30px 20px 230px;
   height: 100%;
@@ -64,6 +64,11 @@ const TalkInfoTab = styled.section`
   }
 `;
 
+const AgoraPledgesBlock = styled(PledgesBlock)`
+  margin-top: 50px;
+  width: 100%;
+`;
+
 interface AgoraContents {
   roomDetail: IRoomDetail;
   currentCategoryId: number;
@@ -79,6 +84,7 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents
       setScrollDown(!scrollDown);
     });
   };
+
   return (
     <AgoraContentsBlock>
       {currentCategoryId === 0 ? (
@@ -95,11 +101,11 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents
           <CommentContainer agoraId={agoraId} />
         </>
       ) : (
-        <PledgesBlock>
+        <AgoraPledgesBlock>
           {link.phrases.map(phrase => (
             <Phrase key={phrase.phrase} position={'left'} phrase={phrase} policyId={phrase.policyId} categoryId={1} />
           ))}
-        </PledgesBlock>
+        </AgoraPledgesBlock>
       )}
     </AgoraContentsBlock>
   );

@@ -91,7 +91,7 @@ export const getPast = (targetDate: Date) => {
     return Math.floor(pastInMin / 60) + '시간 전';
   }
   if (pastInMin >= 1) {
-    return Math.floor(pastInMin / 60) + '분 전';
+    return pastInMin + '분 전';
   }
   return '방금';
 };

@@ -9,7 +9,16 @@ import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+  );
   const router = useRouter();
   // @ts-ignore
   const getLayout = Component.getLayout || ((page: ReactNode) => page);

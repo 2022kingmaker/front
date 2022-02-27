@@ -4,6 +4,7 @@ export interface Room {
   roomId: number;
   agenda: string;
   description: string;
+  talkCount: number;
   candidateTalkCounts: CandidateTalkCount[];
   updatedAt: Date;
 }

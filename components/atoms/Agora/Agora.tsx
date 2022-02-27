@@ -53,7 +53,9 @@ const Parties = styled.div`
   }
 `;
 
-const UpdateTime = styled.div``;
+const UpdateTime = styled.div`
+  font-size: 12px;
+`;
 
 interface AgoraProps {
   agenda: string;

@@ -77,6 +77,7 @@ export const getURL = () =>
 
 export const sortRooms = (rooms: Room[], stand: SortStand) => {
   if (stand === SortStand.many) {
+    return rooms.sort((a, b) => b.talkCount - a.talkCount);
   }
   if (stand === SortStand.created) {
     // @ts-ignore

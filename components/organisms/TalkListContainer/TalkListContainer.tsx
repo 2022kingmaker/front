@@ -12,7 +12,7 @@ const TalkListContainerBlock = styled.ul`
 
   overflow-y: auto;
   &::-webkit-scrollbar {
-    //display: none;
+    display: none;
   }
 `;
 

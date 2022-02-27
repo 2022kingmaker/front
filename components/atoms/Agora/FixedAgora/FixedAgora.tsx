@@ -47,7 +47,12 @@ const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
       }
     }
     .fold-button {
+      position: absolute;
+      z-index: 99;
+      right: 10px;
+      top: 15px;
       width: 4%;
+      min-width: 30px;
       margin-right: 5px;
       color: ${({ theme }) => theme.colors.primary};
       :hover {
@@ -83,11 +88,6 @@ const FixedAgora = ({
       </>
     )),
   );
-
-  useEffect(() => {
-    ref.current?.focus();
-    setToggle(true);
-  }, []);
 
   const handleFocus = () => {
     setToggle(true);

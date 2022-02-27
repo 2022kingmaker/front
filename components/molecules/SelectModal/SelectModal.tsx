@@ -9,7 +9,7 @@ const IntroModalBlock = styled.div`
   ${flexBox('space-between', null, 'column')};
   position: relative;
   width: 450px;
-  height: 240px;
+  height: 250px;
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(51, 51, 51, 1), 0 0 4px rgba(51, 51, 51, 0.5);
@@ -38,21 +38,29 @@ const IntroModalBlock = styled.div`
     .close {
       width: 50px;
       height: 30px;
-      margin-top: 15px;
+      margin-top: 20px;
     }
   }
   @media ${({ theme }) => theme.mobile} {
-    width: 90%;
+    width: 100%;
     margin: auto;
   }
 `;
 
 const SelectBox = styled.ul`
   ${flexBox()};
+  width: 345px;
 
   li {
     ${flexBox('center', 'center', 'column')};
     width: 20%;
+  }
+  @media ${({ theme }) => theme.mobile} {
+    li {
+      span {
+        font-size: 12px;
+      }
+    }
   }
 `;
 
@@ -93,7 +101,7 @@ const IntroModal = () => {
                 onClick={handleClick(candidateId)}
                 active={candidateId === currentId}
               />
-              {partyName}
+              <span>{partyName}</span>
             </li>
           ))}
         </SelectBox>
