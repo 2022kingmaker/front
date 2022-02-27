@@ -27,14 +27,23 @@ export const getTalks = async ({ cur = -1, size = 10, roomId }: getTalksProps) =
 };
 
 export const postMessage = async (roomId: number, message: string) => {
-  const response = await axios.post(`${getURL()}/agora/talk/${roomId}`, { text: message }, { withCredentials: true });
+  const response = await axios.post(
+    `${getURL()}/agora/talk/${roomId}`,
+    { text: message },
+    {
+      withCredentials: true,
+      headers: {
+        cookie: 'a',
+      },
+    },
+  );
   return await response.data;
 };
 
 export const reportMessage = async (talkId: number) => {
   const response = await axios.post(
     `${getURL()}/agora/report`,
-    { body: { talkId } },
+    { talkId },
     {
       withCredentials: true,
       headers: {

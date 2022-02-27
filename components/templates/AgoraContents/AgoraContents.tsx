@@ -66,20 +66,19 @@ const TalkInfoTab = styled.section`
 
 interface AgoraContents {
   roomDetail: IRoomDetail;
-  talkList: ITalkList;
   currentCategoryId: number;
+  agoraId: string;
 }
 
-const AgoraContents = ({ roomDetail, talkList, currentCategoryId }: AgoraContents) => {
+const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents) => {
   const { agenda, description, link } = roomDetail;
-  const { talks } = talkList;
 
   return (
     <AgoraContentsBlock>
       {currentCategoryId === 0 ? (
         <>
           <FixedAgora agenda={agenda} description={description} />
-          <TalkListContainer talks={talks} />
+          <TalkListContainer agoraId={agoraId} />
           <TalkInfoTab>
             <span>전체 의견 4개</span>
 

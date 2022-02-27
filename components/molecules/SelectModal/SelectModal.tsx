@@ -81,6 +81,7 @@ const IntroModal = () => {
                 writer={''}
                 backgroundColor={color}
                 margin={true}
+                size={30}
                 onClick={handleClick(partyName)}
                 active={partyName === currentParty}
               />

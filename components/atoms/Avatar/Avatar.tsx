@@ -44,6 +44,7 @@ const Avatar = ({ imgId, size = 55, writer, backgroundColor, margin, active, onC
     <AvatarStringBlock
       backgroundColor={backgroundColor}
       margin={margin}
+      size={size}
       className={active ? 'active' : ''}
       onClick={onClick}
     >

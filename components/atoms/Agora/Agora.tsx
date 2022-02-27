@@ -71,12 +71,14 @@ const Agora = ({
   updatedAt,
   roomId,
 }: AgoraProps) => {
+  const paragraphs = description.split('\\n');
+
   return (
     <li>
       <Link href={`/agora/${roomId}`} passHref>
         <AgoraBlock>
           <Title>{agenda}</Title>
-          <Description>{description}</Description>
+          <Description>{paragraphs[paragraphs.length - 1]}</Description>
           <Info>
             <Parties>
               {talks?.map(({ colorCode, count, candidateId }) => (

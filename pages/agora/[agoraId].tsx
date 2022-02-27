@@ -13,6 +13,7 @@ import SelectModal from '@molecules/SelectModal/SelectModal';
 import dynamic from 'next/dynamic';
 import { GetServerSidePropsContext } from 'next/types';
 import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
+import useGetTalks from '@hooks/useGetInfiniteTalks';
 const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const AgoraPageBlock = styled.div`
@@ -43,9 +44,6 @@ const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
   const { data: roomDetail, isLoading: isRoomDetailLoading } = useQuery<IRoomDetail>(['getRoomDetail'], () =>
     getRoomDetail(+agoraId),
   );
-  const { data: talkList, isLoading: isTalkListLoading } = useQuery<ITalkList>(['getTalks'], () =>
-    getTalks({ roomId: +agoraId }),
-  );
 
   return (
     <AgoraPageBlock>
@@ -55,10 +53,10 @@ const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
         <meta name={'viewport'} content={'initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width'} />
       </Head>
       <SideBarAgora toc={toc} currentCategoryId={currentCategoryId} setCurrentCategoryId={setCurrentCategoryId} />
-      {isRoomDetailLoading || isTalkListLoading ? (
+      {isRoomDetailLoading ? (
         <>Loading...</>
       ) : (
-        <AgoraContents roomDetail={roomDetail!} talkList={talkList!} currentCategoryId={currentCategoryId} />
+        <AgoraContents roomDetail={roomDetail!} currentCategoryId={currentCategoryId} agoraId={agoraId} />
       )}
       <Modal isShowing={isShowing} close={toggle}>
         <SelectModal />

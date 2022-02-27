@@ -3,7 +3,9 @@ import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
 import React, { useEffect, useRef } from 'react';
 import { ITalk } from '@models/Agora';
-import { reportMessage } from '../../../apis/agora';
+import { useInView } from 'react-intersection-observer';
+import { useGetInfiniteTalks } from '@hooks/index';
+import useScrollInit from '@organisms/TalkListContainer/useScrollInit';
 
 const TalkListContainerBlock = styled.ul`
   width: 100%;
@@ -35,22 +37,33 @@ const Writer = styled.div`
   text-align: center;
 `;
 interface TalkListContainer {
-  talks: ITalk[];
+  agoraId: string;
 }
 
-const TalkListContainer = ({ talks }: TalkListContainer) => {
-  const ref = useRef<HTMLUListElement>(null);
+const TalkListContainer = ({ agoraId }: TalkListContainer) => {
+  const [scrollRef] = useScrollInit<HTMLUListElement>();
+  const [lastRef, inView] = useInView({ rootMargin: '200px 0px 0px 0px' });
+  const { pages, isLoading, fetchNextPage } = useGetInfiniteTalks(+agoraId);
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollTop = ref.current.scrollHeight;
+    if (inView && pages && pages[pages.length - 1].hasNext) {
+      fetchNextPage();
     }
-  }, [talks]);
+  }, [inView]);
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
+
+  const combinedPage = pages!
+    .map(page => page.talks)
+    .flatMap(page => page)
+    .reverse();
 
   return (
-    <TalkListContainerBlock ref={ref}>
-      {talks.map(({ talkId, colorCode, createdAt, text, writer, reported }) => (
-        <TalkContainer key={talkId}>
+    <TalkListContainerBlock ref={scrollRef}>
+      {combinedPage.map(({ talkId, colorCode, createdAt, text, writer, reported }, index) => (
+        <TalkContainer key={talkId} ref={index === 0 ? lastRef : null}>
           {!reported ? (
             <UserTab>
               <Avatar size={35} writer={writer} backgroundColor={colorCode} />
