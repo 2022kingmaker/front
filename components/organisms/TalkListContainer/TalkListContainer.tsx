@@ -78,7 +78,7 @@ const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
               </UserTab>
             )}
             <TalkBubble color={colorCode!} removed={reported} createdAt={createdAt}>
-              {React.Children.toArray(text.split('\\n').map(p => <p>{p}</p>))}
+              {React.Children.toArray(text.split('\\n').map((p, index) => <p key={p + index}>{p}</p>))}
             </TalkBubble>
           </TalkContainer>
         ))
