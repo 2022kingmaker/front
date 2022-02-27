@@ -5,6 +5,7 @@ import { Categories } from '@models/Category';
 import { ITableContents } from '@models/TableContent';
 import { SortStand } from '@lib/constant';
 import { Room } from '@models/Agora';
+import { bool } from 'prop-types';
 
 export const sortRates = (rates: IRate[]) => {
   return rates.sort(sortCallback);
@@ -85,13 +86,13 @@ export const sortRooms = (rooms: Room[], stand: SortStand) => {
   return rooms.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 };
 
-interface SetCookie {
-  key: string;
-  value: string;
-  exp?: number | string;
-}
-export const setCookie = ({ key, value, exp = 1 }: SetCookie) => {
-  const date = new Date();
-  date.setTime(date.getTime() + +exp * 24 * 60 * 60 * 1000);
-  document.cookie = `${key}=${value}; expires=${date.toUTCString()}; path=${window.location.pathname};`;
+export const setSupportCandidate = (value: number) => {
+  sessionStorage.setItem(`${window.location.pathname}:candidate`, value.toString());
+};
+
+export const hasSupportCandidate = () => {
+  return !!sessionStorage.getItem(`${window.location.pathname}:candidate`);
+};
+export const getSupportCandidate = () => {
+  return sessionStorage.getItem(`${window.location.pathname}:candidate`) || -1;
 };

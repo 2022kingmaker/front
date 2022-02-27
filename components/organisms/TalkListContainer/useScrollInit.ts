@@ -12,7 +12,7 @@ const useScrollInit = <T extends HTMLElement>(options?: UseScrollInit) => {
     if (ref.current) {
       ref.current.scrollTop = ref.current.scrollHeight;
     }
-  }, deps);
+  }, deps.concat([ref.current]));
 
   return [ref];
 };

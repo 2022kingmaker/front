@@ -4,11 +4,11 @@ import CommentContainer from '@molecules/CommentContainer/CommentContainer';
 import Refresh from '@assets/icons/refresh.svg';
 import TalkListContainer from '@organisms/TalkListContainer/TalkListContainer';
 import FixedAgora from '@atoms/Agora/FixedAgora/FixedAgora';
-import { IRoomDetail, ITalkList } from '@models/Agora';
-import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
-import React from 'react';
-import Pledges, { PledgesBlock } from '@organisms/Pledges/Pledges';
+import { IRoomDetail } from '@models/Agora';
+import React, { useState } from 'react';
+import { PledgesBlock } from '@organisms/Pledges/Pledges';
 import Phrase from '@molecules/Phrase/Phrase';
+import { useQueryClient } from 'react-query';
 
 const AgoraContentsBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
@@ -72,21 +72,27 @@ interface AgoraContents {
 
 const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents) => {
   const { agenda, description, link } = roomDetail;
-
+  const queryClient = useQueryClient();
+  const [scrollDown, setScrollDown] = useState(false);
+  const handleClick = () => {
+    queryClient.invalidateQueries(agoraId).then(() => {
+      setScrollDown(!scrollDown);
+    });
+  };
   return (
     <AgoraContentsBlock>
       {currentCategoryId === 0 ? (
         <>
           <FixedAgora agenda={agenda} description={description} />
-          <TalkListContainer agoraId={agoraId} />
+          <TalkListContainer agoraId={agoraId} scrollDown={scrollDown} />
           <TalkInfoTab>
             <span>전체 의견 4개</span>
 
             <span>
-              <Refresh className={'refreshIcon'} />
+              <Refresh className={'refreshIcon'} onClick={handleClick} />
             </span>
           </TalkInfoTab>
-          <CommentContainer />
+          <CommentContainer agoraId={agoraId} />
         </>
       ) : (
         <PledgesBlock>

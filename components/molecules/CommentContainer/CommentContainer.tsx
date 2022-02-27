@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import TalkInput from '@atoms/TalkInput/TalkInput';
 import { flexBox } from '@styles/mixin';
 import Submit from '@assets/icons/submit.svg';
-import { useMutation } from 'react-query';
-import { postMessage } from '../../../apis/agora';
-
+import { useMutation, useQueryClient } from 'react-query';
+import { PostMessage, postMessage } from '../../../apis/agora';
+import React, { useRef } from 'react';
+import { getSupportCandidate, hasSupportCandidate } from '@lib/utils';
 const CommentContainerBlock = styled.form`
   ${flexBox('flex-start', 'flex-start')};
   margin-top: 10px;
@@ -30,19 +31,33 @@ const Button = styled.button`
   background: ${({ theme }) => theme.colors.primary};
 `;
 
-interface CommentContainerProps {}
+interface CommentContainerProps {
+  agoraId: string;
+}
 
-const CommentContainer = ({}: CommentContainerProps) => {
-  const submitMessage = useMutation(['postMessage'], () => postMessage(1, '테스팅'));
+const CommentContainer = ({ agoraId }: CommentContainerProps) => {
+  const queryClient = useQueryClient();
+  const submitMessage = useMutation(
+    ['postMessage'],
+    ({ roomId, text, candidateId }: PostMessage) => postMessage({ roomId, text, candidateId }),
+    {
+      onSuccess: (data, variables, context) => {
+        queryClient.invalidateQueries('getTalks');
+      },
+    },
+  );
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClick = () => {
-    console.log('e');
-    submitMessage.mutate();
+    if (inputRef.current?.value) {
+      const candidateId = +getSupportCandidate();
+      submitMessage.mutate({ roomId: +agoraId, candidateId, text: inputRef.current?.value });
+    }
   };
 
   return (
     <CommentContainerBlock onSubmit={e => e.preventDefault()}>
-      <TalkInput />
+      <TalkInput ref={inputRef} />
       <Button>
         <Submit onClick={handleClick} />
       </Button>

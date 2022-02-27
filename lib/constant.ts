@@ -8,3 +8,11 @@ export enum SortStand {
   many = '1',
   created = '2',
 }
+
+export enum Candidate {
+  first,
+  second,
+  third,
+  fourth,
+  none = -1,
+}

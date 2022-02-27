@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 const MAX_HEIGHT = 141;
 const HEIGHT_UNIT = 3;
@@ -14,9 +14,7 @@ const TalkInputBlock = styled.textarea`
   font-size: 16px;
 `;
 
-interface TalkInputProps {}
-
-const TalkInput = ({}: TalkInputProps) => {
+const TalkInput = forwardRef((_, ref: React.ForwardedRef<HTMLTextAreaElement>) => {
   const resizeHeight = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const $textArea = e.target as HTMLTextAreaElement;
     if ($textArea.scrollHeight >= MAX_HEIGHT) {
@@ -31,8 +29,9 @@ const TalkInput = ({}: TalkInputProps) => {
       onKeyUp={resizeHeight}
       placeholder={'너의 댓글 삭제될 수 있다.'}
       spellCheck={false}
+      ref={ref}
     />
   );
-};
+});
 
 export default TalkInput;

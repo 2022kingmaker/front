@@ -7,14 +7,14 @@ import { ITableContents } from '@models/TableContent';
 import AgoraContents from '@templates/AgoraContents/AgoraContents';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { getRoomDetail, getTalks } from '../../apis/agora';
-import { IRoomDetail, ITalkList } from '@models/Agora';
-import { useModal } from '@hooks/index';
-import SelectModal from '@molecules/SelectModal/SelectModal';
-import dynamic from 'next/dynamic';
+import { IRoomDetail } from '@models/Agora';
 import { GetServerSidePropsContext } from 'next/types';
-import SpeechBubble from '@atoms/SpeechBubble/SpeechBubble';
-import useGetTalks from '@hooks/useGetInfiniteTalks';
+
+import dynamic from 'next/dynamic';
 const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
+import { useModal } from '@hooks/index';
+import { hasSupportCandidate } from '@lib/utils';
+import { SelectModal } from '@molecules/index';
 
 const AgoraPageBlock = styled.div`
   height: 100%;
@@ -39,11 +39,15 @@ interface AgoraPageProps {
 }
 
 const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
-  const { isShowing, toggle } = useModal(true);
+  const { isShowing, toggle, forceUpdate } = useModal(false);
   const [currentCategoryId, setCurrentCategoryId] = useState(0);
   const { data: roomDetail, isLoading: isRoomDetailLoading } = useQuery<IRoomDetail>(['getRoomDetail'], () =>
     getRoomDetail(+agoraId),
   );
+
+  useEffect(() => {
+    forceUpdate(!hasSupportCandidate());
+  }, []);
 
   return (
     <AgoraPageBlock>

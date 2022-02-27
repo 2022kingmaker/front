@@ -69,11 +69,11 @@ interface TalkBubbleProps {
 }
 
 const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: TalkBubbleProps) => {
-  const reportMutation = useMutation(['reportMessage'], () => reportMessage(2));
+  const reportMutation = useMutation(['reportMessage'], (talkId: number) => reportMessage(talkId));
 
   const handleClick = () => {
-    console.log('e');
-    reportMutation.mutate();
+    const talkId = +window.location.pathname.split('/')[2];
+    reportMutation.mutate(talkId);
   };
 
   return (

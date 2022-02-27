@@ -26,17 +26,14 @@ export const getTalks = async ({ cur = -1, size = 10, roomId }: getTalksProps) =
   return await response.json();
 };
 
-export const postMessage = async (roomId: number, message: string) => {
-  const response = await axios.post(
-    `${getURL()}/agora/talk/${roomId}`,
-    { text: message },
-    {
-      withCredentials: true,
-      headers: {
-        cookie: 'a',
-      },
-    },
-  );
+export interface PostMessage {
+  roomId: number;
+  text: string;
+  candidateId: number;
+}
+
+export const postMessage = async ({ roomId, text, candidateId }: PostMessage) => {
+  const response = await axios.post(`${getURL()}/agora/talk/${roomId}`, { text, candidateId });
   return await response.data;
 };
 

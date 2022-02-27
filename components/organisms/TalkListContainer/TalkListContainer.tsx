@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
-import React, { useEffect, useRef } from 'react';
-import { ITalk } from '@models/Agora';
+import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useGetInfiniteTalks } from '@hooks/index';
 import useScrollInit from '@organisms/TalkListContainer/useScrollInit';
@@ -13,7 +12,7 @@ const TalkListContainerBlock = styled.ul`
 
   overflow-y: auto;
   &::-webkit-scrollbar {
-    display: none;
+    //display: none;
   }
 `;
 
@@ -37,22 +36,24 @@ const Writer = styled.div`
   text-align: center;
 `;
 interface TalkListContainer {
+  scrollDown: boolean;
   agoraId: string;
 }
 
-const TalkListContainer = ({ agoraId }: TalkListContainer) => {
-  const [scrollRef] = useScrollInit<HTMLUListElement>();
+const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
   const [lastRef, inView] = useInView({ rootMargin: '200px 0px 0px 0px' });
   const { pages, isLoading, fetchNextPage } = useGetInfiniteTalks(+agoraId);
+  const [scrollRef] = useScrollInit<HTMLUListElement>({ deps: [pages ? pages[0].lastIndex : undefined, scrollDown] });
 
   useEffect(() => {
     if (inView && pages && pages[pages.length - 1].hasNext) {
       fetchNextPage();
     }
+    return () => {};
   }, [inView]);
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <>loading...</>;
   }
 
   const combinedPage = pages!
