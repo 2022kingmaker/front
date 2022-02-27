@@ -19,7 +19,7 @@ const TalkListContainerBlock = styled.ul`
 const TalkContainer = styled.li`
   ${flexBox('center', 'flex-start')};
 
-  margin: 20px 0;
+  margin: 20px 0 25px 0;
 `;
 const UserTab = styled.section`
   ${flexBox('center', 'center', 'column')};
@@ -78,7 +78,7 @@ const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
               </UserTab>
             )}
             <TalkBubble color={colorCode!} removed={reported} createdAt={createdAt}>
-              {text}
+              {React.Children.toArray(text.split('\\n').map(p => <p>{p}</p>))}
             </TalkBubble>
           </TalkContainer>
         ))

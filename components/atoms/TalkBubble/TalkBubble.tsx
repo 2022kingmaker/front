@@ -24,7 +24,6 @@ const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
     font-size: 14px;
     font-weight: 400;
     line-height: 1.3;
-    margin-bottom: 5px;
   }
   ${({ removed, theme }) =>
     removed &&
@@ -72,8 +71,11 @@ const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: Ta
   const reportMutation = useMutation(['reportMessage'], (talkId: number) => reportMessage(talkId));
 
   const handleClick = () => {
-    const talkId = +window.location.pathname.split('/')[2];
-    reportMutation.mutate(talkId);
+    const result = window.confirm('정말 신고하시겠습니까?');
+    if (result) {
+      const talkId = +window.location.pathname.split('/')[2];
+      reportMutation.mutate(talkId);
+    }
   };
 
   return (
@@ -84,7 +86,7 @@ const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: Ta
         </Removed>
       ) : (
         <>
-          <p>{children}</p>
+          <div>{children}</div>
           <TalkInfo>
             <li onClick={handleClick}>신고하기</li>
             <li className={'time'}>{format(new Date(createdAt), 'MM월 dd일 hh:mm')}</li>
