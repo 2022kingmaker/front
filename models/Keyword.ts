@@ -16,6 +16,7 @@ export interface IPhrase {
   policyId: number;
   candidate: Candidate;
   phrase: string;
+  categoryId: number;
 }
 
 export interface KeywordDetail extends Keyword {

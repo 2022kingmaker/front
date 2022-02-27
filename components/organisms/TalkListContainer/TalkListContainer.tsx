@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useGetInfiniteTalks } from '@hooks/index';
+import useScrollInit from '@organisms/TalkListContainer/useScrollInit';
 
 const TalkListContainerBlock = styled.ul`
   width: 100%;
@@ -16,7 +19,7 @@ const TalkListContainerBlock = styled.ul`
 const TalkContainer = styled.li`
   ${flexBox('center', 'flex-start')};
 
-  margin: 20px 0;
+  margin: 20px 0 25px 0;
 `;
 const UserTab = styled.section`
   ${flexBox('center', 'center', 'column')};
@@ -30,68 +33,58 @@ const Writer = styled.div`
   font-size: 12px;
   line-height: 1.3;
   word-break: break-word;
+  text-align: center;
 `;
+interface TalkListContainer {
+  scrollDown: boolean;
+  agoraId: string;
+}
 
-const TalkListContainer = () => {
-  const ref = useRef<HTMLUListElement>(null);
+const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
+  const [lastRef, inView] = useInView({ rootMargin: '200px 0px 0px 0px' });
+  const { pages, isLoading, fetchNextPage } = useGetInfiniteTalks(+agoraId);
+  const [scrollRef] = useScrollInit<HTMLUListElement>({ deps: [pages ? pages[0].lastIndex : undefined, scrollDown] });
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollTop = ref.current.scrollHeight;
+    if (inView && pages && pages[pages.length - 1].hasNext) {
+      fetchNextPage();
     }
-  }, []);
+    return () => {};
+  }, [inView]);
+
+  if (isLoading) {
+    return <>loading...</>;
+  }
+
+  const combinedPage = pages!
+    .map(page => page.talks)
+    .flatMap(page => page)
+    .reverse();
 
   return (
-    <TalkListContainerBlock ref={ref}>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={'섬뜩한 '} backgroundColor={'#1F4D9C'} />
-          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
-        </UserTab>
-        <TalkBubble color={'#1F4D9C'}></TalkBubble>
-      </TalkContainer>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={'고양이'} backgroundColor={'#D33736'} />
-          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
-        </UserTab>
-        <TalkBubble color={'#D33736'}></TalkBubble>
-      </TalkContainer>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={'고양이'} backgroundColor={'#F7CE46'} />
-          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
-        </UserTab>
-        <TalkBubble color={'#F7CE46'}></TalkBubble>
-      </TalkContainer>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
-          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
-        </UserTab>
-        <TalkBubble color={'#D95F29'}></TalkBubble>
-      </TalkContainer>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={'고양이'} backgroundColor={'#D95F29'} />
-          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
-        </UserTab>
-        <TalkBubble color={'#D95F29'}></TalkBubble>
-      </TalkContainer>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={'고양이'} backgroundColor={'#c4c4c4'} />
-          <Writer>{makeNewLine('섬뜩한 고양이')}</Writer>
-        </UserTab>
-        <TalkBubble color={'#c4c4c4'}></TalkBubble>
-      </TalkContainer>
-      <TalkContainer>
-        <UserTab>
-          <Avatar writer={''} backgroundColor={'none'} />
-          <Writer>{makeNewLine('')}</Writer>
-        </UserTab>
-        <TalkBubble color={'none'} removed={true}></TalkBubble>
-      </TalkContainer>
+    <TalkListContainerBlock ref={scrollRef}>
+      {combinedPage.length ? (
+        combinedPage.map(({ talkId, colorCode, createdAt, text, writer, reported }, index) => (
+          <TalkContainer key={talkId} ref={index === 0 ? lastRef : null}>
+            {!reported ? (
+              <UserTab>
+                <Avatar size={35} writer={writer} backgroundColor={colorCode} />
+                <Writer key={createdAt.toString()}>{makeNewLine(writer!)}</Writer>
+              </UserTab>
+            ) : (
+              <UserTab>
+                <Avatar size={35} writer={''} backgroundColor={'none'} />
+                <Writer>{makeNewLine('')}</Writer>
+              </UserTab>
+            )}
+            <TalkBubble color={colorCode!} removed={reported} createdAt={createdAt}>
+              {React.Children.toArray(text.split('\\n').map((p, index) => <p key={p + index}>{p}</p>))}
+            </TalkBubble>
+          </TalkContainer>
+        ))
+      ) : (
+        <>글작성해라</>
+      )}
     </TalkListContainerBlock>
   );
 };
@@ -99,9 +92,11 @@ const TalkListContainer = () => {
 export default TalkListContainer;
 
 const makeNewLine = (nickname: string) =>
-  nickname.split(' ').map(word => (
-    <>
-      <span>{word}</span>
-      <br />
-    </>
-  ));
+  React.Children.toArray(
+    nickname.split(' ').map(word => (
+      <>
+        <span>{word}</span>
+        <br />
+      </>
+    )),
+  );

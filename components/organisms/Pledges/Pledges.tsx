@@ -4,7 +4,7 @@ import Phrase from '@molecules/Phrase/Phrase';
 import { Phrases } from '@models/Keyword';
 import { flexBox } from '@styles/mixin';
 
-const PledgesBlock = styled.div`
+export const PledgesBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
 
   position: relative;

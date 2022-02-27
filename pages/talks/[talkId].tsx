@@ -9,6 +9,7 @@ import { getToc } from '@lib/utils';
 import { ParsedUrlQuery } from 'querystring';
 import { GetStaticProps } from 'next/types';
 import TalksContents from '@templates/TalksContents/TalksContents';
+import { getAgoraCategories } from '../../apis/agora';
 
 const TalksBlock = styled.div`
   height: inherit;
@@ -33,7 +34,7 @@ const Talks: NextPage = ({ data }: TalksProps) => {
         <meta name="description" content="토론의 장" />
       </Head>
       <SideBarRoute toc={toc} currentCategoryId={+talkId} />
-      <TalksContents />
+      <TalksContents talkId={+talkId} />
     </TalksBlock>
   );
 };
@@ -45,7 +46,7 @@ Talks.getLayout = function getLayout(page: React.ReactNode) {
 };
 
 export const getStaticPaths = async () => {
-  const categories: Categories = await getCategories();
+  const categories: Categories = await getAgoraCategories();
 
   const paths = categories.map(category => ({
     params: { talkId: category.categoryId.toString() },
@@ -58,7 +59,7 @@ interface Params extends ParsedUrlQuery {
 }
 export const getStaticProps: GetStaticProps = async context => {
   const { talkId } = context.params as Params;
-  const categories = await getCategories();
+  const categories = await getAgoraCategories();
 
   return { props: { data: { categories, talkId } } };
 };

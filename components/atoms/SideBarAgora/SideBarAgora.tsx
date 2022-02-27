@@ -64,12 +64,13 @@ export interface SideBarAgoraProps {
   toc: ITableContents[];
   activeFontSize?: number;
   currentCategoryId: number;
+  setCurrentCategoryId: any;
 }
-const SideBarAgora = ({ toc, activeFontSize = 25, currentCategoryId }: SideBarAgoraProps) => {
+const SideBarAgora = ({ toc, activeFontSize = 25, currentCategoryId, setCurrentCategoryId }: SideBarAgoraProps) => {
   return (
     <SideBarAgoraBlock className={'desktop-navi'} activeFontSize={activeFontSize}>
       {toc.map(({ id, name }) => (
-        <li key={`${id}+${name}`}>
+        <li key={`${id}+${name}`} onClick={() => setCurrentCategoryId(id)}>
           <a className={`${id === currentCategoryId ? 'active' : ''}`}>{name}</a>
         </li>
       ))}

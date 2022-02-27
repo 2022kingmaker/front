@@ -16,7 +16,11 @@ const useModal = (initShow = false) => {
     setIsShowing(!isShowing);
   };
 
-  return { isShowing, toggle };
+  const forceUpdate = (bool: boolean) => {
+    setIsShowing(bool);
+  };
+
+  return { isShowing, toggle, forceUpdate };
 };
 
 export default useModal;

@@ -3,6 +3,9 @@ import { ChartData } from 'chart.js';
 import { getWeek } from '@lib/date';
 import { Categories } from '@models/Category';
 import { ITableContents } from '@models/TableContent';
+import { SortStand } from '@lib/constant';
+import { Room } from '@models/Agora';
+import { bool } from 'prop-types';
 
 export const sortRates = (rates: IRate[]) => {
   return rates.sort(sortCallback);
@@ -68,3 +71,29 @@ export const getToc = (categories: Categories) =>
     });
     return toc;
   }, [] as ITableContents[]);
+
+export const getURL = () =>
+  process.env.NODE_ENV === 'development' && typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API : '/api';
+
+export const sortRooms = (rooms: Room[], stand: SortStand) => {
+  if (stand === SortStand.many) {
+    return rooms.sort((a, b) => b.talkCount - a.talkCount);
+  }
+  if (stand === SortStand.created) {
+    // @ts-ignore
+    return rooms.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+  }
+  // @ts-ignore
+  return rooms.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+};
+
+export const setSupportCandidate = (value: number) => {
+  sessionStorage.setItem(`${window.location.pathname}:candidate`, value.toString());
+};
+
+export const hasSupportCandidate = () => {
+  return !!sessionStorage.getItem(`${window.location.pathname}:candidate`);
+};
+export const getSupportCandidate = () => {
+  return sessionStorage.getItem(`${window.location.pathname}:candidate`) || -1;
+};

@@ -4,10 +4,14 @@ import CommentContainer from '@molecules/CommentContainer/CommentContainer';
 import Refresh from '@assets/icons/refresh.svg';
 import TalkListContainer from '@organisms/TalkListContainer/TalkListContainer';
 import FixedAgora from '@atoms/Agora/FixedAgora/FixedAgora';
-import { useEffect, useState } from 'react';
+import { IRoomDetail } from '@models/Agora';
+import React, { useState } from 'react';
+import { PledgesBlock } from '@organisms/Pledges/Pledges';
+import Phrase from '@molecules/Phrase/Phrase';
+import { useQueryClient } from 'react-query';
 
 const AgoraContentsBlock = styled.div`
-  ${flexBox('center', 'center', 'column')};
+  ${flexBox('flex-start', 'flex-start', 'column')};
   position: relative;
   padding: 35px 30px 20px 230px;
   height: 100%;
@@ -43,8 +47,9 @@ const AgoraContentsBlock = styled.div`
 const TalkInfoTab = styled.section`
   ${flexBox('flex-start', 'center')};
   position: relative;
-  width: 95%;
+  width: 100%;
   padding-top: 10px;
+  margin-left: 5px;
   font-size: 12px;
   ::before {
     content: '';
@@ -55,27 +60,53 @@ const TalkInfoTab = styled.section`
     border-top: 1px solid #c4c4c4;
   }
   .refreshIcon {
-    margin: 1px 0 0 8px;
+    margin: 2px 0 0 8px;
   }
 `;
 
-const AgoraContents = () => {
+const AgoraPledgesBlock = styled(PledgesBlock)`
+  margin-top: 50px;
+  width: 100%;
+`;
+
+interface AgoraContents {
+  roomDetail: IRoomDetail;
+  currentCategoryId: number;
+  agoraId: string;
+}
+
+const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents) => {
+  const { agenda, description, link, talkCount } = roomDetail;
+  const queryClient = useQueryClient();
+  const [scrollDown, setScrollDown] = useState(false);
+  const handleClick = () => {
+    queryClient.invalidateQueries(agoraId).then(() => {
+      setScrollDown(!scrollDown);
+    });
+  };
+
   return (
     <AgoraContentsBlock>
-      <FixedAgora
-        agenda={'야권 단일화 어떻게 생각하시나요?'}
-        description={'모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?'}
-      />
-      <TalkListContainer />
+      {currentCategoryId === 0 ? (
+        <>
+          <FixedAgora agenda={agenda} description={description} />
+          <TalkListContainer agoraId={agoraId} scrollDown={scrollDown} />
+          <TalkInfoTab>
+            <span>전체 의견 {talkCount || 0}개</span>
 
-      <TalkInfoTab>
-        <span>전체 의견 4개</span>
-
-        <span>
-          <Refresh className={'refreshIcon'} />
-        </span>
-      </TalkInfoTab>
-      <CommentContainer />
+            <span>
+              <Refresh className={'refreshIcon'} onClick={handleClick} />
+            </span>
+          </TalkInfoTab>
+          <CommentContainer agoraId={agoraId} />
+        </>
+      ) : (
+        <AgoraPledgesBlock>
+          {link.phrases.map(phrase => (
+            <Phrase key={phrase.phrase} position={'left'} phrase={phrase} policyId={phrase.policyId} categoryId={1} />
+          ))}
+        </AgoraPledgesBlock>
+      )}
     </AgoraContentsBlock>
   );
 };

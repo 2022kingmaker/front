@@ -6,3 +6,4 @@ export { default as Opinion } from './Opinion/Opinion';
 export { default as BigAvatar } from './BigAvatar/BigAvatar';
 export { default as Calendar } from './Calendar/Calendar';
 export { default as MultiCalendar } from './Calendar/MultiCalendar/MultiCalendar';
+export { default as SelectModal } from './SelectModal/SelectModal';

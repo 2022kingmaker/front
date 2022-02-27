@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import SortButton from '@atoms/SortButton/SortButton';
 import Agora from '@atoms/Agora/Agora';
+import { useQuery } from 'react-query';
+import { getRooms } from '../../../apis/agora';
+import { Room } from '@models/Agora';
+import React, { useEffect, useState } from 'react';
+import { SortStand } from '@lib/constant';
+import { sortRooms } from '@lib/utils';
 
 const TalksContentsBlock = styled.div`
   position: relative;
@@ -12,37 +18,43 @@ const TalksContentsBlock = styled.div`
   width: 100%;
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
-    padding: 125px 12px 200px 12px;
+    padding: 125px 12px 50px 12px;
     .topic-container {
       width: 100%;
     }
   }
 `;
 
-const TalksContents = () => {
+interface TalksContentsProps {
+  talkId: number;
+}
+
+const TalksContents = ({ talkId }: TalksContentsProps) => {
+  const { data, isLoading, refetch, isRefetching } = useQuery<Room[]>(['getRooms'], () => getRooms(talkId));
+  const [stand, setStand] = useState<SortStand>(SortStand.recent);
+
+  useEffect(() => {
+    refetch();
+  }, [talkId]);
+
   return (
     <TalksContentsBlock>
-      <SortButton />
+      <SortButton setStand={setStand} />
       <ul>
-        <li>
-          <Agora
-            agenda={'야권 단일화 어떻게 생각하시나요?'}
-            description={
-              '모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?\n' +
-              '자유로운 의견 나눠주세요!'
-            }
-            talks={[]}
-          />
-        </li>
-        <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
-        </li>
-        <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
-        </li>
-        <li>
-          <Agora agenda={'e'} description={'e'} talks={[]} />
-        </li>
+        {isLoading || isRefetching ? (
+          <>토론 방 불러오는 중...</>
+        ) : (
+          sortRooms(data!, stand).map(({ agenda, description, roomId, candidateTalkCounts, updatedAt }) => (
+            <Agora
+              key={roomId}
+              roomId={roomId}
+              agenda={agenda}
+              description={description}
+              talks={candidateTalkCounts}
+              updatedAt={new Date(updatedAt)}
+            />
+          ))
+        )}
       </ul>
     </TalksContentsBlock>
   );

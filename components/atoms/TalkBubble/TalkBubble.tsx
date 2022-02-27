@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
+import { ReactNode } from 'react';
+import { format } from 'date-fns';
+import { reportMessage } from '../../../apis/agora';
+import { useMutation } from 'react-query';
 
 const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
   ${flexBox('flex-start', 'flex-start', 'row')};
@@ -20,7 +24,6 @@ const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
     font-size: 14px;
     font-weight: 400;
     line-height: 1.3;
-    margin-bottom: 5px;
   }
   ${({ removed, theme }) =>
     removed &&
@@ -32,7 +35,7 @@ const TalkInfo = styled.ul`
   ${flexBox('center', 'center')};
   position: absolute;
   left: 5px;
-  bottom: -15px;
+  bottom: -17px;
 
   > * {
     color: #333333;
@@ -50,7 +53,7 @@ const TalkInfo = styled.ul`
 const Removed = styled.div`
   ${flexBox()};
   width: 100%;
-  height: 88px;
+  height: 25px;
 
   div {
     font-size: 14px;
@@ -58,26 +61,35 @@ const Removed = styled.div`
   }
 `;
 interface TalkBubbleProps {
-  color?: string;
-  removed?: boolean;
+  color: string;
+  removed: boolean;
+  children: ReactNode;
+  createdAt: Date;
 }
 
-const TalkBubble = ({ color = 'none', removed = false }: TalkBubbleProps) => {
+const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: TalkBubbleProps) => {
+  const reportMutation = useMutation(['reportMessage'], (talkId: number) => reportMessage(talkId));
+
+  const handleClick = () => {
+    const result = window.confirm('정말 신고하시겠습니까?');
+    if (result) {
+      const talkId = +window.location.pathname.split('/')[2];
+      reportMutation.mutate(talkId);
+    }
+  };
+
   return (
     <TalkBubbleBlock color={color} removed={removed}>
       {removed ? (
         <Removed>
-          <div>부적절한 게시글로 판단되어 삭제된 글입니다.</div>
+          <div>{children}</div>
         </Removed>
       ) : (
         <>
-          <p>
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-            가나다라마바사아자차카타파하 가나다라마바사아자차카타파하
-          </p>
+          <div>{children}</div>
           <TalkInfo>
-            <li>신고하기</li>
-            <li className={'time'}>09:34</li>
+            <li onClick={handleClick}>신고하기</li>
+            <li className={'time'}>{format(new Date(createdAt), 'MM월 dd일 hh:mm')}</li>
           </TalkInfo>
         </>
       )}

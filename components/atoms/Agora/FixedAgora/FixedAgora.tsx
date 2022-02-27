@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { AgoraStyle, Description, Title } from '@atoms/Agora/Agora';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import FoldedIcon from '@assets/icons/folded.svg';
 
 const FoldAgora = css`
@@ -20,6 +20,7 @@ const FoldAgora = css`
 
 const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
   ${AgoraStyle};
+  height: auto;
   position: fixed;
   margin: 0 auto;
   left: 200px;
@@ -29,17 +30,34 @@ const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
   outline: none;
   z-index: 2;
 
+  p {
+    margin: 10px 0;
+  }
   .bottom-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
     width: 100%;
+    font-size: 14px;
+
     .text {
-      color: gray;
-      font-size: 14px;
+      p {
+        color: #333;
+        margin: 0;
+        width: 100%;
+        font-weight: 600;
+        font-style: italic;
+      }
     }
     .fold-button {
-      margin-right: 20px;
-      font-size: 14px;
+      position: absolute;
+      z-index: 99;
+      right: 10px;
+      top: 15px;
+      width: 4%;
+      min-width: 30px;
+      margin-right: 5px;
+      color: ${({ theme }) => theme.colors.primary};
       :hover {
         cursor: pointer;
       }
@@ -66,11 +84,13 @@ const FixedAgora = ({
 }: FixedAgoraProps) => {
   const [toggle, setToggle] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    ref.current?.focus();
-    setToggle(true);
-  }, []);
+  const paragraphs = React.Children.toArray(
+    description.split('\\n').map(paragraph => (
+      <>
+        <p>{paragraph}</p>
+      </>
+    )),
+  );
 
   const handleFocus = () => {
     setToggle(true);
@@ -84,9 +104,9 @@ const FixedAgora = ({
       {toggle ? (
         <>
           <Title>{agenda}</Title>
-          <Description>{description}</Description>
+          <Description>{paragraphs.slice(0, paragraphs.length - 1)}</Description>
           <div className={'bottom-container'}>
-            <div className={'text'}>자유로운 의견 나눠주세요!</div>
+            <div className={'text'}>{paragraphs.slice(-1)}</div>
             <div className={'fold-button'} onClick={handleBlur}>
               접기
             </div>

@@ -15,6 +15,12 @@ const HeaderBlock = styled.div`
   background: #fff;
   position: fixed;
   z-index: 3;
+  white-space: nowrap;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .container {
     ${flexBox('space-between', 'flex-start', 'row')};
     a {
@@ -48,12 +54,15 @@ const Header = () => {
               <img src="/images/logo.png" alt="logo" />
             </a>
           </Link>
+          <Link href={'/'} passHref>
+            <a>공약비교</a>
+          </Link>
           <Link href={'/statistics'} passHref>
             <a>통계</a>
           </Link>
-          {/*<Link href={'/talks/2'} passHref>*/}
-          {/*  <a>국민 톡</a>*/}
-          {/*</Link>*/}
+          <Link href={'/talks/1'} passHref>
+            <a>투기장</a>
+          </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>
       </ul>
