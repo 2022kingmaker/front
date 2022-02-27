@@ -76,7 +76,7 @@ interface AgoraContents {
 }
 
 const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents) => {
-  const { agenda, description, link } = roomDetail;
+  const { agenda, description, link, talkCount } = roomDetail;
   const queryClient = useQueryClient();
   const [scrollDown, setScrollDown] = useState(false);
   const handleClick = () => {
@@ -92,7 +92,7 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents
           <FixedAgora agenda={agenda} description={description} />
           <TalkListContainer agoraId={agoraId} scrollDown={scrollDown} />
           <TalkInfoTab>
-            <span>전체 의견 4개</span>
+            <span>전체 의견 {talkCount || 0}개</span>
 
             <span>
               <Refresh className={'refreshIcon'} onClick={handleClick} />

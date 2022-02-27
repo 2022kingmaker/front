@@ -35,6 +35,7 @@ export interface IRoomDetail {
   roomId: number;
   agenda: string;
   description: string;
+  talkCount: number;
   link: {
     phrases: IPhrase[];
   };
