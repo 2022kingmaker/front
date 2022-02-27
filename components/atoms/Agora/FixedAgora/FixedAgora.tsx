@@ -36,6 +36,7 @@ const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
   .bottom-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
     width: 100%;
     font-size: 14px;
 

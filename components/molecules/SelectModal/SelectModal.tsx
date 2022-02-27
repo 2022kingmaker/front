@@ -5,8 +5,8 @@ import { Avatar } from '@atoms/index';
 import { setSupportCandidate } from '@lib/utils';
 import { Candidate } from '@lib/constant';
 
-const IntroModalBlock = styled.div`
-  ${flexBox('space-between', null, 'column')};
+const SelectModalBlock = styled.div`
+  ${flexBox('space-between', 'center', 'column')};
   position: relative;
   width: 450px;
   height: 250px;
@@ -16,6 +16,8 @@ const IntroModalBlock = styled.div`
   padding: 24px;
 
   .article {
+    ${flexBox('center', 'flex-start', 'column')};
+    width: 100%;
     line-height: 24px;
     padding: 12px 0;
     > * {
@@ -48,14 +50,15 @@ const IntroModalBlock = styled.div`
 `;
 
 const SelectBox = styled.ul`
-  ${flexBox()};
-  width: 345px;
+  ${flexBox('center', 'center')};
+  width: 100%;
 
   li {
     ${flexBox('center', 'center', 'column')};
     width: 20%;
   }
   @media ${({ theme }) => theme.mobile} {
+    width: 350px;
     li {
       span {
         font-size: 12px;
@@ -72,7 +75,7 @@ const parties = [
   { partyName: '없음', candidateId: Candidate.none, color: '#C4C4C4' },
 ];
 
-const IntroModal = () => {
+const SelectModal = () => {
   const [currentId, setCurrentId] = useState(Candidate.none);
 
   const handleClick = (candidateId: number) => {
@@ -86,7 +89,7 @@ const IntroModal = () => {
   }, []);
 
   return (
-    <IntroModalBlock>
+    <SelectModalBlock>
       <div className="article">
         <p>지지하는 정당을 골라주세요.</p>
         <br />
@@ -109,8 +112,8 @@ const IntroModal = () => {
           <button className={'close'}>확인</button>
         </div>
       </div>
-    </IntroModalBlock>
+    </SelectModalBlock>
   );
 };
 
-export default IntroModal;
+export default SelectModal;

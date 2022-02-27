@@ -63,24 +63,28 @@ const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
 
   return (
     <TalkListContainerBlock ref={scrollRef}>
-      {combinedPage.map(({ talkId, colorCode, createdAt, text, writer, reported }, index) => (
-        <TalkContainer key={talkId} ref={index === 0 ? lastRef : null}>
-          {!reported ? (
-            <UserTab>
-              <Avatar size={35} writer={writer} backgroundColor={colorCode} />
-              <Writer key={createdAt.toString()}>{makeNewLine(writer!)}</Writer>
-            </UserTab>
-          ) : (
-            <UserTab>
-              <Avatar size={35} writer={''} backgroundColor={'none'} />
-              <Writer>{makeNewLine('')}</Writer>
-            </UserTab>
-          )}
-          <TalkBubble color={colorCode!} removed={reported} createdAt={createdAt}>
-            {text}
-          </TalkBubble>
-        </TalkContainer>
-      ))}
+      {combinedPage.length ? (
+        combinedPage.map(({ talkId, colorCode, createdAt, text, writer, reported }, index) => (
+          <TalkContainer key={talkId} ref={index === 0 ? lastRef : null}>
+            {!reported ? (
+              <UserTab>
+                <Avatar size={35} writer={writer} backgroundColor={colorCode} />
+                <Writer key={createdAt.toString()}>{makeNewLine(writer!)}</Writer>
+              </UserTab>
+            ) : (
+              <UserTab>
+                <Avatar size={35} writer={''} backgroundColor={'none'} />
+                <Writer>{makeNewLine('')}</Writer>
+              </UserTab>
+            )}
+            <TalkBubble color={colorCode!} removed={reported} createdAt={createdAt}>
+              {text}
+            </TalkBubble>
+          </TalkContainer>
+        ))
+      ) : (
+        <>글작성해라</>
+      )}
     </TalkListContainerBlock>
   );
 };
