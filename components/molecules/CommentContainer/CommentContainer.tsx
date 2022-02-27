@@ -37,27 +37,34 @@ interface CommentContainerProps {
 
 const CommentContainer = ({ agoraId }: CommentContainerProps) => {
   const queryClient = useQueryClient();
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
   const submitMessage = useMutation(
     ['postMessage'],
     ({ roomId, text, candidateId }: PostMessage) => postMessage({ roomId, text, candidateId }),
     {
-      onSuccess: (data, variables, context) => {
+      onSuccess: () => {
         queryClient.invalidateQueries('getTalks');
+        inputRef.current!.value = '';
+        inputRef.current!.style.height = '42px';
       },
     },
   );
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  const mutationMessage = (text: string) => {
+    const candidateId = +getSupportCandidate();
+    submitMessage.mutate({ roomId: +agoraId, candidateId, text: text.replaceAll('\n', '\\n') });
+  };
 
   const handleClick = () => {
     if (inputRef.current?.value) {
-      const candidateId = +getSupportCandidate();
-      submitMessage.mutate({ roomId: +agoraId, candidateId, text: inputRef.current?.value });
+      mutationMessage(inputRef.current?.value);
     }
   };
 
   return (
     <CommentContainerBlock onSubmit={e => e.preventDefault()}>
-      <TalkInput ref={inputRef} />
+      <TalkInput ref={inputRef} mutationMessage={mutationMessage} />
       <Button>
         <Submit onClick={handleClick} />
       </Button>
