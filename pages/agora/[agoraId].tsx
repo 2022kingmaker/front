@@ -11,10 +11,10 @@ import { IRoomDetail } from '@models/Agora';
 import { GetServerSidePropsContext } from 'next/types';
 
 import dynamic from 'next/dynamic';
-const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 import { useModal } from '@hooks/index';
 import { hasSupportCandidate } from '@lib/utils';
 import { SelectModal } from '@molecules/index';
+const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const AgoraPageBlock = styled.div`
   height: 100%;

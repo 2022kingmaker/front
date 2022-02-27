@@ -15,6 +15,12 @@ const HeaderBlock = styled.div`
   background: #fff;
   position: fixed;
   z-index: 3;
+  white-space: nowrap;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .container {
     ${flexBox('space-between', 'flex-start', 'row')};
     a {

@@ -45,6 +45,11 @@ const CommentContainer = ({ agoraId }: CommentContainerProps) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries('getTalks');
+
+        inputRef.current!.value = '';
+        inputRef.current!.style.height = '42px';
+      },
+      onMutate: () => {
         inputRef.current!.value = '';
         inputRef.current!.style.height = '42px';
       },
@@ -53,6 +58,12 @@ const CommentContainer = ({ agoraId }: CommentContainerProps) => {
 
   const mutationMessage = (text: string) => {
     const candidateId = +getSupportCandidate();
+    const isWhiteSpace = /^\s*$/;
+    if (text.length === 0 || isWhiteSpace.test(text.trim())) {
+      inputRef.current!.value = '';
+      inputRef.current!.style.height = '42px';
+      return;
+    }
     submitMessage.mutate({ roomId: +agoraId, candidateId, text: text.replaceAll('\n', '\\n') });
   };
 

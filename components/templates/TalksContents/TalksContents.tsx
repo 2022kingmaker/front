@@ -18,7 +18,7 @@ const TalksContentsBlock = styled.div`
   width: 100%;
   @media ${({ theme }) => theme.desktop} {
     width: 100%;
-    padding: 125px 12px 200px 12px;
+    padding: 125px 12px 50px 12px;
     .topic-container {
       width: 100%;
     }

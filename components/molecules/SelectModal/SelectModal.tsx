@@ -38,9 +38,13 @@ const SelectModalBlock = styled.div`
     ${flexBox()};
     width: 100%;
     .close {
-      width: 50px;
-      height: 30px;
+      width: 65px;
+      height: 35px;
       margin-top: 20px;
+      border-radius: 8px;
+      border: none;
+      color: white;
+      background: ${({ theme }) => theme.colors.primary};
     }
   }
   @media ${({ theme }) => theme.mobile} {
