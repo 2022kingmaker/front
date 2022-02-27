@@ -42,9 +42,11 @@ const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
 
     .text {
       p {
-        color: gray;
+        color: #333;
         margin: 0;
         width: 100%;
+        font-weight: 600;
+        font-style: italic;
       }
     }
     .fold-button {

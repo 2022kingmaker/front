@@ -2,17 +2,17 @@ import { getURL } from '@lib/utils';
 import axios from 'axios';
 
 export const getAgoraCategories = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/agora/category`);
+  const response = await fetch(`http://118.67.128.85:8083/agora/category`);
   return await response.json();
 };
 
 export const getRooms = async (categoryId: number) => {
-  const response = await fetch(`${getURL()}/agora/room?categoryId=${categoryId}`);
+  const response = await fetch(`http://118.67.128.85:8083/agora/room?categoryId=${categoryId}`);
   return await response.json();
 };
 
 export const getRoomDetail = async (roomId: number) => {
-  const response = await fetch(`${getURL()}/agora/roomDetail/${roomId}`);
+  const response = await fetch(`http://118.67.128.85:8083/agora/roomDetail/${roomId}`);
   return await response.json();
 };
 
@@ -22,7 +22,7 @@ interface getTalksProps {
   roomId: number;
 }
 export const getTalks = async ({ cur = -1, size = 10, roomId }: getTalksProps) => {
-  const response = await fetch(`${getURL()}/agora/talks?roomId=${roomId}&cur=${cur}&size=${size}`);
+  const response = await fetch(`http://118.67.128.85:8083/agora/talks?roomId=${roomId}&cur=${cur}&size=${size}`);
   return await response.json();
 };
 
@@ -33,13 +33,13 @@ export interface PostMessage {
 }
 
 export const postMessage = async ({ roomId, text, candidateId }: PostMessage) => {
-  const response = await axios.post(`${getURL()}/agora/talk/${roomId}`, { text, candidateId });
+  const response = await axios.post(`http://118.67.128.85:8083/agora/talk/${roomId}`, { text, candidateId });
   return await response.data;
 };
 
 export const reportMessage = async (talkId: number) => {
   const response = await axios.post(
-    `${getURL()}/agora/report`,
+    `http://118.67.128.85:8083/agora/report`,
     { talkId },
     {
       withCredentials: true,

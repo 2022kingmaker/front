@@ -48,11 +48,14 @@ const Header = () => {
               <img src="/images/logo.png" alt="logo" />
             </a>
           </Link>
+          <Link href={'/'} passHref>
+            <a>공약비교</a>
+          </Link>
           <Link href={'/statistics'} passHref>
             <a>통계</a>
           </Link>
           <Link href={'/talks/1'} passHref>
-            <a>국민 톡</a>
+            <a>투기장</a>
           </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>

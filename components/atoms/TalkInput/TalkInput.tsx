@@ -13,6 +13,9 @@ const TalkInputBlock = styled.textarea`
   resize: none;
   padding: 8px 45px 8px 8px;
   font-size: 16px;
+  ::placeholder {
+    font-size: 14px;
+  }
 `;
 
 interface TalkInputProps {
@@ -42,7 +45,7 @@ const TalkInput = forwardRef(({ mutationMessage }: TalkInputProps, ref: React.Fo
       onKeyDown={resizeHeight}
       onKeyUp={resizeHeight}
       onKeyPress={handleKeyPress}
-      placeholder={'너의 댓글 삭제될 수 있다.'}
+      placeholder={'작성된 의견은 수정/삭제할 수 없습니다.'}
       spellCheck={false}
       ref={ref}
     />
