@@ -46,7 +46,7 @@ Talks.getLayout = function getLayout(page: React.ReactNode) {
 };
 
 export const getStaticPaths = async () => {
-  const categories: Categories = await getCategories();
+  const categories: Categories = await getAgoraCategories();
 
   const paths = categories.map(category => ({
     params: { talkId: category.categoryId.toString() },

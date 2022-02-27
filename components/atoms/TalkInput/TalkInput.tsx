@@ -34,4 +34,6 @@ const TalkInput = forwardRef((_, ref: React.ForwardedRef<HTMLTextAreaElement>) =
   );
 });
 
+TalkInput.displayName = 'TalkInput';
+
 export default TalkInput;

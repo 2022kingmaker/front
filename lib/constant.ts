@@ -10,7 +10,7 @@ export enum SortStand {
 }
 
 export enum Candidate {
-  first,
+  first = 1,
   second,
   third,
   fourth,

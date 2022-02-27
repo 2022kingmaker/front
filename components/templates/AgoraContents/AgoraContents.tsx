@@ -49,7 +49,7 @@ const TalkInfoTab = styled.section`
   position: relative;
   width: 100%;
   padding-top: 10px;
-  margin-left: 15px;
+  margin-left: 5px;
   font-size: 12px;
   ::before {
     content: '';
@@ -60,7 +60,7 @@ const TalkInfoTab = styled.section`
     border-top: 1px solid #c4c4c4;
   }
   .refreshIcon {
-    margin: 1px 0 0 8px;
+    margin: 2px 0 0 8px;
   }
 `;
 
