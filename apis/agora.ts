@@ -33,7 +33,16 @@ export interface PostMessage {
 }
 
 export const postMessage = async ({ roomId, text, candidateId }: PostMessage) => {
-  const response = await axios.post(`http://118.67.128.85:8083/agora/talk/${roomId}`, { text, candidateId });
+  const response = await axios.post(
+    `http://118.67.128.85:8083/agora/talk/${roomId}`,
+    { text, candidateId },
+    {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
   return await response.data;
 };
 
