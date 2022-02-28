@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { AgoraStyle, Description, Title } from '@atoms/Agora/Agora';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import FoldedIcon from '@assets/icons/folded.svg';
 
 const FoldAgora = css`
@@ -72,6 +72,9 @@ const FixedAgoraBlock = styled.div<{ toggle: boolean }>`
   }
   ${({ toggle }) => (toggle ? '' : FoldAgora)};
 `;
+const FixedAgoraTitle = styled(Title)`
+  width: calc(100% - 40px);
+`;
 
 interface FixedAgoraProps {
   agenda: string;
@@ -103,7 +106,7 @@ const FixedAgora = ({
     <FixedAgoraBlock ref={ref} tabIndex={1} onFocus={handleFocus} onBlur={handleBlur} toggle={toggle}>
       {toggle ? (
         <>
-          <Title>{agenda}</Title>
+          <FixedAgoraTitle>{agenda}</FixedAgoraTitle>
           <Description>{paragraphs.slice(0, paragraphs.length - 1)}</Description>
           <div className={'bottom-container'}>
             <div className={'text'}>{paragraphs.slice(-1)}</div>

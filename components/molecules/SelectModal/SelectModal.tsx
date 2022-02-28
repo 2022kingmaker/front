@@ -48,7 +48,7 @@ const SelectModalBlock = styled.div`
     }
   }
   @media ${({ theme }) => theme.mobile} {
-    width: 100%;
+    width: 95%;
     margin: auto;
   }
 `;
@@ -56,7 +56,6 @@ const SelectModalBlock = styled.div`
 const SelectBox = styled.ul`
   ${flexBox('center', 'center')};
   width: 100%;
-
   li {
     ${flexBox('center', 'center', 'column')};
     width: 20%;

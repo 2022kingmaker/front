@@ -12,7 +12,6 @@ const useGetInfiniteTalks = (agoraId: number) => {
       },
     },
   );
-  console.log(query.data);
   return {
     pages: query.data?.pages,
     isLoading: query.isLoading,

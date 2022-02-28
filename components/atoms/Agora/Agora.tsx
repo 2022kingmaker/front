@@ -25,6 +25,7 @@ const AgoraBlock = styled.a`
 
 export const Title = styled.h1`
   font-size: 18px;
+  line-height: 20px;
   font-weight: 600;
 `;
 
@@ -51,10 +52,18 @@ const Parties = styled.div`
   span {
     font-size: 12px;
   }
+  @media ${({ theme }) => theme.desktop} {
+    div {
+      > * {
+        margin-right: 4px;
+      }
+  }
 `;
 
 const UpdateTime = styled.div`
+  text-align: right;
   font-size: 12px;
+  width: 50px;
 `;
 
 interface AgoraProps {
