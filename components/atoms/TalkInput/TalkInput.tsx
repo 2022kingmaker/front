@@ -36,6 +36,10 @@ const TalkInput = forwardRef(({ mutationMessage }: TalkInputProps, ref: React.Fo
     $textArea.style.height = HEIGHT_UNIT + $textArea.scrollHeight + 'px';
   };
   const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (input.length > 500) {
+      setInput(input.slice(0, 500));
+      return;
+    }
     const isPressShift = e.shiftKey;
     const keyCode = e.code;
 
@@ -49,6 +53,10 @@ const TalkInput = forwardRef(({ mutationMessage }: TalkInputProps, ref: React.Fo
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (input.length > 500) {
+      setInput(input.slice(0, 500));
+      return;
+    }
     const { inputType } = e.nativeEvent as InputEvent;
     if (inputType === InputEventType.insertLineBreak) {
       return;

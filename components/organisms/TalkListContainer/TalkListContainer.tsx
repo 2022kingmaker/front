@@ -33,6 +33,12 @@ const Writer = styled.div`
   word-break: break-word;
   text-align: center;
 `;
+const EmptyComment = styled.div`
+  ${flexBox()};
+  width: 100%;
+  height: 100%;
+`;
+
 interface TalkListContainer {
   scrollDown: boolean;
   agoraId: string;
@@ -81,7 +87,9 @@ const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
           </TalkContainer>
         ))
       ) : (
-        <>글작성해라</>
+        <EmptyComment>
+          <span>자유롭게 의견을 작성해주세요!</span>
+        </EmptyComment>
       )}
     </TalkListContainerBlock>
   );
