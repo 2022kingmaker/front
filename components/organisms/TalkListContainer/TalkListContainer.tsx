@@ -9,7 +9,6 @@ import useScrollInit from '@organisms/TalkListContainer/useScrollInit';
 const TalkListContainerBlock = styled.ul`
   width: 100%;
   height: 100%;
-
   overflow-y: auto;
   &::-webkit-scrollbar {
     display: none;
@@ -18,7 +17,6 @@ const TalkListContainerBlock = styled.ul`
 
 const TalkContainer = styled.li`
   ${flexBox('center', 'flex-start')};
-
   margin: 20px 0 25px 0;
 `;
 const UserTab = styled.section`
