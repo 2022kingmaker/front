@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 import { useState } from 'react';
 import QuestionImg from '@assets/icons/question_icon.png';
 
@@ -48,7 +49,14 @@ const QuestionMark = ({ agency, period, requester }: QuestionMarkProps) => {
   };
   return (
     <QuestionMarkBlock>
-      <img src={QuestionImg.src} alt="물음표 이미지" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
+      <Image
+        src={QuestionImg.src}
+        width={18}
+        height={18}
+        alt="물음표 이미지"
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      />
       <HiddenBox isMouseOver={isMouseOver}>
         <div>
           <span className={'title'}>조사 기관 </span>: {agency}

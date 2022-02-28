@@ -6,8 +6,8 @@
     "start": "next start",
     "lint": "next lint",
     "dev": "env-cmd -f .env.dev next dev",
-    "build-development": "env-cmd -f .env.dev next build",
-    "build-production": "env-cmd -f .env.prod next build",
+    "build-development": "NODE_OPTIONS=--max-old-space-size=500 env-cmd -f .env.dev next build",
+    "build-production": "NODE_OPTIONS=--max-old-space-size=700 env-cmd -f .env.prod next build",
     "dev-deploy": "next test=development build"
   },
   "dependencies": {
