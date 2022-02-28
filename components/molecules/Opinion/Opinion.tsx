@@ -6,19 +6,12 @@ import { flexBox } from '@styles/mixin';
 
 const OpinionBlock = styled.div<{ position: string }>`
   ${flexBox('center', 'center', 'row')};
-  div:first-child {
-    margin-right: 50px;
-  }
-  //flex-direction: column-reverse;
+
   @media ${({ theme }) => theme.desktop} {
     justify-content: space-between;
   }
   @media ${({ theme }) => theme.mobile} {
     flex-direction: ${({ position }) => (position === 'left' ? 'column-reverse' : 'column')};
-
-    div:first-child {
-      margin: 0;
-    }
   }
 `;
 

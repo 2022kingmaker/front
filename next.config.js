@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  productionBrowserSourceMaps: false,
+  images: {
+    domains: ['dc4n6vz6gh9cs.cloudfront.net'],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

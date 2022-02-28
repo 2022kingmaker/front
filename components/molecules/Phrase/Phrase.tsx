@@ -9,7 +9,7 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
   position: relative;
   width: 550px;
   height: 80px;
-  img {
+  .image-wrapper {
     left: 5px;
     ${({ position }) => (position === 'right' ? `left` : ``)} : 500px;
   }
@@ -19,7 +19,7 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
 
   @media ${({ theme }) => theme.mobile} {
     width: 100%;
-    img {
+    .image-wrapper {
       ${({ position }) => (position === 'right' ? `left` : ``)} : 260px;
     }
   }

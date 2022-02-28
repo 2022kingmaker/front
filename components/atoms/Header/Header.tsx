@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-
 import { flexBox } from '@styles/mixin';
 import { useModal } from '@hooks/index';
 import { ReportModal } from '@molecules/index';
@@ -38,6 +38,14 @@ const HeaderBlock = styled.div`
     }
   }
 `;
+const ImageWrapper = styled.div`
+  position: relative;
+  margin-top: 8px;
+  width: 120px;
+  height: 27.86px;
+  & > span {
+  }
+`;
 
 const NavigationTab = styled.div`
   ${flexBox('space-between', null, 'row')};
@@ -51,7 +59,9 @@ const Header = () => {
         <NavigationTab>
           <Link href={'/'} passHref>
             <a>
-              <img src="/images/logo.png" alt="logo" />
+              <ImageWrapper>
+                <Image src="/images/logo.png" layout={'fill'} alt="logo" />
+              </ImageWrapper>
             </a>
           </Link>
           <Link href={'/'} passHref>

@@ -53,19 +53,6 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
           <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-VDT6ENG204" />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-VDT6ENG204', {
-          page_path: window.location.pathname,
-        });
-      `,
-            }}
-          />
         </Head>
         <body>
           <Main />

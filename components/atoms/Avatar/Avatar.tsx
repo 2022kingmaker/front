@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
+import Image from 'next/image';
 
-const AvatarBlock = styled.img<Partial<AvatarProps>>`
+const AvatarBlock = styled.div<Partial<AvatarProps>>`
   position: relative;
   ${({ size }) => `
     width: ${size}px;
@@ -12,6 +13,9 @@ const AvatarBlock = styled.img<Partial<AvatarProps>>`
   @media ${({ theme }) => theme.mobile} {
     width: 35px;
     height: 35px;
+  }
+  & > span {
+    border-radius: 50%;
   }
 `;
 const AvatarStringBlock = styled.div<Partial<AvatarProps>>`
@@ -51,11 +55,13 @@ const Avatar = ({ imgId, size = 55, writer, backgroundColor, margin, active, onC
       {writer[0]}
     </AvatarStringBlock>
   ) : (
-    <AvatarBlock
-      src={process.env.NEXT_PUBLIC_IMAGE_URL + `/candidate-images/candidate0${imgId}.png`}
-      size={size}
-      alt={'대선 후보 아바타 이미지'}
-    />
+    <AvatarBlock className={'image-wrapper'} size={size}>
+      <Image
+        src={process.env.NEXT_PUBLIC_IMAGE_URL + `/candidate-images/candidate0${imgId}.png`}
+        layout={'fill'}
+        alt={'대선 후보 아바타 이미지'}
+      />
+    </AvatarBlock>
   );
 };
 

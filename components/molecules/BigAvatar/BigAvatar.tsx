@@ -5,7 +5,8 @@ import { flexBox } from '@styles/mixin';
 
 const BigAvatarBlock = styled.div`
   ${flexBox('center', 'center', 'column')};
-  img {
+  margin-right: 50px;
+  .image-wrapper {
     margin-bottom: 10px;
   }
   .info {
@@ -15,11 +16,13 @@ const BigAvatarBlock = styled.div`
       margin-bottom: 10px;
       font-weight: 500;
     }
-    div {
-    }
   }
   @media ${({ theme }) => theme.mobile} {
     flex-direction: row;
+    margin: 10px 0 0 0;
+    .image-wrapper {
+      margin: 3px 20px 0 0;
+    }
   }
 `;
 

@@ -8,6 +8,7 @@ import * as ga from 'lib/ga/index';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -45,6 +46,21 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
         />
       </Head>
+      <Script strategy={'afterInteractive'} src="https://www.googletagmanager.com/gtag/js?id=G-VDT6ENG204" />
+      <Script
+        id="gtag-script"
+        strategy={'afterInteractive'}
+        dangerouslySetInnerHTML={{
+          __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VDT6ENG204', {
+          page_path: window.location.pathname,
+        });
+      `,
+        }}
+      />
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <GlobalStyles />
