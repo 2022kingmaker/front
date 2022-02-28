@@ -59,7 +59,7 @@ export const getStaticProps = async () => {
   const categories = await getCategories();
   const keywordDetails = await getKeywordDetails();
 
-  return { props: { data: { categories, keywordDetails } }, revalidate: 60 };
+  return { props: { data: { categories, keywordDetails } } };
 };
 
 export default Home;
