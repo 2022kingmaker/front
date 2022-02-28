@@ -21,6 +21,7 @@ import { RangeModifier } from 'react-day-picker/types/Modifiers';
 import { flexBox } from '@styles/mixin';
 import QuestionMark from '@atoms/QuestionMark/QuestionMark';
 import calendarIcon from '@assets/icons/calendar_icon.png';
+import Image from 'next/image';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip);
 
@@ -52,12 +53,6 @@ const CalendarToggle = styled.div`
     color: #595959;
     margin: 0 8px;
   }
-  img {
-    margin-top: 4px;
-    margin-right: 5px;
-    width: 30px;
-    height: 30px;
-  }
   :hover {
     cursor: pointer;
   }
@@ -76,6 +71,12 @@ const CalendarBackground = styled.div`
   left: -100vw;
   width: 200vw;
   height: calc(100vh - 60px);
+`;
+export const ImageWrapper = styled.div`
+  margin-top: 4px;
+  margin-right: 5px;
+  & > span {
+  }
 `;
 
 interface LineChartProps {
@@ -107,7 +108,9 @@ const LineChart = ({ sortedRates, labels }: LineChartProps) => {
       <H2>기간별 지지율</H2>
       <ToggleContainer>
         <CalendarToggle onClick={handleClick}>
-          <img src={calendarIcon.src} alt="달력 이미지" />
+          <ImageWrapper>
+            <Image width={30} height={30} src={calendarIcon.src} alt="달력 이미지" />
+          </ImageWrapper>
           {chartData.labels![0]!} <span className={'split'}>~</span> {chartData.labels![chartData.labels!.length - 1]}
         </CalendarToggle>
         {isCalendarOpen && <CalendarBackground onClick={handleClick} />}

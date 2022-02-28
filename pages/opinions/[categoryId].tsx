@@ -30,7 +30,6 @@ export interface IdProps {
 const OpinionPage = ({ data }: IdProps) => {
   const { keywords, policies, categories } = data;
   const [activeTopic, setActiveTopic] = useState(categories[0].name);
-
   useIntersectionObserver(setActiveTopic);
 
   const groupByKeyword = groupingByKeyword(policies, keywords);

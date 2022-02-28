@@ -34,7 +34,7 @@ export interface PhraseProps {
   categoryId: number;
 }
 
-const Phrase = ({ policyId, position, phrase }: PhraseProps) => {
+const Phrase = ({ policyId, position, phrase, categoryId }: PhraseProps) => {
   const phraseText = phrase.phrase;
   const { partyId, colorCode } = phrase.candidate.party;
   const color = COLORS_MAP[partyId] || colorCode;
@@ -49,7 +49,7 @@ const Phrase = ({ policyId, position, phrase }: PhraseProps) => {
             position={position}
             phraseText={phraseText}
             policyId={policyId}
-            categoryId={phrase.categoryId}
+            categoryId={categoryId}
           />
         </>
       ) : (
@@ -59,7 +59,7 @@ const Phrase = ({ policyId, position, phrase }: PhraseProps) => {
             position={position}
             phraseText={phraseText}
             policyId={policyId}
-            categoryId={phrase.categoryId}
+            categoryId={categoryId}
           />
           <Avatar imgId={partyId} />
         </>

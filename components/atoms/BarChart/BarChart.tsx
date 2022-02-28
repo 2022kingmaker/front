@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -15,7 +16,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import React, { useState } from 'react';
 import { IRate } from '@models/Rate';
 import { getChartData } from '@lib/utils';
-import { H2 } from '@atoms/LineChart/LineChart';
+import { H2, ImageWrapper } from '@atoms/LineChart/LineChart';
 import { Calendar } from '@molecules/index';
 import { getThisWeekRange, getWeek } from '@lib/date';
 import { disabledDays } from '@molecules/Calendar/MultiCalendar/MultiCalendar';
@@ -101,7 +102,9 @@ const BarChart = ({ sortedRates, labels }: BarChartProps) => {
       <H2>주차별 지지율</H2>
       <ToggleContainer>
         <CalendarToggle onClick={handleClick}>
-          <img src={calendarIcon.src} alt="달력 이미지" />
+          <ImageWrapper>
+            <Image width={30} height={30} src={calendarIcon.src} alt="달력 이미지" />
+          </ImageWrapper>
           {chartData.labels}
         </CalendarToggle>
         {isCalendarOpen && <CalendarBackground onClick={handleClick} />}
