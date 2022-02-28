@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import React, { forwardRef } from 'react';
 import { InputEventType, KeyCodeType } from '@lib/constant';
+import { useRecoilState } from 'recoil';
+import { inputState } from '../../../states/inputState';
 
 const MAX_HEIGHT = 141;
 const HEIGHT_UNIT = 3;
@@ -23,6 +25,8 @@ interface TalkInputProps {
 }
 
 const TalkInput = forwardRef(({ mutationMessage }: TalkInputProps, ref: React.ForwardedRef<HTMLTextAreaElement>) => {
+  const [input, setInput] = useRecoilState(inputState);
+
   const resizeHeight = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const $textArea = e.target as HTMLTextAreaElement;
     if ($textArea.scrollHeight >= MAX_HEIGHT) {
@@ -31,22 +35,36 @@ const TalkInput = forwardRef(({ mutationMessage }: TalkInputProps, ref: React.Fo
     $textArea.style.height = '1px';
     $textArea.style.height = HEIGHT_UNIT + $textArea.scrollHeight + 'px';
   };
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const isPressShift = e.shiftKey;
     const keyCode = e.code;
 
     if (!isPressShift && (keyCode === KeyCodeType.NumpadEnter || keyCode === KeyCodeType.Enter)) {
-      mutationMessage(e.target.value);
+      mutationMessage(input);
       return;
     }
+    if (isPressShift && keyCode === KeyCodeType.Enter) {
+      setInput(prev => prev + '\n');
+    }
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { inputType } = e.nativeEvent as InputEvent;
+    if (inputType === InputEventType.insertLineBreak) {
+      return;
+    }
+    setInput(e.target.value);
+  };
+
   return (
     <TalkInputBlock
       onKeyDown={resizeHeight}
       onKeyUp={resizeHeight}
       onKeyPress={handleKeyPress}
+      onChange={handleChange}
       placeholder={'작성된 의견은 수정/삭제할 수 없습니다.'}
       spellCheck={false}
+      value={input}
       ref={ref}
     />
   );

@@ -9,6 +9,8 @@ import React, { useState } from 'react';
 import { PledgesBlock } from '@organisms/Pledges/Pledges';
 import Phrase from '@molecules/Phrase/Phrase';
 import { useQueryClient } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { inputState } from '../../../states/inputState';
 
 const AgoraContentsBlock = styled.div`
   ${flexBox('flex-start', 'flex-start', 'column')};
@@ -45,7 +47,7 @@ const AgoraContentsBlock = styled.div`
 `;
 
 const TalkInfoTab = styled.section`
-  ${flexBox('flex-start', 'center')};
+  ${flexBox('space-between', 'center')};
   position: relative;
   width: 100%;
   padding-top: 10px;
@@ -61,6 +63,12 @@ const TalkInfoTab = styled.section`
   }
   .refreshIcon {
     margin: 2px 0 0 8px;
+  }
+  .left-tab {
+    ${flexBox('center', 'center')};
+  }
+  .right-tab {
+    margin-right: 10px;
   }
 `;
 
@@ -79,6 +87,7 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents
   const { agenda, description, link, talkCount } = roomDetail;
   const queryClient = useQueryClient();
   const [scrollDown, setScrollDown] = useState(false);
+  const input = useRecoilValue(inputState);
   const handleClick = () => {
     queryClient.invalidateQueries(agoraId).then(() => {
       setScrollDown(!scrollDown);
@@ -92,11 +101,15 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents
           <FixedAgora agenda={agenda} description={description} />
           <TalkListContainer agoraId={agoraId} scrollDown={scrollDown} />
           <TalkInfoTab>
-            <span>전체 의견 {talkCount || 0}개</span>
-
-            <span>
-              <Refresh className={'refreshIcon'} onClick={handleClick} />
-            </span>
+            <section className="left-tab">
+              <span>전체 의견 {talkCount || 0}개</span>
+              <span>
+                <Refresh className={'refreshIcon'} onClick={handleClick} />
+              </span>
+            </section>
+            <section className="right-tab">
+              <span>{input.length} / 500</span>
+            </section>
           </TalkInfoTab>
           <CommentContainer agoraId={agoraId} />
         </>

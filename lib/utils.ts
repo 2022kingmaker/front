@@ -5,7 +5,6 @@ import { Categories } from '@models/Category';
 import { ITableContents } from '@models/TableContent';
 import { SortStand } from '@lib/constant';
 import { Room } from '@models/Agora';
-import { bool } from 'prop-types';
 
 export const sortRates = (rates: IRate[]) => {
   return rates.sort(sortCallback);
@@ -96,4 +95,9 @@ export const hasSupportCandidate = () => {
 };
 export const getSupportCandidate = () => {
   return sessionStorage.getItem(`${window.location.pathname}:candidate`) || -1;
+};
+
+export const resetTextArea = (elem: HTMLTextAreaElement) => {
+  elem.value = '';
+  elem.style.height = '42px';
 };

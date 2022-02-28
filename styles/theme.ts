@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
     third: '#F7CE46',
     fourth: '#D95F29',
     activeBorder: '#22c3d3',
+    disable: '#c2c1c1',
   },
   font: {
     small: '12px',

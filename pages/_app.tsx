@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import * as ga from 'lib/ga/index';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -45,8 +46,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <GlobalStyles />
-        {getLayout(<Component {...pageProps} />)}
+        <RecoilRoot>
+          <GlobalStyles />
+          {getLayout(<Component {...pageProps} />)}
+        </RecoilRoot>
       </QueryClientProvider>
     </ThemeProvider>
   );
