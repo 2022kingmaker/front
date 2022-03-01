@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { Avatar } from '@atoms/index';
-import { setSupportCandidate } from '@lib/utils';
+import { getSupportCandidate, setSupportCandidate } from '@lib/utils';
 import { Candidate } from '@lib/constant';
 
 const SelectModalBlock = styled.div`
@@ -70,7 +70,7 @@ const SelectBox = styled.ul`
   }
 `;
 
-const parties = [
+export const parties = [
   { partyName: '더불어민주당', candidateId: Candidate.first, color: '#1F4D9C' },
   { partyName: '국민의힘', candidateId: Candidate.second, color: '#D33736' },
   { partyName: '정의당', candidateId: Candidate.third, color: '#F7CE46' },
@@ -79,7 +79,7 @@ const parties = [
 ];
 
 const SelectModal = () => {
-  const [currentId, setCurrentId] = useState(Candidate.none);
+  const [currentId, setCurrentId] = useState(+getSupportCandidate() || Candidate.none);
 
   const handleClick = (candidateId: number) => {
     return () => {

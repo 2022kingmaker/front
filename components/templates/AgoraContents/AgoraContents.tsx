@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import CommentContainer from '@molecules/CommentContainer/CommentContainer';
 import Refresh from '@assets/icons/refresh.svg';
+import Vote from '@assets/icons/vote.svg';
 import TalkListContainer from '@organisms/TalkListContainer/TalkListContainer';
 import FixedAgora from '@atoms/Agora/FixedAgora/FixedAgora';
 import { IRoomDetail } from '@models/Agora';
@@ -10,7 +11,9 @@ import { PledgesBlock } from '@organisms/Pledges/Pledges';
 import Phrase from '@molecules/Phrase/Phrase';
 import { useQueryClient } from 'react-query';
 import { useRecoilValue } from 'recoil';
-import { inputState } from '../../../states/inputState';
+import { inputState } from 'states/inputState';
+import { getSupportCandidate } from '@lib/utils';
+import { parties } from '@molecules/SelectModal/SelectModal';
 
 const AgoraContentsBlock = styled.div`
   ${flexBox('flex-start', 'flex-start', 'column')};
@@ -52,7 +55,7 @@ const TalkInfoTab = styled.section`
   width: 100%;
   padding-top: 10px;
   margin-left: 5px;
-  font-size: 12px;
+  font-size: 14px;
   ::before {
     content: '';
     position: absolute;
@@ -61,13 +64,20 @@ const TalkInfoTab = styled.section`
     width: 200%;
     border-top: 1px solid #c4c4c4;
   }
+  svg:hover {
+    cursor: pointer;
+  }
   .refreshIcon {
     margin: 2px 0 0 8px;
+  }
+  .voteIcon {
+    margin: 2px 10px 0 0;
   }
   .left-tab {
     ${flexBox('center', 'center')};
   }
   .right-tab {
+    ${flexBox('center', 'center')};
     margin-right: 10px;
   }
 `;
@@ -81,9 +91,10 @@ interface AgoraContents {
   roomDetail: IRoomDetail;
   currentCategoryId: number;
   agoraId: string;
+  toggle: (e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>) => void;
 }
 
-const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents) => {
+const AgoraContents = ({ roomDetail, currentCategoryId, agoraId, toggle }: AgoraContents) => {
   const { agenda, description, link, talkCount } = roomDetail;
   const queryClient = useQueryClient();
   const [scrollDown, setScrollDown] = useState(false);
@@ -108,6 +119,13 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId }: AgoraContents
               </span>
             </section>
             <section className="right-tab">
+              <span>
+                <Vote
+                  className={'voteIcon'}
+                  onClick={(e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement, MouseEvent>) => toggle(e)}
+                  fill={parties.find(party => party.candidateId === +getSupportCandidate())!.color}
+                />
+              </span>
               <span>{input.length} / 500</span>
             </section>
           </TalkInfoTab>

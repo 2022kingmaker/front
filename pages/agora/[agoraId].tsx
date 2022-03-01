@@ -21,8 +21,6 @@ const AgoraPageBlock = styled.div`
   position: relative;
 `;
 
-const SpeechBubbleContainer = styled.div``;
-
 const toc = [
   {
     id: 0,
@@ -60,7 +58,12 @@ const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
       {isRoomDetailLoading ? (
         <>Loading...</>
       ) : (
-        <AgoraContents roomDetail={roomDetail!} currentCategoryId={currentCategoryId} agoraId={agoraId} />
+        <AgoraContents
+          roomDetail={roomDetail!}
+          currentCategoryId={currentCategoryId}
+          agoraId={agoraId}
+          toggle={toggle}
+        />
       )}
       <Modal isShowing={isShowing} close={toggle}>
         <SelectModal />

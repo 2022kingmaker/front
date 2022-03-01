@@ -51,8 +51,6 @@ class MyDocument extends Document {
               'keywords : 대선, 20대 대선, 후보, 대선 후보, 대통령 선거, 선거, 대통령, 국민의힘, 더불어민주당, 국민의당, 정의당, 정책, 정책 비교, 공약, 10대 공약, 대선 정책, 대선 공약, 후보별 공약, 후보별 정책, 공약 비교, 대선 토론, 이재명, 윤석열, 안철수, 심상정'
             }
           />
-          <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-          <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
         </Head>
         <body>
           <Main />
