@@ -68,7 +68,7 @@ const Header = () => {
             <a>공약비교</a>
           </Link>
           <Link href={'/statistics'} passHref>
-            <a>여론 조사</a>
+            <a>여론조사</a>
           </Link>
           <Link href={'/talks/1'} passHref>
             <a>투기장</a>
