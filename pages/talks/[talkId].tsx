@@ -29,7 +29,7 @@ const Talks: NextPage = ({ data }: TalksProps) => {
   return (
     <TalksBlock>
       <Head>
-        <title>국민 톡 | 대선마당</title>
+        <title>투기장 | 대선마당</title>
         <meta name="description" content="토론의 장" />
       </Head>
       <SideBarRoute toc={toc} currentCategoryId={+talkId} />

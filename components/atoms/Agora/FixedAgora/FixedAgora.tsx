@@ -81,10 +81,7 @@ interface FixedAgoraProps {
   description: string;
 }
 
-const FixedAgora = ({
-  agenda = '일자리 창출 이런게 필요해요~',
-  description = '모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?',
-}: FixedAgoraProps) => {
+const FixedAgora = ({ agenda, description }: FixedAgoraProps) => {
   const [toggle, setToggle] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
   const paragraphs = React.Children.toArray(

@@ -9,7 +9,7 @@ export const AgoraStyle = css`
   ${flexBox('space-around', 'flex-start', 'column')};
   padding: 12px;
   width: 100%;
-  height: 140px;
+  height: auto;
   background: white;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 13px;
@@ -21,6 +21,7 @@ export const AgoraStyle = css`
 `;
 const AgoraBlock = styled.a`
   ${AgoraStyle};
+  min-height: 120px;
 `;
 
 export const Title = styled.h1`
@@ -33,6 +34,7 @@ export const Description = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 1.3;
+  margin: 13px 0;
 `;
 
 const Info = styled.div`
@@ -63,7 +65,7 @@ const Parties = styled.div`
 const UpdateTime = styled.div`
   text-align: right;
   font-size: 12px;
-  width: 50px;
+  width: 70px;
 `;
 
 interface AgoraProps {
@@ -75,13 +77,7 @@ interface AgoraProps {
   roomId: number;
 }
 
-const Agora = ({
-  agenda = '일자리 창출 이런게 필요해요~',
-  description = '모든 후보가 공격적인 일자리 창출 공약을 내걸고 있는데요. 여러분의 생각은 어떠신가요?',
-  talks,
-  updatedAt,
-  roomId,
-}: AgoraProps) => {
+const Agora = ({ agenda, description, talks, updatedAt, roomId }: AgoraProps) => {
   const paragraphs = description.split('\\n');
 
   return (
@@ -89,7 +85,7 @@ const Agora = ({
       <Link href={`/agora/${roomId}`} passHref>
         <AgoraBlock>
           <Title>{agenda}</Title>
-          <Description>{paragraphs[paragraphs.length - 1]}</Description>
+          <Description>{description}</Description>
           <Info>
             <Parties>
               {talks?.map(({ colorCode, count, candidateId }) => (
