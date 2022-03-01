@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { Layout, SideBarRoute } from '@atoms/index';
-import { getCategories } from '../../apis/category';
 import { Categories } from '@models/Category';
 import { getToc } from '@lib/utils';
 import { ParsedUrlQuery } from 'querystring';
@@ -61,5 +60,5 @@ export const getStaticProps: GetStaticProps = async context => {
   const { talkId } = context.params as Params;
   const categories = await getAgoraCategories();
 
-  return { props: { data: { categories, talkId } } };
+  return { props: { data: { categories, talkId } }, revalidate: 60 };
 };

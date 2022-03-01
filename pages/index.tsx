@@ -15,6 +15,7 @@ import { Categories } from '@models/Category';
 import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
 import { getToc } from '@lib/utils';
+import { GetStaticProps } from 'next/types';
 
 const HomeBlock = styled.div`
   height: inherit;
@@ -55,11 +56,11 @@ const Home: NextPage = ({ data }: HomeProps) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const categories = await getCategories();
   const keywordDetails = await getKeywordDetails();
 
-  return { props: { data: { categories, keywordDetails } } };
+  return { props: { data: { categories, keywordDetails }, revalidate: 60 } };
 };
 
 export default Home;
