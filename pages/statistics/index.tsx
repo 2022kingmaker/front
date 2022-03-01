@@ -32,7 +32,7 @@ const toc = [
 
 const Statistics: NextPage = ({ data }: StatisticsProps) => {
   const { rates } = data;
-  const [activeTopic, setActiveTopic] = useState('기간별 지지율');
+  const [activeTopic, setActiveTopic] = useState(toc[0].name);
 
   return (
     <StatisticsBlock>
