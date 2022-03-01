@@ -16,7 +16,7 @@ const TalkInputBlock = styled.textarea`
   padding: 8px 45px 8px 8px;
   font-size: 16px;
   ::placeholder {
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
 

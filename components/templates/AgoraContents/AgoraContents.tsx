@@ -71,7 +71,7 @@ const TalkInfoTab = styled.section`
     margin: 2px 0 0 8px;
   }
   .voteIcon {
-    margin: 2px 10px 0 0;
+    margin: 2px 0 0 10px;
   }
   .left-tab {
     ${flexBox('center', 'center')};
@@ -117,8 +117,6 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId, toggle }: Agora
               <span>
                 <Refresh className={'refreshIcon'} onClick={handleClick} />
               </span>
-            </section>
-            <section className="right-tab">
               <span>
                 <Vote
                   className={'voteIcon'}
@@ -126,6 +124,8 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId, toggle }: Agora
                   fill={parties.find(party => party.candidateId === +getSupportCandidate())!.color}
                 />
               </span>
+            </section>
+            <section className="right-tab">
               <span>{input.length} / 500</span>
             </section>
           </TalkInfoTab>
