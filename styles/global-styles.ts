@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
     @font-face {
       font-family: "NotoSansKorean";
       font-display: fallback;
-      src: url("/fonts/NotoSansKR-Medium-Hestia.woff") format("woff");
+      src: url("/fonts/NotoSansKR-Regular-Hestia.woff") format("woff");
     }
     textarea{
       font-family: "NotoSansKorean", sans-serif;
