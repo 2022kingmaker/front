@@ -8,7 +8,6 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
   &.debate {
     width: 85%;
     font-size: 16px;
-    line-height: 1.4;
   }
   position: relative;
   left: 25px;
@@ -36,11 +35,11 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
     display: block;
     width: 0;
     z-index: 1;
-    top: 22px;
+    top: 7px;
 
     ${({ position }) => `
       border-width: ${position === 'left' ? `11px 13px 11px 0` : `11px 0 11px 13px`};
-      ${position}: -10px;
+      ${position}: -9px;
     `}
   }
   &:hover {
@@ -66,7 +65,6 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
     &.debate {
       width: 85%;
       font-size: 14px;
-      line-height: 1.2;
       padding: 12px;
     }
   }
