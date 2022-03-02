@@ -6,8 +6,11 @@ import { IPhrase } from '@models/Keyword';
 
 const PhraseBlock = styled.div<Partial<PhraseProps>>`
   ${flexBox('center', 'flex-start', 'row')};
+  &.debate {
+    justify-content: flex-start;
+    width: 100%;
+  }
   position: relative;
-  width: 550px;
   height: auto;
   .image-wrapper {
     left: 5px;
@@ -18,13 +21,15 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
   }
 
   @media ${({ theme }) => theme.mobile} {
+    &.debate {
+      justify-content: center;
+      width: 100%;
+    }
     width: 100%;
     .image-wrapper {
       left: 0;
       top: 5px;
       ${({ position }) => (position === 'right' ? `left` : ``)} : 15px;
-    }
-    &.debate .image-wrapper {
     }
   }
 `;

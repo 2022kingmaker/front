@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Content, DebateDetail, Script } from '@models/Script';
-import Pledges, { KeywordContainer } from '@organisms/Pledges/Pledges';
-import Phrase from '@molecules/Phrase/Phrase';
+import { Script } from '@models/Script';
+import Pledges from '@organisms/Pledges/Pledges';
 
 const DebateDetailContentsBlock = styled.div`
   position: relative;
@@ -13,7 +12,7 @@ const DebateDetailContentsBlock = styled.div`
   .topic-container {
     margin: 20px 0;
     & > * {
-      padding: 24px;
+      padding: 24px 0;
     }
   }
   .title {

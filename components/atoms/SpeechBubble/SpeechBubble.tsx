@@ -5,7 +5,11 @@ import Link from 'next/link';
 
 const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
   ${flexBox()};
-
+  &.debate {
+    width: 85%;
+    font-size: 16px;
+    line-height: 1.4;
+  }
   position: relative;
   left: 25px;
   width: 50%;
@@ -14,6 +18,8 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
   padding: 18px;
   text-align: center;
   font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
   color: white;
 
   background: ${({ theme, color }) => theme.colors[color!]};
@@ -51,11 +57,18 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
     ${flexBox()};
     ${({ position }) => (position === 'left' ? 'left:10px' : 'left:0')};
     min-width: 250px;
+    //${({ categoryId }) => (categoryId ? '' : '')};
+
     &:hover {
       cursor: pointer;
       transform: none;
     }
-    font-size: 14px;
+    &.debate {
+      width: 85%;
+      font-size: 14px;
+      line-height: 1.2;
+      padding: 12px;
+    }
   }
 `;
 
@@ -81,7 +94,12 @@ const SpeechBubble = ({
 
   return (
     <Link href={toPath.href} as={toPath.as} passHref>
-      <SpeechBubbleBlock color={color} position={position} categoryId={categoryId}>
+      <SpeechBubbleBlock
+        color={color}
+        position={position}
+        categoryId={categoryId}
+        className={categoryId ? '' : 'debate'}
+      >
         {text}
       </SpeechBubbleBlock>
     </Link>
