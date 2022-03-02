@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
       height: 100%;
       background: #F2F2F2;
       font-family: "NotoSansKorean", sans-serif;
+      font-weight: 600;
     }
     body.modal-on{
       overflow-y: hidden;

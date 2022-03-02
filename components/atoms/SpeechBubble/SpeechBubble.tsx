@@ -11,7 +11,7 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
   }
   position: relative;
   left: 25px;
-  width: 50%;
+  width: 70%;
   min-width: 405px;
   height: auto;
   padding: 18px;
@@ -56,7 +56,6 @@ const SpeechBubbleBlock = styled.a<Partial<SpeechBubbleProps>>`
     ${flexBox()};
     ${({ position }) => (position === 'left' ? 'left:10px' : 'left:0')};
     min-width: 250px;
-    //${({ categoryId }) => (categoryId ? '' : '')};
 
     &:hover {
       cursor: pointer;

@@ -5,7 +5,7 @@ const theme: DefaultTheme = {
     primary: `#3D7B80`,
     first: '#1F4D9C',
     second: '#D33736',
-    third: '#F7CE46',
+    third: '#e6b100',
     fourth: '#D95F29',
     activeBorder: '#22c3d3',
     disable: '#c2c1c1',

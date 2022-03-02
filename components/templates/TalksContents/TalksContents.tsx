@@ -61,3 +61,7 @@ const TalksContents = ({ talkId }: TalksContentsProps) => {
 };
 
 export default TalksContents;
+
+TalksContents.defaultProps = {
+  talkId: '1',
+};
