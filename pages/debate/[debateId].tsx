@@ -15,6 +15,7 @@ interface DebateDetailPageProps {
 }
 
 const DebateDetailPage: NextPage = ({ debateDetail }: DebateDetailPageProps) => {
+  console.log(debateDetail);
   const { script } = debateDetail;
   const [currentCategoryId, setCurrentCategoryId] = useState(0);
   const toc = getTocForScript(script);
@@ -39,7 +40,7 @@ export const getStaticPaths = async () => {
     params: { debateId: debateId.toString() },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps = async (context: any) => {

@@ -44,7 +44,7 @@ const DebateDetailContents = ({ script }: DebateDetailContentsProps) => {
       <div className="topic-container">
         <h2 className="title">{category}</h2>
         {contents.map(({ keyword, contents }) => (
-          <Pledges keyword={keyword} categoryId={0} contents={contents} />
+          <Pledges key={contents[0].script.slice(1, 10)} keyword={keyword} categoryId={0} contents={contents} />
         ))}
       </div>
     </DebateDetailContentsBlock>
