@@ -73,6 +73,9 @@ const Header = () => {
           <Link href={'/talks/1'} passHref>
             <a>투기장</a>
           </Link>
+          <Link href={'/debate'} passHref>
+            <a>토론회</a>
+          </Link>
           <a onClick={toggle}>제보</a>
         </NavigationTab>
       </ul>
