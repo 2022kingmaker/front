@@ -15,7 +15,6 @@ interface DebateDetailPageProps {
 }
 
 const DebateDetailPage: NextPage = ({ debateDetail }: DebateDetailPageProps) => {
-  console.log(debateDetail);
   const { script } = debateDetail;
   const [currentCategoryId, setCurrentCategoryId] = useState(0);
   const toc = getTocForScript(script);
