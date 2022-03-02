@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
+import { Debate } from '@models/Debate';
+import { Agora } from '@atoms/index';
+import DebateAgora from '@atoms/Agora/DebateAgora/DebateAgora';
 
 const DebateContentsBlock = styled.div`
   position: relative;
@@ -18,12 +21,24 @@ const DebateContentsBlock = styled.div`
   }
 `;
 
-interface TalksContentsProps {
-  talkId: number;
+interface DebateContentsProps {
+  debateList: Debate[];
 }
-
-const DebateContents = ({ talkId }: TalksContentsProps) => {
-  return <DebateContentsBlock></DebateContentsBlock>;
+const DebateContents = ({ debateList }: DebateContentsProps) => {
+  return (
+    <DebateContentsBlock>
+      {debateList.map(({ debateId, description, title, totalTime, date }) => (
+        <DebateAgora
+          key={debateId}
+          debateId={debateId}
+          description={description}
+          title={title}
+          date={date}
+          totalTime={totalTime}
+        />
+      ))}
+    </DebateContentsBlock>
+  );
 };
 
 export default DebateContents;

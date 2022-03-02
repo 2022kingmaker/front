@@ -64,7 +64,7 @@ export interface SideBarAgoraProps {
   toc: ITableContents[];
   activeFontSize?: number;
   currentCategoryId: number;
-  setCurrentCategoryId: any;
+  setCurrentCategoryId: React.Dispatch<React.SetStateAction<number>>;
 }
 const SideBarAgora = ({ toc, activeFontSize = 25, currentCategoryId, setCurrentCategoryId }: SideBarAgoraProps) => {
   return (

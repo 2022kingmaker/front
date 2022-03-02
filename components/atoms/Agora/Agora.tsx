@@ -78,8 +78,6 @@ interface AgoraProps {
 }
 
 const Agora = ({ agenda, description, talks, updatedAt, roomId }: AgoraProps) => {
-  const paragraphs = description.split('\\n');
-
   return (
     <li>
       <Link href={`/agora/${roomId}`} passHref>

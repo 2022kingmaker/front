@@ -89,7 +89,7 @@ const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: Ta
           <div>{children}</div>
           <TalkInfo>
             <li onClick={handleClick}>신고하기</li>
-            <li className={'time'}>{format(new Date(createdAt), 'MM월 dd일 hh:mm')}</li>
+            <li className={'time'}>{format(new Date(createdAt), 'MM월 dd일 HH:mm')}</li>
           </TalkInfo>
         </>
       )}

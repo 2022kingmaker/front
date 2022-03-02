@@ -1,6 +1,6 @@
 export interface Debate {
   debateId: number;
-  date: string;
+  date: Date;
   totalTime: number;
   title: string;
   description: string;

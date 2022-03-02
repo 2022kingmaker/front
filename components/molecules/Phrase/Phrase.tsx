@@ -5,13 +5,13 @@ import { flexBox } from '@styles/mixin';
 import { IPhrase } from '@models/Keyword';
 
 const PhraseBlock = styled.div<Partial<PhraseProps>>`
-  ${flexBox('flex-start', 'center', 'row')};
+  ${flexBox('center', 'flex-start', 'row')};
   position: relative;
   width: 550px;
-  height: 80px;
+  height: auto;
   .image-wrapper {
     left: 5px;
-    ${({ position }) => (position === 'right' ? `left` : ``)} : 500px;
+    ${({ position }) => (position === 'right' ? `left` : ``)} : 45px;
   }
   > * {
     margin: 10px 0;
@@ -20,7 +20,11 @@ const PhraseBlock = styled.div<Partial<PhraseProps>>`
   @media ${({ theme }) => theme.mobile} {
     width: 100%;
     .image-wrapper {
-      ${({ position }) => (position === 'right' ? `left` : ``)} : 260px;
+      left: 0;
+      top: 5px;
+      ${({ position }) => (position === 'right' ? `left` : ``)} : 15px;
+    }
+    &.debate .image-wrapper {
     }
   }
 `;
@@ -29,38 +33,28 @@ const COLORS_MAP = ['', 'first', 'second', 'third', 'fourth'];
 
 export interface PhraseProps {
   position: string;
-  phrase: IPhrase;
+  phrase?: IPhrase;
   policyId: number;
   categoryId: number;
+  script?: string;
+  candidateId?: number;
 }
 
-const Phrase = ({ policyId, position, phrase, categoryId }: PhraseProps) => {
-  const phraseText = phrase.phrase;
-  const { partyId, colorCode } = phrase.candidate.party;
-  const color = COLORS_MAP[partyId] || colorCode;
+const Phrase = ({ policyId, position, phrase, categoryId, script, candidateId }: PhraseProps) => {
+  const text = script || phrase!.phrase;
+  const partyId = candidateId || phrase!.candidate.party.partyId;
+  const color = COLORS_MAP[partyId];
 
   return (
-    <PhraseBlock position={position}>
+    <PhraseBlock position={position} className={`${script ? 'debate' : ''}`}>
       {position === 'left' ? (
         <>
           <Avatar imgId={partyId} />
-          <SpeechBubble
-            color={color}
-            position={position}
-            phraseText={phraseText}
-            policyId={policyId}
-            categoryId={categoryId}
-          />
+          <SpeechBubble color={color} position={position} text={text} policyId={policyId} categoryId={categoryId} />
         </>
       ) : (
         <>
-          <SpeechBubble
-            color={color}
-            position={position}
-            phraseText={phraseText}
-            policyId={policyId}
-            categoryId={categoryId}
-          />
+          <SpeechBubble color={color} position={position} text={text} policyId={policyId} categoryId={categoryId} />
           <Avatar imgId={partyId} />
         </>
       )}
