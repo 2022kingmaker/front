@@ -96,7 +96,7 @@ const FixedAgora = ({ agenda, description }: FixedAgoraProps) => {
     setToggle(true);
   };
   const handleBlur = () => {
-    setToggle(false);
+    setToggle(true);
   };
 
   return (

@@ -34,6 +34,11 @@ export const Description = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 1.3;
+  max-height: 200px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   margin: 13px 0;
 `;
 
