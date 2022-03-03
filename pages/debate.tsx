@@ -39,7 +39,7 @@ DebatePage.getLayout = function getLayout(page: React.ReactNode) {
 export const getStaticProps = async () => {
   const debateList = await getDebateList();
   if ('status' in debateList) {
-    return { props: { debateList: null } };
+    return { props: { debateList: null }, revalidate: 60 };
   }
-  return { props: { debateList } };
+  return { props: { debateList }, revalidate: 60 };
 };

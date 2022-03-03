@@ -52,7 +52,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const { debateId } = context.params;
   const debateDetail = await getScript(+debateId);
-  return { props: { debateDetail } };
+  return { props: { debateDetail }, revalidate: 60 };
 };
 
 const getTocForScript = (script: Script[]) => script.map(({ category }, index) => ({ name: category, id: index }));
