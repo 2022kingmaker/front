@@ -15,8 +15,11 @@ interface DebateDetailPageProps {
 }
 
 const DebateDetailPage: NextPage = ({ debateDetail }: DebateDetailPageProps) => {
-  const { script } = debateDetail;
   const [currentCategoryId, setCurrentCategoryId] = useState(0);
+  const { script } = debateDetail;
+  if (!script || 'status' in script) {
+    return <></>;
+  }
   const toc = getTocForScript(script);
 
   return (
@@ -35,6 +38,10 @@ DebateDetailPage.getLayout = function getLayout(page: React.ReactNode) {
 
 export const getStaticPaths = async () => {
   const debateList = await getDebateList();
+
+  if ('status' in debateList) {
+    return { paths: [], fallback: 'blocking' };
+  }
   const paths = debateList.map(({ debateId }) => ({
     params: { debateId: debateId.toString() },
   }));
