@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 const DebateAgoraBlock = styled.a`
   ${AgoraStyle};
   height: auto;
-  margin: 0 auto;
+  margin: 15px auto;
   width: 75%;
   outline: none;
   z-index: 2;

@@ -6,7 +6,6 @@ import { getDebateList } from 'apis/debate';
 import { Debate } from '@models/Debate';
 import { ITableContents } from '@models/TableContent';
 import DebateContents from '@templates/DebateContents/DebateContents';
-import { flexBox } from '@styles/mixin';
 
 const DebatePageBlock = styled.div`
   height: inherit;
