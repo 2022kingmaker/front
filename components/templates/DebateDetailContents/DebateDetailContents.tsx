@@ -38,6 +38,9 @@ interface DebateDetailContentsProps {
   script: Script;
 }
 const DebateDetailContents = ({ script }: DebateDetailContentsProps) => {
+  if (!script) {
+    return <></>;
+  }
   const { contents, category } = script;
   return (
     <DebateDetailContentsBlock>
