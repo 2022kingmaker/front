@@ -134,7 +134,13 @@ const AgoraContents = ({ roomDetail, currentCategoryId, agoraId, toggle }: Agora
       ) : (
         <AgoraPledgesBlock>
           {link.phrases.map(phrase => (
-            <Phrase key={phrase.phrase} position={'left'} phrase={phrase} policyId={phrase.policyId} categoryId={1} />
+            <Phrase
+              key={phrase.phrase}
+              position={'left'}
+              phrase={phrase}
+              policyId={phrase.policyId}
+              categoryId={phrase.categoryId}
+            />
           ))}
         </AgoraPledgesBlock>
       )}
