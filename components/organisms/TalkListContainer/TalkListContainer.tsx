@@ -3,8 +3,8 @@ import { Avatar, TalkBubble } from '@atoms/index';
 import { flexBox } from '@styles/mixin';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useGetInfiniteTalks } from '@hooks/index';
 import useScrollInit from '@organisms/TalkListContainer/useScrollInit';
+import { useFetchInfiniteTalks } from 'queries';
 
 const TalkListContainerBlock = styled.ul`
   width: 100%;
@@ -46,7 +46,16 @@ interface TalkListContainer {
 
 const TalkListContainer = ({ scrollDown, agoraId }: TalkListContainer) => {
   const [lastRef, inView] = useInView({ rootMargin: '200px 0px 0px 0px' });
-  const { pages, isLoading, fetchNextPage } = useGetInfiniteTalks(+agoraId);
+  const { data, isLoading, fetchNextPage } = useFetchInfiniteTalks(
+    { agoraId },
+    {
+      getNextPageParam: lastPage => {
+        return lastPage.hasNext ? lastPage.lastIndex : null;
+      },
+    },
+  );
+  const pages = data?.pages;
+
   const [scrollRef] = useScrollInit<HTMLUListElement>({ deps: [pages ? pages[0].lastIndex : undefined, scrollDown] });
 
   useEffect(() => {

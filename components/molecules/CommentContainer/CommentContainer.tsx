@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import TalkInput from '@atoms/TalkInput/TalkInput';
 import { flexBox } from '@styles/mixin';
 import Submit from '@assets/icons/submit.svg';
-import { useMutation, useQueryClient } from 'react-query';
-import { PostMessage, postMessage } from '../../../apis/agora';
+import { useQueryClient } from 'react-query';
 import React, { useRef } from 'react';
 import { getSupportCandidate, resetTextArea } from '@lib/utils';
 import { useRecoilState } from 'recoil';
-import { inputState } from '../../../states/inputState';
+import { inputState } from 'states/inputState';
+import { useFetchPostTalk } from 'queries';
 const CommentContainerBlock = styled.form`
   ${flexBox('flex-start', 'flex-start')};
   margin-top: 10px;
@@ -45,17 +45,13 @@ const CommentContainer = ({ agoraId }: CommentContainerProps) => {
   const queryClient = useQueryClient();
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const submitMessage = useMutation(
-    ['postMessage'],
-    ({ roomId, text, candidateId }: PostMessage) => postMessage({ roomId, text, candidateId }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('getTalks');
-        resetTextArea(inputRef.current!);
-        setInput('');
-      },
+  const submitMessage = useFetchPostTalk({
+    onSuccess: () => {
+      queryClient.invalidateQueries('getTalks');
+      resetTextArea(inputRef.current!);
+      setInput('');
     },
-  );
+  });
 
   const mutationMessage = (input: string) => {
     const candidateId = +getSupportCandidate();

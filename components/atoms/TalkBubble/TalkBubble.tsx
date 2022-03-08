@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { flexBox } from '@styles/mixin';
 import { ReactNode } from 'react';
 import { format } from 'date-fns';
-import { reportMessage } from '../../../apis/agora';
-import { useMutation } from 'react-query';
+import { useFetchReport } from 'queries';
 
 const TalkBubbleBlock = styled.div<Partial<TalkBubbleProps>>`
   ${flexBox('flex-start', 'flex-start', 'row')};
@@ -68,7 +67,8 @@ interface TalkBubbleProps {
 }
 
 const TalkBubble = ({ color = 'none', removed = false, children, createdAt }: TalkBubbleProps) => {
-  const reportMutation = useMutation(['reportMessage'], (talkId: number) => reportMessage(talkId));
+  // const reportMutation = useMutation(['reportMessage'], (talkId: number) => reportMessage(talkId));
+  const reportMutation = useFetchReport();
 
   const handleClick = () => {
     const result = window.confirm('정말 신고하시겠습니까?');

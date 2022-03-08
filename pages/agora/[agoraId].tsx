@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import { Layout, SideBarAgora } from '@atoms/index';
 import { ITableContents } from '@models/TableContent';
 import AgoraContents from '@templates/AgoraContents/AgoraContents';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient } from 'react-query';
 import { getRoomDetail, getTalks } from '../../apis/agora';
-import { IRoomDetail } from '@models/Agora';
 import { GetServerSidePropsContext } from 'next/types';
 
 import dynamic from 'next/dynamic';
 import { useModal } from '@hooks/index';
 import { hasSupportCandidate } from '@lib/utils';
 import { SelectModal } from '@molecules/index';
+import { useFetchRoomDetail } from 'queries';
 const Modal = dynamic(() => import('@molecules/Modal/Modal'), { ssr: false });
 
 const AgoraPageBlock = styled.div`
@@ -39,9 +39,7 @@ interface AgoraPageProps {
 const AgoraPage: NextPage = ({ agoraId }: AgoraPageProps) => {
   const { isShowing, toggle, forceUpdate } = useModal(false);
   const [currentCategoryId, setCurrentCategoryId] = useState(0);
-  const { data: roomDetail, isLoading: isRoomDetailLoading } = useQuery<IRoomDetail>(['getRoomDetail'], () =>
-    getRoomDetail(+agoraId),
-  );
+  const { data: roomDetail, isLoading: isRoomDetailLoading } = useFetchRoomDetail({ agoraId: +agoraId });
 
   useEffect(() => {
     forceUpdate(!hasSupportCandidate());
