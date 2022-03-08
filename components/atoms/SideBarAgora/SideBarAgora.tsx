@@ -14,15 +14,15 @@ const SideBarAgoraBlock = styled.ul<Partial<SideBarAgoraProps>>`
   a:hover {
     cursor: pointer;
   }
-  li{
+  li {
     text-align: center;
     margin-top: 35px;
+    padding: 4px;
   }
 
   a {
     color: #fff;
-    font-weight: 350;
-    transition: 0.45s;      
+    line-height: 22px;
     &.active {
       font-size: ${({ activeFontSize }) => activeFontSize}px;
     }
@@ -39,11 +39,17 @@ const SideBarAgoraBlock = styled.ul<Partial<SideBarAgoraProps>>`
     color: white;
   }
   @media ${({ theme }) => theme.desktop} {
-    ${flexBox('space-around')};
+    ${flexBox('center')};
     z-index: 3;
     top: 44px;
     width: 100%;
     height: 50px;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     background: ${({ theme }) => theme.colors.primary};
     &::-webkit-scrollbar {
       display: none;
@@ -53,11 +59,16 @@ const SideBarAgoraBlock = styled.ul<Partial<SideBarAgoraProps>>`
       padding: 0 12px;
       height: 100%;
       margin: 0;
-      line-height: 44px;
+      line-height: 48px;
+      width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: white;
     }
-    .category-item {
-      display: none;
-    }
+  }
+  .category-item {
+    display: none;
+  }
 `;
 
 export interface SideBarAgoraProps {

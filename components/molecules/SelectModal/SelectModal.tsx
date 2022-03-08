@@ -61,7 +61,7 @@ const SelectBox = styled.ul`
     width: 20%;
   }
   @media ${({ theme }) => theme.mobile} {
-    width: 350px;
+    width: 370px;
     li {
       span {
         font-size: 12px;
@@ -71,7 +71,7 @@ const SelectBox = styled.ul`
 `;
 
 export const parties = [
-  { partyName: '더불어민주당', candidateId: Candidate.first, color: '#1F4D9C' },
+  { partyName: '더불어민주', candidateId: Candidate.first, color: '#1F4D9C' },
   { partyName: '국민의힘', candidateId: Candidate.second, color: '#D33736' },
   { partyName: '정의당', candidateId: Candidate.third, color: '#F7CE46' },
   { partyName: '국민의당', candidateId: Candidate.fourth, color: '#D95F29' },
