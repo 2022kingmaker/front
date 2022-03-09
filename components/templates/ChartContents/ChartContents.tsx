@@ -62,7 +62,7 @@ const ChartContents = ({ rates, setActiveTopic }: ChartContentsProps) => {
     };
   }, []);
 
-  const handleWheel = useCallback((e: any) => {
+  const handleWheel = useCallback((e: WheelEvent) => {
     e.preventDefault();
     throttle(() => {
       const { deltaY } = e;

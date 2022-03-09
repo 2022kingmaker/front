@@ -6,12 +6,12 @@ import { ITalkList } from '@models/Agora';
 export const useFetchInfiniteTalks: TUseInfiniteQuery<ITalkList> = ({ agoraId }, options) =>
   useInfiniteQuery(['getTalks', agoraId], ({ pageParam }) => getTalks({ roomId: +agoraId, cur: pageParam }), options);
 
-export const useFetchPostTalk: TUseMutation<PostMessage> = options =>
+export const useFetchPostTalk: TUseMutation<void, PostMessage> = options =>
   useMutation(
     ['postMessage'],
     ({ roomId, text, candidateId }: PostMessage) => postMessage({ roomId, text, candidateId }),
     options,
   );
 
-export const useFetchReport: TUseMutation<any> = options =>
+export const useFetchReport: TUseMutation<void, number> = options =>
   useMutation(['reportMessage'], (talkId: number) => reportMessage(talkId), options);

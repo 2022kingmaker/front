@@ -22,6 +22,6 @@ export type TUseInfiniteQuery<T> = (
   options?: UseInfiniteQueryOptions<T, FetchError, T, T, any[]>,
 ) => UseInfiniteQueryResult<T, FetchError>;
 
-export type TUseMutation<T> = (
-  options?: UseMutationOptions<T, FetchError, T, T>,
-) => UseMutationResult<T, FetchError, T, T>;
+export type TUseMutation<T, G> = (
+  options?: UseMutationOptions<T, FetchError, G, G>,
+) => UseMutationResult<T, FetchError, G, G>;
