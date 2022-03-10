@@ -1,4 +1,8 @@
-export const koWeekString = ['_', '첫', '둘', '셋', '넷', '다섯'];
+export enum Number {
+  zero,
+  one,
+  two,
+}
 
 export const MONTHS = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 export const WEEKDAYS_SHORT = ['일', '월', '화', '수', '목', '금', '토'];
@@ -15,6 +19,10 @@ export enum Candidate {
   third,
   fourth,
   none = -1,
+}
+export enum MinTo {
+  Month = 1440,
+  Hour = 60,
 }
 export enum KeyCodeType {
   NumpadEnter = 'NumpadEnter',

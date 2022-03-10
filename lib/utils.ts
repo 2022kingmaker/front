@@ -3,7 +3,7 @@ import { ChartData } from 'chart.js';
 import { getWeek } from '@lib/date';
 import { Categories } from '@models/Category';
 import { ITableContents } from '@models/TableContent';
-import { SortStand } from '@lib/constant';
+import { Number, SortStand } from '@lib/constant';
 import { Room } from '@models/Agora';
 
 export const sortRates = (rates: IRate[]) => {
@@ -32,8 +32,8 @@ export const getChartData = (currentRate: IRate) => {
       backgroundColor: v.candidate.party.colorCode + 'BF',
       borderColor: v.candidate.party.colorCode,
       barPercentage: 0.7,
-      categoryPercentage: 1,
-      borderWidth: 2,
+      categoryPercentage: Number.one,
+      borderWidth: Number.two,
     });
   });
   return chartData;
@@ -52,10 +52,10 @@ export const getLineChartData = (rates: IRate[]) => {
           data: [],
           borderColor: `${party.colorCode}`,
           backgroundColor: `${party.colorCode}`,
-          tension: 0,
+          tension: Number.zero,
         });
       }
-      chartData.datasets[candidateId - 1].data.push(statistic.rating);
+      chartData.datasets[candidateId - Number.one].data.push(statistic.rating);
     });
   });
 
@@ -94,7 +94,7 @@ export const hasSupportCandidate = () => {
   return !!sessionStorage.getItem(`${window.location.pathname}:candidate`);
 };
 export const getSupportCandidate = () => {
-  return sessionStorage.getItem(`${window.location.pathname}:candidate`) || -1;
+  return sessionStorage.getItem(`${window.location.pathname}:candidate`) || -Number.zero;
 };
 
 export const resetTextArea = (elem: HTMLTextAreaElement) => {
