@@ -16,6 +16,7 @@ import { getCategories } from '../../apis/category';
 import { getKeywords } from '../../apis/keyword';
 import { getPolicies } from '../../apis/policy';
 import { ITableContents } from '@models/TableContent';
+import { REVALIDATE_TIME } from '@lib/constant';
 
 const IdBlock = styled.div``;
 
@@ -75,7 +76,7 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   const keywords = await getKeywords(categoryId);
   const policies = await getPolicies(categoryId);
 
-  return { props: { data: { policies, categories, keywords } }, revalidate: 60 };
+  return { props: { data: { policies, categories, keywords } }, revalidate: REVALIDATE_TIME };
 };
 
 const groupingByKeyword = (policies: Policies, keywords: Keywords): any =>

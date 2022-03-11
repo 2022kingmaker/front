@@ -9,6 +9,7 @@ import { getRating } from '../../apis/rating';
 import ChartContents from '@templates/ChartContents/ChartContents';
 import { IRate } from '@models/Rate';
 import { ITableContents } from '@models/TableContent';
+import { REVALIDATE_TIME } from '@lib/constant';
 const StatisticsBlock = styled.div`
   height: inherit;
   position: relative;
@@ -57,5 +58,5 @@ Statistics.getLayout = function getLayout(page: React.ReactNode) {
 
 export const getStaticProps = async () => {
   const rates = await getRating();
-  return { props: { data: { rates } }, revalidate: 60 };
+  return { props: { data: { rates } }, revalidate: REVALIDATE_TIME };
 };

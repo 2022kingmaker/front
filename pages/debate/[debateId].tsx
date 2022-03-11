@@ -5,6 +5,7 @@ import { Layout, SideBarAgora } from '@atoms/index';
 import { getDebateList, getScript } from '../../apis/debate';
 import { DebateDetail, Script } from '@models/Script';
 import DebateDetailContents from '@templates/DebateDetailContents/DebateDetailContents';
+import { REVALIDATE_TIME } from '@lib/constant';
 
 const DebateDetailPageBlock = styled.div`
   height: inherit;
@@ -52,7 +53,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const { debateId } = context.params;
   const debateDetail = await getScript(+debateId);
-  return { props: { debateDetail }, revalidate: 60 };
+  return { props: { debateDetail }, revalidate: REVALIDATE_TIME };
 };
 
 const getTocForScript = (script: Script[]) => script.map(({ category }, index) => ({ name: category, id: index }));

@@ -16,6 +16,7 @@ import { getCategories } from '../apis/category';
 import { getKeywordDetails } from '../apis/keyword';
 import { getToc } from '@lib/utils';
 import { GetStaticProps } from 'next/types';
+import { REVALIDATE_TIME } from '@lib/constant';
 
 const HomeBlock = styled.div`
   height: inherit;
@@ -60,7 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const categories = await getCategories();
   const keywordDetails = await getKeywordDetails();
 
-  return { props: { data: { categories, keywordDetails }, revalidate: 60 } };
+  return { props: { data: { categories, keywordDetails }, revalidate: REVALIDATE_TIME } };
 };
 
 export default Home;
