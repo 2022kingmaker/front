@@ -6,7 +6,6 @@ import { getDebateList } from 'apis/debate';
 import { Debate } from '@models/Debate';
 import { ITableContents } from '@models/TableContent';
 import DebateContents from '@templates/DebateContents/DebateContents';
-import { REVALIDATE_TIME } from '@lib/constant';
 
 const DebatePageBlock = styled.div`
   height: inherit;
@@ -37,10 +36,10 @@ export default DebatePage;
 DebatePage.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const debateList = await getDebateList();
   if ('status' in debateList) {
-    return { props: { debateList: null }, revalidate: REVALIDATE_TIME };
+    return { props: { debateList: null } };
   }
-  return { props: { debateList }, revalidate: REVALIDATE_TIME };
+  return { props: { debateList } };
 };

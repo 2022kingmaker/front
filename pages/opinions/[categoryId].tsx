@@ -16,7 +16,6 @@ import { getCategories } from '../../apis/category';
 import { getKeywords } from '../../apis/keyword';
 import { getPolicies } from '../../apis/policy';
 import { ITableContents } from '@models/TableContent';
-import { REVALIDATE_TIME } from '@lib/constant';
 
 const IdBlock = styled.div``;
 
@@ -60,23 +59,15 @@ export default OpinionPage;
 OpinionPage.getLayout = function getLayout(page: React.ReactNode) {
   return <Layout>{page}</Layout>;
 };
-export const getStaticPaths = async () => {
-  const categories: Categories = await getCategories();
 
-  const paths = categories.map(category => ({
-    params: { categoryId: category.categoryId.toString() },
-  }));
-  return { paths, fallback: 'blocking' };
-};
-
-export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ params }: GetServerSidePropsContext) => {
   // @ts-ignore
   const { categoryId } = params;
   const categories = await getCategories();
   const keywords = await getKeywords(categoryId);
   const policies = await getPolicies(categoryId);
 
-  return { props: { data: { policies, categories, keywords } }, revalidate: REVALIDATE_TIME };
+  return { props: { data: { policies, categories, keywords } } };
 };
 
 const groupingByKeyword = (policies: Policies, keywords: Keywords): any =>
